@@ -2,8 +2,7 @@
     "name": "WalletConnectSharp.Unity",
     "rootNamespace": "",
     "references": [
-        "endel.nativewebsocket",
-        "Nethereum"
+        "endel.nativewebsocket"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
