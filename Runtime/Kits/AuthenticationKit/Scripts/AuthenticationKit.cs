@@ -351,7 +351,7 @@ namespace TheOneUnity.Kits.AuthenticationKit
                 Debug.LogError("Failed to retrieve server time from TheOne Server!");
             }
 
-            string signMessage = $"TheOne Authentication\n\nId: {appId}:{serverTime}";
+            string signMessage = $"Moralis Authentication\n\nId: {appId}:{serverTime}";
 
             string signature = null;
 

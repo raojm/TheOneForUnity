@@ -1,5 +1,5 @@
 {
-    "name": "TheOneForUnity",
+    "name": "com.theone.unitysdk",
     "version": "1.0.0",
     "displayName": "TheOne Unity SDK",
     "description": "TheOne provides a single workflow for building high performance dapps. This SDK brings the power of TheOne to your Unity projects.",

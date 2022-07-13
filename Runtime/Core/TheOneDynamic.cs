@@ -243,7 +243,7 @@ namespace TheOneUnity
         /// <returns>Task<TUser></returns>
         public async UniTask<TUser> LogInAsync(IDictionary<string, object> data, CancellationToken cancellationToken)
         {
-            return await this.ServiceHub.LogInWithAsync("theoneEth", data, cancellationToken);
+            return await this.ServiceHub.LogInWithAsync("moralisEth", data, cancellationToken);
         }
 
         /// <summary>

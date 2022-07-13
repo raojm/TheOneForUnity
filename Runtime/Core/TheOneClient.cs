@@ -218,7 +218,7 @@ namespace TheOneUnity
         /// <returns>Task<TheOneUser></returns>
         public async UniTask<TheOneUser> LogInAsync(IDictionary<string, object> data, CancellationToken cancellationToken)
         {
-            TheOneUser u = await this.ServiceHub.LogInWithAsync("theoneEth", data, cancellationToken);
+            TheOneUser u = await this.ServiceHub.LogInWithAsync("moralisEth", data, cancellationToken);
 
             if (u != null)
             {
