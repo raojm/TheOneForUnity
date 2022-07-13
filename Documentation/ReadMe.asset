@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf97db7a39f7034cb1921274cbfaaaa, type: 3}
   m_Name: ReadMe
   m_EditorClassIdentifier: 
-  icon: {fileID: 2800000, guid: 3f2157c8e2f264c4c8eeba93b9b7bfd2, type: 3}
-  title: TheOne Web3 Unity SDK
+  icon: {fileID: 2800000, guid: 29af7602df2bf41e09aa52587bd4c142, type: 3}
+  title: TheOne Unity SDK
   sections:
   - heading: What is TheOne?
     subheading: TheOne

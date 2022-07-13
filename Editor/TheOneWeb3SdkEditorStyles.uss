@@ -147,7 +147,7 @@
 #Logo
 {
 	margin-top: 10px;
-	height: 75px;
-	width: 256px;
+	height: 64px;
+	width: 64px;
 	background-image: url("Resources/TheOneLogoWizard.png"); 
 }
