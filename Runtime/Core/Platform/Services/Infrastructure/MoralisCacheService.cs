@@ -6,20 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Utilities;
 using UnityEngine;
-using static MoralisUnity.Platform.ResourceWrapper;
+using static TheOneUnity.Platform.ResourceWrapper;
 
 #pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously
 
-namespace MoralisUnity.Platform.Services.Infrastructure
+namespace TheOneUnity.Platform.Services.Infrastructure
 {
     /// <summary>
     /// Implements `IStorageController` for PCL targets, based off of PCLStorage.
     /// </summary>
-    public class MoralisCacheService<TUser> : IDiskFileCacheService where TUser : MoralisUser
+    public class TheOneCacheService<TUser> : IDiskFileCacheService where TUser : TheOneUser
     {
         class FileBackedCache : IDataCache<string, object>
         {
@@ -163,15 +163,15 @@ namespace MoralisUnity.Platform.Services.Infrastructure
         FileBackedCache Cache { get; set; }
 
         /// <summary>
-        /// Creates a Moralis storage controller and attempts to extract a previously created settings storage file from the persistent storage location.
+        /// Creates a TheOne storage controller and attempts to extract a previously created settings storage file from the persistent storage location.
         /// </summary>
-        public MoralisCacheService() { }
+        public TheOneCacheService() { }
 
         /// <summary>
-        /// Creates a Moralis storage controller with the provided <paramref name="file"/> wrapper.
+        /// Creates a TheOne storage controller with the provided <paramref name="file"/> wrapper.
         /// </summary>
         /// <param name="file">The file wrapper that the storage controller instance should target</param>
-        public MoralisCacheService(FileInfo file) => EnsureCacheExists(file);
+        public TheOneCacheService(FileInfo file) => EnsureCacheExists(file);
 
         FileBackedCache EnsureCacheExists(FileInfo file = default) => Cache ??= new FileBackedCache(file ?? (File ??= PersistentCacheFile));
 

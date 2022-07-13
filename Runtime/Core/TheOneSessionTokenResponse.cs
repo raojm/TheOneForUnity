@@ -1,11 +1,11 @@
 ﻿/**
- *           Module: MoralisLoginTokenResponse.cs
- *  Descriptiontion: Response to REST request for a Login Token.
- *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+ *           Module: TheOneSessionTokenResponse.cs
+ *  Descriptiontion: Response returned for a REST Session Token request.
+ *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich
  *  
  *  MIT License
  *  
- *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  Copyright (c) 2021 TheOne Web3 Technology AB, 559307-5988
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -25,14 +25,14 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-namespace MoralisUnity
+namespace TheOneUnity
 {
     /// <summary>
-    /// Response to REST request for a Login Token.
+    /// Response returned for a REST Session Token request.
     /// </summary>
-    public class MoralisLoginTokenResponse
+    public class TheOneSessionTokenResponse
     {
+        public string sessionToken;
         public string loginToken;
-        public string url;
     }
 }

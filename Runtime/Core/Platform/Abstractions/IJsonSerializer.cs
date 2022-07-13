@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     /// <summary>
     /// Defines an interface for common json serialization functions.

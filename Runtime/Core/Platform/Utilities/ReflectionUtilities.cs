@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace MoralisUnity.Platform.Utilities
+namespace TheOneUnity.Platform.Utilities
 {
     public static class ReflectionUtilities
     {

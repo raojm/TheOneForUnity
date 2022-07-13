@@ -1,12 +1,12 @@
 /**
- *           Module: MoralisSetup.cs
+ *           Module: TheOneSetup.cs
  *  Descriptiontion: Example class that demonstrates a game menu that incorporates
- *                   Wallet Connect and Moralis Authentication.
- *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich 
+ *                   Wallet Connect and TheOne Authentication.
+ *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich 
  *  
  *  MIT License
  *  
- *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  Copyright (c) 2021 TheOne Web3 Technology AB, 559307-5988
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -29,40 +29,40 @@
 
 using System;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Services.ClientServices;
+using TheOneUnity.Platform.Services.ClientServices;
 using UnityEngine;
 using WalletConnectSharp.Unity;
 using WalletConnectSharp.Core.Models;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     /// <summary>
-    /// Internal MonoBehaviour that allows Moralis to run an Update loop.
+    /// Internal MonoBehaviour that allows TheOne to run an Update loop.
     /// </summary>
-    public class MoralisSingleton : MonoBehaviour
+    public class TheOneSingleton : MonoBehaviour
     {
         /// <summary>
-        /// Moralis client
+        /// TheOne client
         /// </summary>
-        public MoralisClient Client { get; set; }
+        public TheOneClient Client { get; set; }
         
         /// <summary>Indicates that the app is closing. Set in OnApplicationQuit().</summary>
         [NonSerialized]
         public static bool AppQuits;
         
-        private static MoralisSingleton instance;
-        internal static MoralisSingleton Instance
+        private static TheOneSingleton instance;
+        internal static TheOneSingleton Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = FindObjectOfType<MoralisSingleton>();
+                    instance = FindObjectOfType<TheOneSingleton>();
                     if (instance == null)
                     {
                         GameObject obj = new GameObject();
-                        obj.name = "MoralisSingleton";
-                        instance = obj.AddComponent<MoralisSingleton>();
+                        obj.name = "TheOneSingleton";
+                        instance = obj.AddComponent<TheOneSingleton>();
                     }
                 }
 
@@ -93,17 +93,17 @@ namespace MoralisUnity
         {
             if (Instance != this)
             {
-                Debug.LogError("MoralisController is a singleton but there are multiple instances. this != Instance.");
+                Debug.LogError("TheOneController is a singleton but there are multiple instances. this != Instance.");
                 return;
             }
             
-            this.Client = Moralis.Client;
+            this.Client = TheOne.Client;
         }
         
 #if UNITY_WEBGL
         private void FixedUpdate()
         {
-            MoralisLiveQueryManager.UpdateWebSockets();
+            TheOneLiveQueryManager.UpdateWebSockets();
         }
 #endif
     }

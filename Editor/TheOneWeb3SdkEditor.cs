@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using System.IO;
-using MoralisUnity.Sdk.Constants;
+using TheOneUnity.Sdk.Constants;
 
-namespace MoralisUnity.Editor
+namespace TheOneUnity.Editor
 {
-    public class MoralisWeb3SdkEditor : EditorWindow
+    public class TheOneWeb3SdkEditor : EditorWindow
     {
         private VisualElement rootElement;
         private bool windowDrawn = false;
 
         public bool isSetupWizard = true;
 
-        protected static Type WindowType = typeof(MoralisWeb3SdkEditor);
+        protected static Type WindowType = typeof(TheOneWeb3SdkEditor);
 
         /// <summary>
         /// Evnt handled when the package is installed or the project re-opened.
@@ -29,10 +29,10 @@ namespace MoralisUnity.Editor
         /// <summary>
         /// Menu show event - displays the setup window when menu selection made.
         /// </summary>
-        [MenuItem( MoralisConstants.PathMoralisWindowMenu + "/" + MoralisConstants.Open + " " + "Web3 Setup", false, 15 )]
+        [MenuItem( TheOneConstants.PathTheOneWindowMenu + "/" + TheOneConstants.Open + " " + "Web3 Setup", false, 15 )]
         public static void ShowWindow()
         {
-            var window = GetWindow<MoralisWeb3SdkEditor>();
+            var window = GetWindow<TheOneWeb3SdkEditor>();
 
             window.isSetupWizard = false;
             window.titleContent = new GUIContent("Unity Web3 SDK");
@@ -45,7 +45,7 @@ namespace MoralisUnity.Editor
         /// </summary>
         protected static void ShowSetupWizard()
         {
-            MoralisWeb3SdkEditor win = GetWindow(WindowType, false, "Moralis Unity Web3 SDK", true) as MoralisWeb3SdkEditor;
+            TheOneWeb3SdkEditor win = GetWindow(WindowType, false, "TheOne Unity Web3 SDK", true) as TheOneWeb3SdkEditor;
             if (win == null)
             {
                 return;
@@ -63,24 +63,24 @@ namespace MoralisUnity.Editor
             EditorApplication.playModeStateChanged -= PlayModeStateChanged;
             EditorApplication.playModeStateChanged += PlayModeStateChanged;
             
-            if (MoralisSettings.MoralisData == null)
+            if (TheOneSettings.TheOneData == null)
             {
                 // Load or (when first run) create the settings scriptable object.
-                MoralisSettings.LoadOrCreateSettings(true);
+                TheOneSettings.LoadOrCreateSettings(true);
             }
 
             // If something horrible happened and moralis data settings were not
             // loaded, do not show the wizard.
-            if (MoralisSettings.MoralisData == null)
+            if (TheOneSettings.TheOneData == null)
             {
                 return;
             }
 
             // Only show the wizard if it is not disabled and the information has
             // not already been filled in.
-            if (!MoralisSettings.MoralisData.DisableAutoOpenWizard && 
-                (MoralisSettings.MoralisData.DappId.Equals(String.Empty) ||
-                 MoralisSettings.MoralisData.DappUrl.Equals(String.Empty)))
+            if (!TheOneSettings.TheOneData.DisableAutoOpenWizard && 
+                (TheOneSettings.TheOneData.DappId.Equals(String.Empty) ||
+                 TheOneSettings.TheOneData.DappUrl.Equals(String.Empty)))
             {
                 ShowSetupWizard();
             }
@@ -90,7 +90,7 @@ namespace MoralisUnity.Editor
         // unity 5.3 changes the usecase for SetDirty(). but here we don't modify a scene object! so it's ok to use
         private static void SaveSettings()
         {
-            EditorUtility.SetDirty(MoralisSettings.MoralisData);
+            EditorUtility.SetDirty(TheOneSettings.TheOneData);
         }
 
         /// <summary>
@@ -102,21 +102,21 @@ namespace MoralisUnity.Editor
             {
                 // Only draw once
                 windowDrawn = true;
-                string moralisEditorwindowPath = UnityFileHelper.FindMoralisEditorFolder();
+                string moralisEditorwindowPath = UnityFileHelper.FindTheOneEditorFolder();
 
-                if (MoralisSettings.MoralisData == null)
+                if (TheOneSettings.TheOneData == null)
                 {
                     // Just in case moralisData has not been loaded, handle it here.
-                    MoralisSettings.LoadOrCreateSettings();
+                    TheOneSettings.LoadOrCreateSettings();
                 }
 
                 rootElement = rootVisualElement;
 
-                bool mdLoaded = MoralisSettings.MoralisData != null;
+                bool mdLoaded = TheOneSettings.TheOneData != null;
 
                 // Loads the page definition.
                 VisualTreeAsset original = AssetDatabase
-                    .LoadAssetAtPath<VisualTreeAsset>(moralisEditorwindowPath + "MoralisWeb3SdkEditorWindow.uxml");
+                    .LoadAssetAtPath<VisualTreeAsset>(moralisEditorwindowPath + "TheOneWeb3SdkEditorWindow.uxml");
 
                 // If page not found, close and exit window
                 if (original == null)
@@ -131,7 +131,7 @@ namespace MoralisUnity.Editor
 
                 // Load stylsheet
                 StyleSheet styleSheet = AssetDatabase
-                    .LoadAssetAtPath<StyleSheet>(moralisEditorwindowPath + "MoralisWeb3SdkEditorStyles.uss");
+                    .LoadAssetAtPath<StyleSheet>(moralisEditorwindowPath + "TheOneWeb3SdkEditorStyles.uss");
                 // Apply stylesheet root element.
                 rootVisualElement.styleSheets.Add(styleSheet);
 
@@ -150,18 +150,18 @@ namespace MoralisUnity.Editor
 
                 #region TextField Values Setup
                 var DappUrlField = rootVisualElement.Q<TextField>("DappUrlField");
-                DappUrlField.SetValueWithoutNotify(MoralisSettings.MoralisData.DappUrl);
+                DappUrlField.SetValueWithoutNotify(TheOneSettings.TheOneData.DappUrl);
                 DappUrlField.RegisterValueChangedCallback(evt =>
                 {
-                    MoralisSettings.MoralisData.DappUrl = evt.newValue;
+                    TheOneSettings.TheOneData.DappUrl = evt.newValue;
                     SaveSettings();
                 });
 
                 var DappIdField = rootVisualElement.Q<TextField>("DappIdField");
-                DappIdField.SetValueWithoutNotify(MoralisSettings.MoralisData.DappId);
+                DappIdField.SetValueWithoutNotify(TheOneSettings.TheOneData.DappId);
                 DappIdField.RegisterValueChangedCallback(evt =>
                 {
-                    MoralisSettings.MoralisData.DappId = evt.newValue;
+                    TheOneSettings.TheOneData.DappId = evt.newValue;
                     SaveSettings();
                 });
                 #endregion
@@ -175,9 +175,9 @@ namespace MoralisUnity.Editor
                 return;
             }
 
-            if (MoralisSettings.MoralisData.DappUrl.Equals(String.Empty) || MoralisSettings.MoralisData.DappId.Equals(String.Empty))
+            if (TheOneSettings.TheOneData.DappUrl.Equals(String.Empty) || TheOneSettings.TheOneData.DappId.Equals(String.Empty))
             {
-                EditorUtility.DisplayDialog("Warning", "You have not yet completed the Moralis setup wizard. Your game won't be able to connect. Click Okay to open the wizard.", "Okay");
+                EditorUtility.DisplayDialog("Warning", "You have not yet completed the TheOne setup wizard. Your game won't be able to connect. Click Okay to open the wizard.", "Okay");
             }
         }
     }

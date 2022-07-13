@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     /// <summary>
     /// An <see cref="ICacheService"/> which stores the cache on disk via a file.
@@ -8,7 +8,7 @@ namespace MoralisUnity.Platform.Abstractions
     public interface IDiskFileCacheService : ICacheService
     {
         /// <summary>
-        /// The path to a persistent user-specific storage location specific to the final client assembly of the Moralis library.
+        /// The path to a persistent user-specific storage location specific to the final client assembly of the TheOne library.
         /// </summary>
         public string AbsoluteCacheFilePath { get; set; }
 

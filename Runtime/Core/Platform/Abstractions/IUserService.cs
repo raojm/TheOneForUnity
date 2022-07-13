@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
-    public interface IUserService<TUser> where TUser : MoralisUser
+    public interface IUserService<TUser> where TUser : TheOneUser
     {
-        UniTask<TUser> SignUpAsync(IObjectState state, IDictionary<string, IMoralisFieldOperation> operations, CancellationToken cancellationToken = default);
+        UniTask<TUser> SignUpAsync(IObjectState state, IDictionary<string, ITheOneFieldOperation> operations, CancellationToken cancellationToken = default);
 
         UniTask<TUser> LogInAsync(string username, string password, IServiceHub<TUser> serviceHub, CancellationToken cancellationToken = default);
 

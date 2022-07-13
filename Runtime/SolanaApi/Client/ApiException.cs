@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MoralisUnity.SolanaApi.Client 
+namespace TheOneUnity.SolanaApi.Client 
 {
   /// <summary>
   /// API Exception

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Utilities;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 using Newtonsoft.Json;
 using UnityEngine;
-using MoralisUnity.Core.Exceptions;
+using TheOneUnity.Core.Exceptions;
 
-namespace MoralisUnity.Platform.Objects
+namespace TheOneUnity.Platform.Objects
 {
 
-    class MoralisUserJsonConvertor : JsonConverter
+    class TheOneUserJsonConvertor : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
@@ -31,34 +31,34 @@ namespace MoralisUnity.Platform.Objects
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            if (value == null || !(value is MoralisUser))
+            if (value == null || !(value is TheOneUser))
             {
                 serializer.Serialize(writer, null);
                 return;
             }
 
-            Dictionary<string, object> user = ((MoralisUser)value).ToParameterDictionary();
+            Dictionary<string, object> user = ((TheOneUser)value).ToParameterDictionary();
 
             serializer.Serialize(writer, user);
         }
     }
 
-    [JsonConverter(typeof(MoralisUserJsonConvertor))]
-    public class MoralisUser : MoralisObject
+    [JsonConverter(typeof(TheOneUserJsonConvertor))]
+    public class TheOneUser : TheOneObject
     {
         private bool isSaving = false;
 
-        public MoralisUser()
+        public TheOneUser()
         {
             this.ClassName = "_User";
         }
 
-        public MoralisUser(string objectId = null,
+        public TheOneUser(string objectId = null,
             string userName = null,
             IDictionary<string, IDictionary<string, object>> authData = null,
             DateTime? createdAt = null,
             DateTime? updatedAt = null,
-            MoralisAcl ACL = null,
+            TheOneAcl ACL = null,
             string sessionToken = null,
             string ethAddress = null
             ) : base("_User", objectId, sessionToken, createdAt, updatedAt, ACL)
@@ -91,7 +91,7 @@ namespace MoralisUnity.Platform.Objects
     
         internal static HashSet<string> ImmutableKeys { get; } = new HashSet<string> { "classname", "sessionToken", "isNew" };
        
-        internal ICurrentUserService<MoralisUser> CurrentUserService { get; set; }
+        internal ICurrentUserService<TheOneUser> CurrentUserService { get; set; }
 
         internal async UniTask SignUpAsync(UniTask toAwait, CancellationToken cancellationToken)
         {
@@ -178,9 +178,9 @@ namespace MoralisUnity.Platform.Objects
                 {
                     await this.SaveAsync();
                 }
-                catch (MoralisSaveException msexp)
+                catch (TheOneSaveException msexp)
                 {
-                    throw new MoralisSignupException(msexp.Message);
+                    throw new TheOneSignupException(msexp.Message);
                 }
             }
         }

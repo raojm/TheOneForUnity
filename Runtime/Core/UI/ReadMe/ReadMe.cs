@@ -1,8 +1,8 @@
 ﻿using System;
 using UnityEngine;
-using MoralisUnity.Sdk.Constants;
+using TheOneUnity.Sdk.Constants;
 
-namespace MoralisUnity.Sdk.UI.ReadMe
+namespace TheOneUnity.Sdk.UI.ReadMe
 {
     /// <summary>
     /// Custom-formatted readme file with markdown-like display. 

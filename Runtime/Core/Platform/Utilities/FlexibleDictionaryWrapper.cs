@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MoralisUnity.Platform.Utilities
+namespace TheOneUnity.Platform.Utilities
 {
     /// <summary>
     /// Provides a Dictionary implementation that can delegate to any other

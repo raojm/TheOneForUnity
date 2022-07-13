@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     /// <summary>
-    /// A MoralisFieldOperation represents a modification to a value in a MoralisObject.
+    /// A TheOneFieldOperation represents a modification to a value in a TheOneObject.
     /// For example, setting, deleting, or incrementing a value are all different kinds of
-    /// MoralisFieldOperations. MoralisFieldOperations themselves can be considered to be
+    /// TheOneFieldOperations. TheOneFieldOperations themselves can be considered to be
     /// immutable.
     /// </summary>
-    public interface IMoralisFieldOperation
+    public interface ITheOneFieldOperation
     {
         /// <summary>
-        /// Converts the MoralisFieldOperation to a data structure that can be converted to JSON and sent to
-        /// Moralis as part of a save operation.
+        /// Converts the TheOneFieldOperation to a data structure that can be converted to JSON and sent to
+        /// TheOne as part of a save operation.
         /// </summary>
         /// <returns>An object to be JSONified.</returns>
         //object Encode(IServiceHub serviceHub);
@@ -30,15 +30,15 @@ namespace MoralisUnity.Platform.Abstractions
         ///        {add "foo"}.MergeWithPrevious({delete})         -> {set to ["foo"]}
         ///           {delete}.MergeWithPrevious({add "foo"})      -> {delete}        /// </summary>
         /// <param name="previous">The most recent operation on the field, or null if none.</param>
-        /// <returns>A new MoralisFieldOperation or this.</returns>
-        IMoralisFieldOperation MergeWithPrevious(IMoralisFieldOperation previous);
+        /// <returns>A new TheOneFieldOperation or this.</returns>
+        ITheOneFieldOperation MergeWithPrevious(ITheOneFieldOperation previous);
 
         /// <summary>
         /// Returns a new estimated value based on a previous value and this operation. This
-        /// value is not intended to be sent to Moralis, but it is used locally on the client to
+        /// value is not intended to be sent to TheOne, but it is used locally on the client to
         /// inspect the most likely current value for a field.
         ///
-        /// The key and object are used solely for MoralisRelation to be able to construct objects
+        /// The key and object are used solely for TheOneRelation to be able to construct objects
         /// that refer back to their parents.
         /// </summary>
         /// <param name="oldValue">The previous value for the field.</param>

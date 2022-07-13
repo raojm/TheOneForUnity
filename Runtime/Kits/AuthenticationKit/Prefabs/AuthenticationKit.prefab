@@ -2078,7 +2078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: AppData.Name
-      value: Moralis SDK Application
+      value: TheOne SDK Application
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: DefaultWallet
@@ -2098,12 +2098,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: AppData.Description
-      value: This application provdies an example of how to you Moralis in a Unity
+      value: This application provdies an example of how to you TheOne in a Unity
         3D Game
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: AppData.Icons.Array.data[0]
-      value: https://moralis.io/wp-content/uploads/2021/06/Powered-by-Moralis-Badge-Black.svg
+      value: https://moralis.io/wp-content/uploads/2021/06/Powered-by-TheOne-Badge-Black.svg
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: ConnectedEvent.m_PersistentCalls.m_Calls.Array.size
@@ -2251,23 +2251,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: DisconnectedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MoralisUnity.Kits.AuthenticationKit.AuthenticationKit, Moralis.Web3UnitySdk
+      value: TheOneUnity.Kits.AuthenticationKit.AuthenticationKit, TheOne.Web3UnitySdk
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: NewSessionConnected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MoralisUnity.Kits.AuthenticationKit.AuthenticationKit, Moralis.Web3UnitySdk
+      value: TheOneUnity.Kits.AuthenticationKit.AuthenticationKit, TheOne.Web3UnitySdk
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: ConnectedEventSession.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MoralisUnity.Kits.AuthenticationKit.AuthenticationKit, Moralis.Web3UnitySdk
+      value: TheOneUnity.Kits.AuthenticationKit.AuthenticationKit, TheOne.Web3UnitySdk
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: ConnectionFailedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MoralisUnity.Kits.AuthenticationKit.AuthenticationKit, Moralis.Web3UnitySdk
+      value: TheOneUnity.Kits.AuthenticationKit.AuthenticationKit, TheOne.Web3UnitySdk
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: ResumedSessionConnected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MoralisUnity.Kits.AuthenticationKit.AuthenticationKit, Moralis.Web3UnitySdk
+      value: TheOneUnity.Kits.AuthenticationKit.AuthenticationKit, TheOne.Web3UnitySdk
       objectReference: {fileID: 0}
     - target: {fileID: 5175095894888145821, guid: ce99fd52594d5e54f972689a083ac409, type: 3}
       propertyPath: ConnectedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

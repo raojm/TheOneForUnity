@@ -1,5 +1,5 @@
 ﻿
-namespace MoralisUnity.Sdk.Utilities
+namespace TheOneUnity.Sdk.Utilities
 {
     /// <summary>
     /// Provides runtime formatters

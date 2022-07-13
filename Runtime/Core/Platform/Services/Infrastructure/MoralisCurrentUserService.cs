@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Utilities;
 
-namespace MoralisUnity.Platform.Services.Infrastructure
+namespace TheOneUnity.Platform.Services.Infrastructure
 {
-    public class MoralisCurrentUserService<TUser> : ICurrentUserService<TUser> where TUser : MoralisUser
+    public class TheOneCurrentUserService<TUser> : ICurrentUserService<TUser> where TUser : TheOneUser
     {
         TUser currentUser;
 
@@ -17,7 +17,7 @@ namespace MoralisUnity.Platform.Services.Infrastructure
 
         IJsonSerializer JsonSerializer { get; }
 
-        public MoralisCurrentUserService(ICacheService storageController, IJsonSerializer jsonSerializer) => (StorageController, JsonSerializer) = (storageController, jsonSerializer);
+        public TheOneCurrentUserService(ICacheService storageController, IJsonSerializer jsonSerializer) => (StorageController, JsonSerializer) = (storageController, jsonSerializer);
 
        
         public TUser CurrentUser

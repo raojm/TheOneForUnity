@@ -1,24 +1,24 @@
 ﻿
 using System.Threading;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Utilities;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Queries;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Queries;
 
-namespace MoralisUnity.Platform.Services.ClientServices
+namespace TheOneUnity.Platform.Services.ClientServices
 {
     public static class SessionServiceExtensions
     {
         /// <summary>
         /// Constructs a <see cref="ParseQuery{ParseSession}"/> for ParseSession.
         /// </summary>
-        public static MoralisQuery<MoralisSession> GetSessionQuery<TUser>(this IServiceHub<TUser> serviceHub) where TUser : MoralisUser => serviceHub.GetQuery<MoralisSession, TUser>();
+        public static TheOneQuery<TheOneSession> GetSessionQuery<TUser>(this IServiceHub<TUser> serviceHub) where TUser : TheOneUser => serviceHub.GetQuery<TheOneSession, TUser>();
 
         /// <summary>
         /// Gets the current <see cref="ParseSession"/> object related to the current user.
         /// </summary>
-        public static async UniTask<MoralisSession> GetCurrentSessionAsync<TUser>(this IServiceHub<TUser> serviceHub) where TUser : MoralisUser
+        public static async UniTask<TheOneSession> GetCurrentSessionAsync<TUser>(this IServiceHub<TUser> serviceHub) where TUser : TheOneUser
         {
             return await GetCurrentSessionAsync(serviceHub, CancellationToken.None);
         }
@@ -27,9 +27,9 @@ namespace MoralisUnity.Platform.Services.ClientServices
         /// Gets the current <see cref="ParseSession"/> object related to the current user.
         /// </summary>
         /// <param name="cancellationToken">The cancellation token</param>
-        public static async UniTask<MoralisSession> GetCurrentSessionAsync<TUser>(this IServiceHub<TUser> serviceHub, CancellationToken cancellationToken) where TUser : MoralisUser
+        public static async UniTask<TheOneSession> GetCurrentSessionAsync<TUser>(this IServiceHub<TUser> serviceHub, CancellationToken cancellationToken) where TUser : TheOneUser
         {
-            MoralisSession ms = await serviceHub.GetCurrentSessionAsync<TUser>(cancellationToken);
+            TheOneSession ms = await serviceHub.GetCurrentSessionAsync<TUser>(cancellationToken);
 
             if (ms == null) return default;
 
@@ -40,19 +40,19 @@ namespace MoralisUnity.Platform.Services.ClientServices
             return await serviceHub.SessionService.GetSessionAsync(token, serviceHub, cancellationToken);
         }
 
-        public static async UniTask RevokeSessionAsync<TUser>(this IServiceHub<TUser> serviceHub, string sessionToken, CancellationToken cancellationToken) where TUser : MoralisUser
+        public static async UniTask RevokeSessionAsync<TUser>(this IServiceHub<TUser> serviceHub, string sessionToken, CancellationToken cancellationToken) where TUser : TheOneUser
         {
             if (sessionToken != null && serviceHub.SessionService.IsRevocableSessionToken(sessionToken))
                 await serviceHub.SessionService.RevokeAsync(sessionToken, cancellationToken);
         }
 
-        public static async UniTask<string> UpgradeToRevocableSessionAsync<TUser>(this IServiceHub<TUser> serviceHub, string sessionToken, CancellationToken cancellationToken) where TUser : MoralisUser
+        public static async UniTask<string> UpgradeToRevocableSessionAsync<TUser>(this IServiceHub<TUser> serviceHub, string sessionToken, CancellationToken cancellationToken) where TUser : TheOneUser
         {
             if (sessionToken is null || serviceHub.SessionService.IsRevocableSessionToken(sessionToken))
                 return sessionToken;
             else
             {
-                MoralisSession ms = await serviceHub.SessionService.UpgradeToRevocableSessionAsync(sessionToken, serviceHub, cancellationToken);
+                TheOneSession ms = await serviceHub.SessionService.UpgradeToRevocableSessionAsync(sessionToken, serviceHub, cancellationToken);
 
                 return ms.sessionToken;
             }

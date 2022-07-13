@@ -135,7 +135,7 @@ function getErrors(key) {
     return resp;
 }
 
-// END Moralis WebSocket -----------------------------------------------------
+// END TheOne WebSocket -----------------------------------------------------
 
 /*
 Establish connection to web3.

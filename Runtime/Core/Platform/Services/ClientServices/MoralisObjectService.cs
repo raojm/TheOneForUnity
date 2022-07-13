@@ -4,34 +4,34 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using System.Net;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Exceptions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Services.Models;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Exceptions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Services.Models;
+using TheOneUnity.Platform.Utilities;
 using UnityEngine;
-using MoralisUnity.Core.Exceptions;
+using TheOneUnity.Core.Exceptions;
 
-namespace MoralisUnity.Platform.Services.ClientServices
+namespace TheOneUnity.Platform.Services.ClientServices
 {
-    public class MoralisObjectService : IObjectService
+    public class TheOneObjectService : IObjectService
     {
-        IMoralisCommandRunner CommandRunner { get; }
+        ITheOneCommandRunner CommandRunner { get; }
 
         IServerConnectionData ServerConnectionData { get; }
 
         IJsonSerializer JsonSerializer { get; }
 
-        public MoralisObjectService(IMoralisCommandRunner commandRunner, IServerConnectionData serverConnectionData, IJsonSerializer jsonSerializer)
+        public TheOneObjectService(ITheOneCommandRunner commandRunner, IServerConnectionData serverConnectionData, IJsonSerializer jsonSerializer)
         {
             CommandRunner = commandRunner;
             ServerConnectionData = serverConnectionData;
             JsonSerializer = jsonSerializer;
         }
 
-        public async UniTask<T> FetchAsync<T>(T item, string sessionToken, CancellationToken cancellationToken = default) where T : MoralisObject
+        public async UniTask<T> FetchAsync<T>(T item, string sessionToken, CancellationToken cancellationToken = default) where T : TheOneObject
         {
-            MoralisCommand command = new MoralisCommand($"server/classes/{Uri.EscapeDataString(item.ClassName)}/{Uri.EscapeDataString(item.objectId)}", method: "GET", sessionToken: sessionToken, data: default);
+            TheOneCommand command = new TheOneCommand($"server/classes/{Uri.EscapeDataString(item.ClassName)}/{Uri.EscapeDataString(item.objectId)}", method: "GET", sessionToken: sessionToken, data: default);
             Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(command, cancellationToken: cancellationToken);
          
             T resp = default;
@@ -45,9 +45,9 @@ namespace MoralisUnity.Platform.Services.ClientServices
             return resp;
         }
 
-        public async UniTask<string> SaveAsync(MoralisObject item, IDictionary<string, IMoralisFieldOperation> operations, string sessionToken, CancellationToken cancellationToken = default)
+        public async UniTask<string> SaveAsync(TheOneObject item, IDictionary<string, ITheOneFieldOperation> operations, string sessionToken, CancellationToken cancellationToken = default)
         {
-            MoralisCommand command = new MoralisCommand(item.objectId == null ? $"server/classes/{Uri.EscapeDataString(item.ClassName)}" : $"server/classes/{Uri.EscapeDataString(item.ClassName)}/{item.objectId}", method: item.objectId is null ? "POST" : "PUT", sessionToken: sessionToken, data: operations is { } && operations.Count > 0 ? JsonSerializer.Serialize(operations, JsonSerializer.DefaultOptions).JsonInsertParseDate() : JsonSerializer.Serialize(item, JsonSerializer.DefaultOptions).JsonInsertParseDate());
+            TheOneCommand command = new TheOneCommand(item.objectId == null ? $"server/classes/{Uri.EscapeDataString(item.ClassName)}" : $"server/classes/{Uri.EscapeDataString(item.ClassName)}/{item.objectId}", method: item.objectId is null ? "POST" : "PUT", sessionToken: sessionToken, data: operations is { } && operations.Count > 0 ? JsonSerializer.Serialize(operations, JsonSerializer.DefaultOptions).JsonInsertParseDate() : JsonSerializer.Serialize(item, JsonSerializer.DefaultOptions).JsonInsertParseDate());
             Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(command, cancellationToken: cancellationToken);
             
             string resp = default;
@@ -58,15 +58,15 @@ namespace MoralisUnity.Platform.Services.ClientServices
             }
             else
             {
-                throw new MoralisSaveException(cmdResp.Item2);
+                throw new TheOneSaveException(cmdResp.Item2);
             }
 
             return resp;
         }
 
-        public async UniTask DeleteAsync(MoralisObject item, string sessionToken, CancellationToken cancellationToken = default)
+        public async UniTask DeleteAsync(TheOneObject item, string sessionToken, CancellationToken cancellationToken = default)
         {
-            Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(new MoralisCommand($"server/classes/{item.ClassName}/{item.objectId}", method: "DELETE", sessionToken: sessionToken, data: null), cancellationToken: cancellationToken);
+            Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(new TheOneCommand($"server/classes/{item.ClassName}/{item.objectId}", method: "DELETE", sessionToken: sessionToken, data: null), cancellationToken: cancellationToken);
             
             if ((int)cmdResp.Item1 >= 400)
             {
@@ -76,7 +76,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
                
         int MaximumBatchSize { get; } = 50;
 
-        async UniTask<IList<UniTask<IDictionary<string, object>>>> ExecuteBatchRequestAsync<T>(IList<MoralisCommand> requests, string sessionToken, CancellationToken cancellationToken = default)
+        async UniTask<IList<UniTask<IDictionary<string, object>>>> ExecuteBatchRequestAsync<T>(IList<TheOneCommand> requests, string sessionToken, CancellationToken cancellationToken = default)
         {
             int batchSize = requests.Count;
 
@@ -105,7 +105,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
                 return results;
             }).Cast<object>().ToList();
 
-            MoralisCommand command = new MoralisCommand("batch", method: "POST", sessionToken: sessionToken, data: JsonSerializer.Serialize(new Dictionary<string, object> { [nameof(requests)] = encodedRequests }, JsonSerializer.DefaultOptions));
+            TheOneCommand command = new TheOneCommand("batch", method: "POST", sessionToken: sessionToken, data: JsonSerializer.Serialize(new Dictionary<string, object> { [nameof(requests)] = encodedRequests }, JsonSerializer.DefaultOptions));
 
             Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(command, cancellationToken: cancellationToken);
 
@@ -140,7 +140,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
                         else if (result.ContainsKey("error"))
                         {
                             IDictionary<string, object> error = result["error"] as IDictionary<string, object>;
-                            target.TrySetException(new MoralisFailureException((MoralisFailureException.ErrorCode)(long)error["code"], error[nameof(error)] as string));
+                            target.TrySetException(new TheOneFailureException((TheOneFailureException.ErrorCode)(long)error["code"], error[nameof(error)] as string));
                         }
                         else
                             target.TrySetException(new InvalidOperationException("Invalid batch command response."));

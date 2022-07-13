@@ -1,4 +1,4 @@
-using MoralisUnity.Web3Api.Models;
+using TheOneUnity.Web3Api.Models;
 using Newtonsoft.Json.Utilities;
 using UnityEngine;
 

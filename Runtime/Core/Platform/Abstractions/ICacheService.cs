@@ -2,10 +2,10 @@
 using System.IO;
 using Cysharp.Threading.Tasks;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     /// <summary>
-    /// An abstraction for accessing persistent storage in the Moralis SDK.
+    /// An abstraction for accessing persistent storage in the TheOne SDK.
     /// </summary>
     public interface ICacheService
     {

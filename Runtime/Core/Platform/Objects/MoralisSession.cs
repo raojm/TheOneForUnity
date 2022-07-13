@@ -1,10 +1,10 @@
 ﻿
 
-namespace MoralisUnity.Platform.Objects
+namespace TheOneUnity.Platform.Objects
 {
-    public class MoralisSession : MoralisObject
+    public class TheOneSession : TheOneObject
     {
-        public MoralisSession() : base("_Session") { }
+        public TheOneSession() : base("_Session") { }
 
        	// [JsonProperty("sessionToken")]
         public new string sessionToken { get; set; }

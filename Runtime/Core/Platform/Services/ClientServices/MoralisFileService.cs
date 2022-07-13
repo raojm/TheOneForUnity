@@ -3,50 +3,50 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading;
-using MoralisUnity.Platform.Services.ClientServices;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Services.ClientServices;
+using TheOneUnity.Platform.Utilities;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Exceptions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Services.Models;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Exceptions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Services.Models;
 
-namespace MoralisUnity.Platform.Services.ClientServices
+namespace TheOneUnity.Platform.Services.ClientServices
 {
-    public class MoralisFileService : IFileService
+    public class TheOneFileService : IFileService
     {
-        IMoralisCommandRunner CommandRunner { get; }
+        ITheOneCommandRunner CommandRunner { get; }
 
         IJsonSerializer JsonSerializer { get; }
 
-        public MoralisFileService(IMoralisCommandRunner commandRunner, IJsonSerializer jsonSerializer) => (CommandRunner, JsonSerializer) = (commandRunner, jsonSerializer);
+        public TheOneFileService(ITheOneCommandRunner commandRunner, IJsonSerializer jsonSerializer) => (CommandRunner, JsonSerializer) = (commandRunner, jsonSerializer);
 
-        public async UniTask<MoralisFileState> SaveAsync(MoralisFileState state, Stream dataStream, string sessionToken, IProgress<IDataTransferLevel> progress, CancellationToken cancellationToken = default)
+        public async UniTask<TheOneFileState> SaveAsync(TheOneFileState state, Stream dataStream, string sessionToken, IProgress<IDataTransferLevel> progress, CancellationToken cancellationToken = default)
         {
             if (state.url != null)
                 return state;
 
             if (cancellationToken.IsCancellationRequested)
-                return await UniTask.FromCanceled<MoralisFileState>(cancellationToken);
+                return await UniTask.FromCanceled<TheOneFileState>(cancellationToken);
 
             long oldPosition = dataStream.Position;
 
-            Tuple<HttpStatusCode, string> cmdResult = await CommandRunner.RunCommandAsync(new MoralisCommand($"server/files/{state.name}", method: "POST", sessionToken: sessionToken, contentType: state.mediatype, stream: dataStream), uploadProgress: progress, cancellationToken: cancellationToken);
+            Tuple<HttpStatusCode, string> cmdResult = await CommandRunner.RunCommandAsync(new TheOneCommand($"server/files/{state.name}", method: "POST", sessionToken: sessionToken, contentType: state.mediatype, stream: dataStream), uploadProgress: progress, cancellationToken: cancellationToken);
                 
             cancellationToken.ThrowIfCancellationRequested();
-            MoralisFileState fileState = default;
+            TheOneFileState fileState = default;
 
             if (cmdResult.Item2 is { })
             {
-                fileState = JsonSerializer.Deserialize<MoralisFileState>(cmdResult.Item2);
+                fileState = JsonSerializer.Deserialize<TheOneFileState>(cmdResult.Item2);
 
                 if (String.IsNullOrWhiteSpace(fileState.name) || !(fileState.url is { }))
-                    throw new MoralisFailureException(MoralisFailureException.ErrorCode.ScriptFailed, "");
+                    throw new TheOneFailureException(TheOneFailureException.ErrorCode.ScriptFailed, "");
 
                 fileState.mediatype = state.mediatype;
             }
             else
-                throw new MoralisFailureException(MoralisFailureException.ErrorCode.ScriptFailed, "");
+                throw new TheOneFailureException(TheOneFailureException.ErrorCode.ScriptFailed, "");
         
             // Rewind the stream on failure or cancellation (if possible).
             if (dataStream.CanSeek)

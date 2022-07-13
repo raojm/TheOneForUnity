@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MoralisUnity.Platform.Objects
+namespace TheOneUnity.Platform.Objects
 {
-    public class MoralisGeoPoint
+    public class TheOneGeoPoint
     {
         /// <summary>
-        /// Constructs a MoralisGeoPoint with the specified latitude and longitude.
+        /// Constructs a TheOneGeoPoint with the specified latitude and longitude.
         /// </summary>
         /// <param name="latitude">The point's latitude.</param>
         /// <param name="longitude">The point's longitude.</param>
-        public MoralisGeoPoint(double latitude, double longitude)
+        public TheOneGeoPoint(double latitude, double longitude)
         //  : this()
         {
             Latitude = latitude;
@@ -62,7 +62,7 @@ namespace MoralisUnity.Platform.Objects
         /// </summary>
         /// <param name="point">GeoPoint describing the other point being measured against.</param>
         /// <returns>The distance in between the two points.</returns>
-        public MoralisGeoDistance DistanceTo(MoralisGeoPoint point)
+        public TheOneGeoDistance DistanceTo(TheOneGeoPoint point)
         {
             double d2r = Math.PI / 180; // radian conversion factor
             double lat1rad = Latitude * d2r;
@@ -78,7 +78,7 @@ namespace MoralisUnity.Platform.Objects
             double a = sinDeltaLatDiv2 * sinDeltaLatDiv2 +
               Math.Cos(lat1rad) * Math.Cos(lat2rad) * sinDeltaLongDiv2 * sinDeltaLongDiv2;
             a = Math.Min(1.0, a);
-            return new MoralisGeoDistance(2 * Math.Asin(Math.Sqrt(a)));
+            return new TheOneGeoDistance(2 * Math.Asin(Math.Sqrt(a)));
         }
 
         //IDictionary<string, object> IJsonConvertible.ConvertToJSON() => new Dictionary<string, object> {

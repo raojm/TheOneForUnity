@@ -1,6 +1,6 @@
 ﻿
 
-namespace MoralisUnity.Web3Api.Core
+namespace TheOneUnity.Web3Api.Core
 {
     public enum Method
     {

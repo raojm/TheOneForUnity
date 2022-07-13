@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MoralisUnity.Platform.Services.ClientServices
+namespace TheOneUnity.Platform.Services.ClientServices
 {
     public static class CommandRunnerExtensions
     {

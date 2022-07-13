@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Utilities;
 
-namespace MoralisUnity.Platform.Operations
+namespace TheOneUnity.Platform.Operations
 {
-    class MoralisUniqueAddOperation : IMoralisFieldOperation
+    class TheOneUniqueAddOperation : ITheOneFieldOperation
     {
         ReadOnlyCollection<object> Data { get; }
 
         public string __op { get { return "AddUnique"; } }
 
         public IEnumerable<object> objects => Data;
-        public MoralisUniqueAddOperation(IEnumerable<object> objects) => Data = new ReadOnlyCollection<object>(objects.ToList());
+        public TheOneUniqueAddOperation(IEnumerable<object> objects) => Data = new ReadOnlyCollection<object>(objects.ToList());
 
-        public IMoralisFieldOperation MergeWithPrevious(IMoralisFieldOperation previous) => previous switch
+        public ITheOneFieldOperation MergeWithPrevious(ITheOneFieldOperation previous) => previous switch
         {
             null => this,
-            MoralisDeleteOperation { } => new MoralisSetOperation(Data.ToList()),
-            MoralisSetOperation { } setOp => new MoralisSetOperation(Conversion.To<IList<object>>(setOp.Value).Concat(Data).ToList()),
-            MoralisAddOperation { } addition => new MoralisAddOperation(addition.objects.Concat(Data)),
+            TheOneDeleteOperation { } => new TheOneSetOperation(Data.ToList()),
+            TheOneSetOperation { } setOp => new TheOneSetOperation(Conversion.To<IList<object>>(setOp.Value).Concat(Data).ToList()),
+            TheOneAddOperation { } addition => new TheOneAddOperation(addition.objects.Concat(Data)),
             _ => throw new InvalidOperationException("Operation is invalid after previous operation.")
         };
 
@@ -34,11 +34,11 @@ namespace MoralisUnity.Platform.Operations
             }
 
             List<object> result = Conversion.To<IList<object>>(oldValue).ToList();
-            IEqualityComparer<object> comparer = MoralisFieldOperations.MoralisObjectComparer;
+            IEqualityComparer<object> comparer = TheOneFieldOperations.TheOneObjectComparer;
 
             foreach (object target in Data)
             {
-                if (target is MoralisObject)
+                if (target is TheOneObject)
                 {
                     if (!(result.FirstOrDefault(reference => comparer.Equals(target, reference)) is { } matched))
                     {

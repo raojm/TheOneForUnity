@@ -1,18 +1,18 @@
 ﻿using System;
 using System.IO;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Utilities;
 
-namespace MoralisUnity.Platform.Objects
+namespace TheOneUnity.Platform.Objects
 {
-    public class MoralisFile
+    public class TheOneFile
     {
-        internal MoralisFileState State { get; set; }
+        internal TheOneFileState State { get; set; }
 
         internal Stream DataStream { get; }
 
         #region Constructor
 
-        internal MoralisFile(string name, Uri uri, string mimeType = null) => State = new MoralisFileState
+        internal TheOneFile(string name, Uri uri, string mimeType = null) => State = new TheOneFileState
         {
             name = name,
             url = uri,
@@ -28,7 +28,7 @@ namespace MoralisUnity.Platform.Objects
         /// <param name="data">The file's data.</param>
         /// <param name="mimeType">To specify the content-type used when uploading the
         /// file, provide this parameter.</param>
-        public MoralisFile(string name, byte[] data, string mimeType = null) : this(name, new MemoryStream(data), mimeType) { }
+        public TheOneFile(string name, byte[] data, string mimeType = null) : this(name, new MemoryStream(data), mimeType) { }
 
         /// <summary>
         /// Creates a new file from a stream and a name.
@@ -39,9 +39,9 @@ namespace MoralisUnity.Platform.Objects
         /// <param name="data">The file's data.</param>
         /// <param name="mimeType">To specify the content-type used when uploading the
         /// file, provide this parameter.</param>
-        public MoralisFile(string name, Stream data, string mimeType = null)
+        public TheOneFile(string name, Stream data, string mimeType = null)
         {
-            State = new MoralisFileState
+            State = new TheOneFileState
             {
                 name = name,
                 mediatype = mimeType

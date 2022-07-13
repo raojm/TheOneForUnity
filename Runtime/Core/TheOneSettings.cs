@@ -2,13 +2,13 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
-    public class MoralisSettings
+    public class TheOneSettings
     {
- 		private static MoralisServerSettings moralisData;
+ 		private static TheOneServerSettings moralisData;
         
-        public static MoralisServerSettings MoralisData
+        public static TheOneServerSettings TheOneData
         {
             get
             {
@@ -22,10 +22,10 @@ namespace MoralisUnity
             private set { moralisData = value; }
         }
 
-        private static string MoralisDataFilename = "MoralisServerSettings";
+        private static string TheOneDataFilename = "TheOneServerSettings";
 
         /// <summary>
-        /// Loads the Moralis Data Setting sasset. If it does not exist, create it.
+        /// Loads the TheOne Data Setting sasset. If it does not exist, create it.
         /// </summary>
         /// <param name="reload"></param>
         public static void LoadOrCreateSettings(bool reload = false)
@@ -37,15 +37,15 @@ namespace MoralisUnity
             }
             else if (moralisData != null)
             {
-                // Moralis Data setting have already been loaded.
+                // TheOne Data setting have already been loaded.
                 return;
             }
 
-            // Try to load the resource / asset (MoralisServerSettings
-            // a.k.a. Moralis Data Settings)
-            moralisData = (MoralisServerSettings)Resources.Load(MoralisDataFilename, typeof(MoralisServerSettings));
+            // Try to load the resource / asset (TheOneServerSettings
+            // a.k.a. TheOne Data Settings)
+            moralisData = (TheOneServerSettings)Resources.Load(TheOneDataFilename, typeof(TheOneServerSettings));
             
-            // If Moralis Data Setting were loaded successfully, all is well,
+            // If TheOne Data Setting were loaded successfully, all is well,
             // exit the method.
             if (moralisData != null)
             {
@@ -53,21 +53,21 @@ namespace MoralisUnity
             }
 
 #if UNITY_EDITOR
-            // The MoralisServerSettings a.k.a Moralis Data Settings does not exist so create it.
+            // The TheOneServerSettings a.k.a TheOne Data Settings does not exist so create it.
             if (moralisData == null)
             {
-                // Create a fresh instance of the Moralis Datat Setting sasset.
-                moralisData = (MoralisServerSettings)MoralisServerSettings.CreateInstance("MoralisServerSettings");
+                // Create a fresh instance of the TheOne Datat Setting sasset.
+                moralisData = (TheOneServerSettings)TheOneServerSettings.CreateInstance("TheOneServerSettings");
                 
                 if (moralisData == null)
                 {
-                    Debug.LogError("Failed to create MoralisServerSettings. Moralis is unable to run this way. If you deleted it from the project, reload the Editor.");
+                    Debug.LogError("Failed to create TheOneServerSettings. TheOne is unable to run this way. If you deleted it from the project, reload the Editor.");
                     return;
                 }
             }
 
-            string moralisResourcesDirectory = UnityFileHelper.FindMoralisAssetFolder() ;
-            string serverSettingsAssetPath = moralisResourcesDirectory + MoralisDataFilename + ".asset";
+            string moralisResourcesDirectory = UnityFileHelper.FindTheOneAssetFolder() ;
+            string serverSettingsAssetPath = moralisResourcesDirectory + TheOneDataFilename + ".asset";
             string serverSettingsDirectory = Path.GetDirectoryName(serverSettingsAssetPath);
 
             if (!Directory.Exists(serverSettingsDirectory))

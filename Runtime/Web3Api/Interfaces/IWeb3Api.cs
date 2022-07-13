@@ -1,5 +1,5 @@
 ﻿
-namespace MoralisUnity.Web3Api.Interfaces
+namespace TheOneUnity.Web3Api.Interfaces
 {
     public interface IWeb3Api
     {

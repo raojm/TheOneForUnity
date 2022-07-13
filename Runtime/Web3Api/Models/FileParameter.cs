@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace MoralisUnity.Web3Api.Core.Models
+namespace TheOneUnity.Web3Api.Core.Models
 {
     public class FileParameter
     {

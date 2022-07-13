@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace MoralisUnity.Sdk.Utilities
+namespace TheOneUnity.Sdk.Utilities
 {
     /// <summary>
     /// Provides runtime validators

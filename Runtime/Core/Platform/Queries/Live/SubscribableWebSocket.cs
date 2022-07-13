@@ -3,14 +3,14 @@ using System;
 using System.Text;
 using System.Threading;
 using UnityEngine;
-using static MoralisUnity.Platform.Exceptions.MoralisFailureException;
+using static TheOneUnity.Platform.Exceptions.TheOneFailureException;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Exceptions;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Exceptions;
 using Newtonsoft.Json;
 
-namespace MoralisUnity.Platform.Queries.Live
+namespace TheOneUnity.Platform.Queries.Live
 {
     public class SubscribableWebSocket 
     {
@@ -73,7 +73,7 @@ namespace MoralisUnity.Platform.Queries.Live
         {
             if (String.IsNullOrWhiteSpace(ConncetionData.LiveQueryServerURI))
             {
-                throw new MoralisFailureException(MoralisFailureException.ErrorCode.ServerUrlNullOrEmtpy, "");
+                throw new TheOneFailureException(TheOneFailureException.ErrorCode.ServerUrlNullOrEmtpy, "");
             }
             else
             {
@@ -82,13 +82,13 @@ namespace MoralisUnity.Platform.Queries.Live
 
             ClientStatus = LiveQueryClientStatusTypes.New;
 
-            bool resp = await MoralisLiveQueriesGL.CreateSubscription(RequestId.ToString(), ConncetionData.LiveQueryServerURI);
+            bool resp = await TheOneLiveQueriesGL.CreateSubscription(RequestId.ToString(), ConncetionData.LiveQueryServerURI);
 
             if (resp)
             {
                 Console.WriteLine("Live Query WebSocket connected.");
                 connected = true;
-                string json = MoralisLiveQueriesGL.GetResponseQueue(RequestId.ToString());
+                string json = TheOneLiveQueriesGL.GetResponseQueue(RequestId.ToString());
             }
             else
             {
@@ -115,7 +115,7 @@ namespace MoralisUnity.Platform.Queries.Live
                     {
                         SendGeneralMessage("Sending connection request.");
                         string msg = CreateConnectRequest();
-                        MoralisLiveQueriesGL.SendMessage(RequestId.ToString(), msg);
+                        TheOneLiveQueriesGL.SendMessage(RequestId.ToString(), msg);
                         connectionSent = true;
                         return;
                     }
@@ -123,7 +123,7 @@ namespace MoralisUnity.Platform.Queries.Live
                     else if (!subscriptionSent && LiveQueryClientStatusTypes.Opening.Equals(ClientStatus))
                     {
                         SendGeneralMessage("Sending subscription request.");
-                        MoralisLiveQueriesGL.SendMessage(RequestId.ToString(), subscriptionRequest);
+                        TheOneLiveQueriesGL.SendMessage(RequestId.ToString(), subscriptionRequest);
                         subscriptionSent = true;
                         return;
                     }
@@ -131,13 +131,13 @@ namespace MoralisUnity.Platform.Queries.Live
                     {
                         SendGeneralMessage("Sending unsubscribe request.");
                         string msg = CreateUnsubscribeRequest();
-                        MoralisLiveQueriesGL.SendMessage(RequestId.ToString(), msg);
+                        TheOneLiveQueriesGL.SendMessage(RequestId.ToString(), msg);
                         unsubscribeSent = true;
                         return;
                     }
                 }
 
-                string json = MoralisLiveQueriesGL.GetResponseQueue(RequestId.ToString());
+                string json = TheOneLiveQueriesGL.GetResponseQueue(RequestId.ToString());
 
                 if (!String.IsNullOrEmpty(json) && !json.Equals(emptyArray))
                 {
@@ -214,7 +214,7 @@ namespace MoralisUnity.Platform.Queries.Live
 
         public WebSocketStateType GetWebSocketStatus()
         {
-            int resp = MoralisLiveQueriesGL.GetSocketState(RequestId.ToString());
+            int resp = TheOneLiveQueriesGL.GetSocketState(RequestId.ToString());
             return (WebSocketStateType)resp;
         }
     }
@@ -224,13 +224,13 @@ using System;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
-using MoralisUnity.Platform.Exceptions;
-using static MoralisUnity.Platform.Exceptions.MoralisFailureException;
+using TheOneUnity.Platform.Exceptions;
+using static TheOneUnity.Platform.Exceptions.TheOneFailureException;
 using System.Collections.Generic;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Queries.Live;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Queries.Live;
 
-namespace MoralisUnity.Platform.Queries.Live
+namespace TheOneUnity.Platform.Queries.Live
 {
     public class SubscribableWebSocket
     {
@@ -293,7 +293,7 @@ namespace MoralisUnity.Platform.Queries.Live
         {
             if (String.IsNullOrWhiteSpace(ConncetionData.LiveQueryServerURI))
             {
-                throw new MoralisFailureException(ErrorCode.ServerUrlNullOrEmtpy, "");
+                throw new TheOneFailureException(ErrorCode.ServerUrlNullOrEmtpy, "");
             }
 
             ClientStatus = LiveQueryClientStatusTypes.New;
@@ -303,7 +303,7 @@ namespace MoralisUnity.Platform.Queries.Live
             using (IClientWebSocket ws = webSocket switch
             {
                 { } => webSocket,
-                _ => new MoralisClientWebSocket()
+                _ => new TheOneClientWebSocket()
             })
             {
                 await ws.ConnectAsync(new Uri(ConncetionData.LiveQueryServerURI), CancellationToken.None);

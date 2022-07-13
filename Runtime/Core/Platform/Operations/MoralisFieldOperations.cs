@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Operations
+namespace TheOneUnity.Platform.Operations
 {
-    public class MoralisObjectIdComparer : IEqualityComparer<object>
+    public class TheOneObjectIdComparer : IEqualityComparer<object>
     {
         bool IEqualityComparer<object>.Equals(object p1, object p2)
         {
-            MoralisObject moralisObj1 = p1 as MoralisObject;
-            MoralisObject moralisObj2 = p2 as MoralisObject;
+            TheOneObject moralisObj1 = p1 as TheOneObject;
+            TheOneObject moralisObj2 = p2 as TheOneObject;
             if (moralisObj1 != null && moralisObj1 != null)
             {
                 return Equals(moralisObj1.objectId, moralisObj1.objectId);
@@ -20,7 +20,7 @@ namespace MoralisUnity.Platform.Operations
 
         public int GetHashCode(object p)
         {
-            MoralisObject moralisObject = p as MoralisObject;
+            TheOneObject moralisObject = p as TheOneObject;
             if (moralisObject != null)
             {
                 return moralisObject.objectId.GetHashCode();
@@ -29,19 +29,19 @@ namespace MoralisUnity.Platform.Operations
         }
     }
 
-    static class MoralisFieldOperations
+    static class TheOneFieldOperations
     {
-        private static MoralisObjectIdComparer comparer;
+        private static TheOneObjectIdComparer comparer;
 
-        public static IMoralisFieldOperation Decode(IDictionary<string, object> json) => throw new NotImplementedException();
+        public static ITheOneFieldOperation Decode(IDictionary<string, object> json) => throw new NotImplementedException();
 
-        public static IEqualityComparer<object> MoralisObjectComparer
+        public static IEqualityComparer<object> TheOneObjectComparer
         {
             get
             {
                 if (comparer == null)
                 {
-                    comparer = new MoralisObjectIdComparer();
+                    comparer = new TheOneObjectIdComparer();
                 }
                 return comparer;
             }

@@ -1,25 +1,25 @@
 ﻿using System;
-using MoralisUnity.SolanaApi.Client;
+using TheOneUnity.SolanaApi.Client;
 
-namespace MoralisUnity.SolanaApi
+namespace TheOneUnity.SolanaApi
 {
-    public class MoralisSolanaClient
+    public class TheOneSolanaClient
     {
         SolanaApiClient client = new SolanaApiClient();
 
-        static MoralisSolanaClient instance = new MoralisSolanaClient();
+        static TheOneSolanaClient instance = new TheOneSolanaClient();
 
-        private MoralisSolanaClient() { }
+        private TheOneSolanaClient() { }
 
         /// <summary>
-        /// Initialize Moralis Web3API. Use this to initialize to your personal 
-        /// Moralis server. Major advantage is api key is supplied 
+        /// Initialize TheOne Web3API. Use this to initialize to your personal 
+        /// TheOne server. Major advantage is api key is supplied 
         /// </summary>
         /// <param name="url"></param>
         public static void Initialize(string url) => instance.client.Initialize(url);
 
         /// <summary>
-        /// Initialize Moralis Web3API. 
+        /// Initialize TheOne Web3API. 
         /// </summary>
         /// <param name="useStandardServer">If true enforces use of the standard REST server</param>
         /// <param name="apiKey">Required if useStandardServer is true</param>
@@ -35,13 +35,13 @@ namespace MoralisUnity.SolanaApi
         }
 
         /// <summary>
-        /// Gets the Web3ApiClient instance. Moralis.Initialize must be called first.
-        /// If Moralis is not initialized this will throw an ApiException.
+        /// Gets the Web3ApiClient instance. TheOne.Initialize must be called first.
+        /// If TheOne is not initialized this will throw an ApiException.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when Moralis.Initialize has not been called.</exception>
+        /// <exception cref="ApiException">Thrown when TheOne.Initialize has not been called.</exception>
         public static SolanaApiClient SolanaApi
         {
-            get => instance.client.IsInitialized ? instance.client : throw new ApiException(109, "Moralis must be initialized before use.");
+            get => instance.client.IsInitialized ? instance.client : throw new ApiException(109, "TheOne must be initialized before use.");
         }
     }
 }

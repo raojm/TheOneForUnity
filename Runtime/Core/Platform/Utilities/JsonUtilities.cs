@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MoralisUnity.Platform.Utilities
+namespace TheOneUnity.Platform.Utilities
 {
     /// <summary>
     /// A simple recursive-descent JSON Parser based on the grammar defined at http://www.json.org

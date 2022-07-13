@@ -1,4 +1,4 @@
-namespace MoralisUnity.Platform.Queries.Live
+namespace TheOneUnity.Platform.Queries.Live
 {
     public enum WebSocketStateType { 
         Connecting = 0,

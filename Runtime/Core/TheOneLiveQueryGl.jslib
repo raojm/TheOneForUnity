@@ -1,6 +1,6 @@
 
 mergeInto(LibraryManager.library, {
-  MoralisLiveQueries: function () {
+  TheOneLiveQueries: function () {
   },
   
   OpenWebsocketJs: function (key, path) {

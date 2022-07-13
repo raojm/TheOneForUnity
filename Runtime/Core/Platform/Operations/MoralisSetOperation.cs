@@ -1,14 +1,14 @@
-﻿using MoralisUnity.Platform.Abstractions;
+﻿using TheOneUnity.Platform.Abstractions;
 
-namespace MoralisUnity.Platform.Operations
+namespace TheOneUnity.Platform.Operations
 {
-    class MoralisSetOperation : IMoralisFieldOperation
+    class TheOneSetOperation : ITheOneFieldOperation
     {
         public object Value { get; private set; }
 
-        public MoralisSetOperation(object value) => Value = value;
+        public TheOneSetOperation(object value) => Value = value;
 
-        public IMoralisFieldOperation MergeWithPrevious(IMoralisFieldOperation previous) => this;
+        public ITheOneFieldOperation MergeWithPrevious(ITheOneFieldOperation previous) => this;
 
         public object Apply(object oldValue, string key) => Value;
 

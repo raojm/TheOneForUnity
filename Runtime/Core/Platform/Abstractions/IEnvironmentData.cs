@@ -1,5 +1,5 @@
 ﻿
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     /// <summary>
     /// Information about the environment in which the library will be operating.

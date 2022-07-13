@@ -1,6 +1,6 @@
-﻿using MoralisUnity.Platform.Objects;
+﻿using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Queries.Live
+namespace TheOneUnity.Platform.Queries.Live
 {
     /// <summary>
     /// This action object is used for Connected, Create, Update, Enter, Delete, 
@@ -8,7 +8,7 @@ namespace MoralisUnity.Platform.Queries.Live
     /// Note: For subscribed and unscubscribed events, Object will always be null or default
     /// </summary>
     /// <typeparam name="T">Response object</typeparam>
-    public class ActionEvent<T> : QueryEventMessage where T : MoralisObject
+    public class ActionEvent<T> : QueryEventMessage where T : TheOneObject
     {
         /// <summary>
         /// REQUIRED: Client generated 
@@ -16,7 +16,7 @@ namespace MoralisUnity.Platform.Queries.Live
         public int requestId { get; set; }
 
         /// <summary>
-        /// OPTIONAL: Moralis current user session token.
+        /// OPTIONAL: TheOne current user session token.
         /// </summary>
         public T Object { get; set; }
     }

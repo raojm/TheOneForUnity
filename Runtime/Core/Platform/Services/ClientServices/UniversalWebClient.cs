@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
-using WebRequest = MoralisUnity.Platform.Services.Models.WebRequest;
+using WebRequest = TheOneUnity.Platform.Services.Models.WebRequest;
 using UnityEngine;
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 using Newtonsoft.Json;
 
-namespace MoralisUnity.Platform.Services
+namespace TheOneUnity.Platform.Services
 {
     /// <summary>
     /// A universal implementation of <see cref="IWebClient"/>.

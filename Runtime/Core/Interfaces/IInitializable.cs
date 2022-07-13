@@ -1,4 +1,4 @@
-﻿namespace MoralisUnity.Sdk.Interfaces
+﻿namespace TheOneUnity.Sdk.Interfaces
 {
     /// <summary>
     /// Implements API for types which Initialize.

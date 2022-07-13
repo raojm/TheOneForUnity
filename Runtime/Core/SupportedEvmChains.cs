@@ -1,12 +1,12 @@
 ﻿/**
  *           Module: ChainEntry.cs
  *  Descriptiontion: Provides a easy way to get detail about an EVM chain for 
- *  all EVM chains supported by the Moralis Web3API
- *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich 
+ *  all EVM chains supported by the TheOne Web3API
+ *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich 
  *  
  *  MIT License
  *  
- *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  Copyright (c) 2021 TheOne Web3 Technology AB, 559307-5988
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -29,20 +29,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MoralisUnity.Web3Api.Models;
+using TheOneUnity.Web3Api.Models;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     /// <summary>
     /// Provides a easy way to get detail about an EVM chain for all EVM chains 
-    /// supported by the Moralis Web3API
+    /// supported by the TheOne Web3API
     /// </summary>
     public class SupportedEvmChains
     {
         private static List<ChainEntry> chains = new List<ChainEntry>();
 
         /// <summary>
-        /// The list of EVM chains supported by the Moralis Web3API.
+        /// The list of EVM chains supported by the TheOne Web3API.
         /// </summary>
         public static List<ChainEntry> SupportedChains 
         { 
@@ -137,7 +137,7 @@ namespace MoralisUnity
         }
 
         /// <summary>
-        /// Define extra information about the EVM chanis supported by Moralis.
+        /// Define extra information about the EVM chanis supported by TheOne.
         /// </summary>
         /// <returns></returns>
         private static Dictionary<string, Dictionary<string, object>> GetChainDetails()

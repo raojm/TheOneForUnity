@@ -4,11 +4,11 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 
-namespace MoralisUnity.Platform.Queries.Live
+namespace TheOneUnity.Platform.Queries.Live
 {
-    public class MoralisClientWebSocket : IClientWebSocket
+    public class TheOneClientWebSocket : IClientWebSocket
     {
         private ClientWebSocket webSocket = new ClientWebSocket();
 

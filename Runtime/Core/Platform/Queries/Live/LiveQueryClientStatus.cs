@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MoralisUnity.Platform.Queries.Live
+namespace TheOneUnity.Platform.Queries.Live
 {
     public enum LiveQueryClientStatusTypes
     {

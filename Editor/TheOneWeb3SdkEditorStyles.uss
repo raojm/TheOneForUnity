@@ -149,5 +149,5 @@
 	margin-top: 10px;
 	height: 75px;
 	width: 256px;
-	background-image: url("Resources/MoralisLogoWizard.png"); 
+	background-image: url("Resources/TheOneLogoWizard.png"); 
 }

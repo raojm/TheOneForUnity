@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Web3Api.Models;
+using TheOneUnity.Web3Api.Models;
 
-namespace MoralisUnity.Web3Api.Interfaces
+namespace TheOneUnity.Web3Api.Interfaces
 {
 	/// <summary>
 	/// Represents a collection of functions to interact with the API endpoints

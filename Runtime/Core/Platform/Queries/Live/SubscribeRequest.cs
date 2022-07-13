@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Queries.Live
+namespace TheOneUnity.Platform.Queries.Live
 {
-    public class SubscribeRequest<T> : QueryEventMessage where T : MoralisObject
+    public class SubscribeRequest<T> : QueryEventMessage where T : TheOneObject
     {
-        private MoralisQuery<T> _query;
+        private TheOneQuery<T> _query;
 
         /// <summary>
-        /// REQUIRED: Moralis Application Id
+        /// REQUIRED: TheOne Application Id
         /// </summary>
         public string applicationId { get; set; }
 
@@ -18,7 +18,7 @@ namespace MoralisUnity.Platform.Queries.Live
         public int requestId { get; set; }
 
         /// <summary>
-        /// OPTIONAL: Moralis current user session token.
+        /// OPTIONAL: TheOne current user session token.
         /// </summary>
         public string sessionToken { get; set; }
 
@@ -27,7 +27,7 @@ namespace MoralisUnity.Platform.Queries.Live
         /// </summary>
         public IDictionary<string, object> query { get; private set; }
 
-        internal MoralisQuery<T> OriginalQuery
+        internal TheOneQuery<T> OriginalQuery
         { 
             get { return _query; }
             set
@@ -40,7 +40,7 @@ namespace MoralisUnity.Platform.Queries.Live
 
         public SubscribeRequest() => op = OperationTypes.subscribe.ToString();
 
-        public SubscribeRequest(MoralisQuery<T> targetQuery, string applicationId, int requestId, string sessionToken = null) => 
+        public SubscribeRequest(TheOneQuery<T> targetQuery, string applicationId, int requestId, string sessionToken = null) => 
             (this.OriginalQuery, this.applicationId, this.requestId, op, this.sessionToken) = 
             (targetQuery, applicationId, requestId, OperationTypes.subscribe.ToString(), sessionToken);
         

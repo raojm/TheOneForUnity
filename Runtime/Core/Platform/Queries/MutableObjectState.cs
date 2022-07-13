@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Operations;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Operations;
 
-namespace MoralisUnity.Platform.Queries
+namespace TheOneUnity.Platform.Queries
 {
     public class MutableObjectState : IObjectState
     {
@@ -15,14 +15,14 @@ namespace MoralisUnity.Platform.Queries
 
         public bool ContainsKey(string key) => ServerData.ContainsKey(key);
 
-        public void Apply(IDictionary<string, IMoralisFieldOperation> operationSet)
+        public void Apply(IDictionary<string, ITheOneFieldOperation> operationSet)
         {
             // Apply operationSet
-            foreach (KeyValuePair<string, IMoralisFieldOperation> pair in operationSet)
+            foreach (KeyValuePair<string, ITheOneFieldOperation> pair in operationSet)
             {
                 ServerData.TryGetValue(pair.Key, out object oldValue);
                 object newValue = pair.Value.Apply(oldValue, pair.Key);
-                if (newValue != MoralisDeleteOperation.Token)
+                if (newValue != TheOneDeleteOperation.Token)
                     ServerData[pair.Key] = newValue;
                 else
                     ServerData.Remove(pair.Key);

@@ -4,14 +4,14 @@ using System.IO;
 using System.Net;
 using System.Text;
 using UnityEngine.Networking;
-using MoralisUnity.SolanaApi;
-using WebRequest = MoralisUnity.SolanaApi.Models.WebRequest;
+using TheOneUnity.SolanaApi;
+using WebRequest = TheOneUnity.SolanaApi.Models.WebRequest;
 using Newtonsoft.Json;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.SolanaApi.Core.Models;
-using MoralisUnity.SolanaApi.Models;
+using TheOneUnity.SolanaApi.Core.Models;
+using TheOneUnity.SolanaApi.Models;
 
-namespace MoralisUnity.SolanaApi.Client
+namespace TheOneUnity.SolanaApi.Client
 {
     /// <summary>
     /// API client is mainly responible for making the HTTP call to the API backend.

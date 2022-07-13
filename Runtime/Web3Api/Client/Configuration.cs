@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace MoralisUnity.Web3Api.Client
+namespace TheOneUnity.Web3Api.Client
 {
     /// <summary>
     /// Represents a set of configuration settings

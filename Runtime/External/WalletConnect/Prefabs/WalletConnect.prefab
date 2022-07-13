@@ -84,8 +84,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   AppData:
-    Description: A sample application using Moralis
+    Description: A sample application using TheOne
     URL: https://www.moralis.io/
     Icons:
-    - '"https://moralis.io/wp-content/uploads/2021/06/Powered-by-Moralis-Badge-Black.svg"'
-    Name: Moralis Sample dApp
+    - '"https://moralis.io/wp-content/uploads/2021/06/Powered-by-TheOne-Badge-Black.svg"'
+    Name: TheOne Sample dApp

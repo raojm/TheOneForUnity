@@ -1,12 +1,12 @@
 {
-    "name": "Moralis.Web3UnitySdk.Editor",
+    "name": "TheOne.Web3UnitySdk",
     "rootNamespace": "",
     "references": [
-        "Moralis.Web3UnitySdk"
+        "Nethereum",
+        "UniTask",
+        "WalletConnectSharp.Unity"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

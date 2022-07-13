@@ -1,6 +1,6 @@
 using System;
 
-namespace MoralisUnity.Platform.Utilities
+namespace TheOneUnity.Platform.Utilities
 {
     internal static class ThreadingUtilities
     {

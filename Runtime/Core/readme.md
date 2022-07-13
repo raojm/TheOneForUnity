@@ -1,5 +1,5 @@
-﻿# Moralis DOT NET SDK #
-The files in this directory and in the child directories of this directory for the Moralis 
+﻿# TheOne DOT NET SDK #
+The files in this directory and in the child directories of this directory for the TheOne 
 Dot Net SDK. These files should not be modified.
 
 The raw files are included in this project to ensure compatibility with Unity 3D. While the official 

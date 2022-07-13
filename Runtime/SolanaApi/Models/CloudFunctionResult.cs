@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MoralisUnity.SolanaApi.Models
+namespace TheOneUnity.SolanaApi.Models
 {
     public class CloudFunctionResult<T>
     {

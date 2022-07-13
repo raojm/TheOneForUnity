@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Net;
-using MoralisUnity.SolanaApi.Client;
-using MoralisUnity.SolanaApi.Interfaces;
-using MoralisUnity.SolanaApi.Models;
+using TheOneUnity.SolanaApi.Client;
+using TheOneUnity.SolanaApi.Interfaces;
+using TheOneUnity.SolanaApi.Models;
 
-namespace MoralisUnity.SolanaApi.CloudApi
+namespace TheOneUnity.SolanaApi.CloudApi
 {
 	public class AccountApi : IAccountApi
 	{

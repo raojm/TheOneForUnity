@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 
 #pragma warning disable 1998
 
-namespace MoralisUnity.Platform.Utilities
+namespace TheOneUnity.Platform.Utilities
 {
     /// <summary>
     /// WARNING File cache will not work in WebGL at this time, use a memory cache

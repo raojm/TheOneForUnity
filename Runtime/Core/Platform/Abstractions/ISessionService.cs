@@ -1,16 +1,16 @@
 ﻿using System.Threading;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Objects;
 using Cysharp.Threading.Tasks;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
-    public interface ISessionService<TUser> where TUser : MoralisUser
+    public interface ISessionService<TUser> where TUser : TheOneUser
     {
-        UniTask<MoralisSession> GetSessionAsync(string sessionToken, IServiceHub<TUser> serviceHub, CancellationToken cancellationToken = default);
+        UniTask<TheOneSession> GetSessionAsync(string sessionToken, IServiceHub<TUser> serviceHub, CancellationToken cancellationToken = default);
 
         UniTask RevokeAsync(string sessionToken, CancellationToken cancellationToken = default);
 
-        UniTask<MoralisSession> UpgradeToRevocableSessionAsync(string sessionToken, IServiceHub<TUser> serviceHub, CancellationToken cancellationToken = default);
+        UniTask<TheOneSession> UpgradeToRevocableSessionAsync(string sessionToken, IServiceHub<TUser> serviceHub, CancellationToken cancellationToken = default);
 
         bool IsRevocableSessionToken(string sessionToken);
     }

@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Utilities;
 using Cysharp.Threading.Tasks;
 using System.Net;
 using System;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Services.Models;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Services.Models;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace MoralisUnity.Platform.Services.ClientServices
+namespace TheOneUnity.Platform.Services.ClientServices
 {
-    public class MoralisUserService<TUser> : IUserService<TUser> where TUser : MoralisUser
+    public class TheOneUserService<TUser> : IUserService<TUser> where TUser : TheOneUser
     {
-        IMoralisCommandRunner CommandRunner { get; }
+        ITheOneCommandRunner CommandRunner { get; }
 
         IJsonSerializer JsonSerializer { get; }
 
@@ -24,11 +24,11 @@ namespace MoralisUnity.Platform.Services.ClientServices
 
         public object RevocableSessionEnabledMutex { get; } = new object { };
 
-        public MoralisUserService(IMoralisCommandRunner commandRunner, IObjectService objectService, IJsonSerializer jsonSerializer) => (CommandRunner, ObjectService, JsonSerializer) = (commandRunner, objectService, jsonSerializer);
+        public TheOneUserService(ITheOneCommandRunner commandRunner, IObjectService objectService, IJsonSerializer jsonSerializer) => (CommandRunner, ObjectService, JsonSerializer) = (commandRunner, objectService, jsonSerializer);
 
-        public async UniTask<TUser> SignUpAsync(IObjectState state, IDictionary<string, IMoralisFieldOperation> operations, CancellationToken cancellationToken = default)
+        public async UniTask<TUser> SignUpAsync(IObjectState state, IDictionary<string, ITheOneFieldOperation> operations, CancellationToken cancellationToken = default)
         {
-            Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(new MoralisCommand("server/classes/_User", method: "POST", data: JsonSerializer.Serialize(operations)), cancellationToken: cancellationToken);
+            Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(new TheOneCommand("server/classes/_User", method: "POST", data: JsonSerializer.Serialize(operations)), cancellationToken: cancellationToken);
 
             TUser resp = default;
 
@@ -58,14 +58,14 @@ namespace MoralisUnity.Platform.Services.ClientServices
 
             Tuple<HttpStatusCode, string> cmdResp =
                 await CommandRunner.RunCommandAsync(
-                    new MoralisCommand($"server/login", method: "POST", data: signinData), cancellationToken: cancellationToken);
+                    new TheOneCommand($"server/login", method: "POST", data: signinData), cancellationToken: cancellationToken);
 
             if ((int)cmdResp.Item1 < 300)
             {
                 result = JsonSerializer.Deserialize<TUser>(cmdResp.Item2.ToString());
 
                 result.ObjectService = this.ObjectService;
-                result.ACL = new MoralisAcl(result);
+                result.ACL = new TheOneAcl(result);
                 await result.SaveAsync();
             }
             else
@@ -85,7 +85,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
                 [authType] = data
             };
 
-            MoralisCommand cmd = new MoralisCommand("server/users", method: "POST", data: JsonSerializer.Serialize(new Dictionary<string, object> { [nameof(authData)] = authData }));
+            TheOneCommand cmd = new TheOneCommand("server/users", method: "POST", data: JsonSerializer.Serialize(new Dictionary<string, object> { [nameof(authData)] = authData }));
             Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(cmd, cancellationToken: cancellationToken);
 
             if ((int)cmdResp.Item1 < 300)
@@ -94,7 +94,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
 
                 user.ObjectService = this.ObjectService;
 
-                user.ACL = new MoralisAcl(user);
+                user.ACL = new TheOneAcl(user);
                 user.ethAddress = data["id"].ToString();
                 user.accounts = new string[1];
                 user.accounts[0] = user.ethAddress;
@@ -112,7 +112,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
         public async UniTask<TUser> GetUserAsync(string sessionToken, IServiceHub<TUser> serviceHub, CancellationToken cancellationToken = default)
         {
             TUser user = default;
-            Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(new MoralisCommand("server/users/me", method: "GET", sessionToken: sessionToken, data: default), cancellationToken: cancellationToken);
+            Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(new TheOneCommand("server/users/me", method: "GET", sessionToken: sessionToken, data: default), cancellationToken: cancellationToken);
             if ((int)cmdResp.Item1 < 300)
             {
                 user = JsonSerializer.Deserialize<TUser>(cmdResp.Item2.ToString());
@@ -125,7 +125,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
 
         public async UniTask RequestPasswordResetAsync(string email, CancellationToken cancellationToken = default)
         {
-            Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(new MoralisCommand("server/requestPasswordReset", method: "POST", data: JsonSerializer.Serialize(new Dictionary<string, object> { [nameof(email)] = email })), cancellationToken: cancellationToken);
+            Tuple<HttpStatusCode, string> cmdResp = await CommandRunner.RunCommandAsync(new TheOneCommand("server/requestPasswordReset", method: "POST", data: JsonSerializer.Serialize(new Dictionary<string, object> { [nameof(email)] = email })), cancellationToken: cancellationToken);
 
             if((int)cmdResp.Item1 >= 400)
             {

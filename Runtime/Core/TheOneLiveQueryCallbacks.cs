@@ -1,10 +1,10 @@
-﻿using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Queries.Live;
+﻿using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Queries.Live;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
-    public class MoralisLiveQueryCallbacks<T> : ILiveQueryCallbacks<T> where T : MoralisObject
+    public class TheOneLiveQueryCallbacks<T> : ILiveQueryCallbacks<T> where T : TheOneObject
     {
 
         /// <summary>

@@ -1,9 +1,9 @@
 ﻿using System;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Utilities;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 
-namespace MoralisUnity.Platform.Services.Infrastructure
+namespace TheOneUnity.Platform.Services.Infrastructure
 {
     public class InstallationService : IInstallationService
     {

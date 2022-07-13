@@ -2,12 +2,12 @@
 using System.IO;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     public interface IFileService
     {
-        UniTask<MoralisFileState> SaveAsync(MoralisFileState state, Stream dataStream, string sessionToken, IProgress<IDataTransferLevel> progress, CancellationToken cancellationToken);
+        UniTask<TheOneFileState> SaveAsync(TheOneFileState state, Stream dataStream, string sessionToken, IProgress<IDataTransferLevel> progress, CancellationToken cancellationToken);
     }
 }

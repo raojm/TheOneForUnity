@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine.Events;
 
-namespace MoralisUnity.Kits.AuthenticationKit
+namespace TheOneUnity.Kits.AuthenticationKit
 {
     /// <summary>
     /// See <see cref="AuthenticationKit"/> comments for a feature overview.

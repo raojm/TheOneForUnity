@@ -1,32 +1,32 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Queries;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Queries;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     public interface IQueryService
     {
         IObjectService ObjectService { get; }
-        //Task<IEnumerable<T>> FindAsync<T>(MoralisQuery<T> query, MoralisUser user, CancellationToken cancellationToken = default) where T : MoralisObject;
+        //Task<IEnumerable<T>> FindAsync<T>(TheOneQuery<T> query, TheOneUser user, CancellationToken cancellationToken = default) where T : TheOneObject;
 
-        //Task<IEnumerable<T>> AggregateAsync<T>(MoralisQuery<T> query, MoralisUser user, CancellationToken cancellationToken = default) where T : MoralisObject;
+        //Task<IEnumerable<T>> AggregateAsync<T>(TheOneQuery<T> query, TheOneUser user, CancellationToken cancellationToken = default) where T : TheOneObject;
 
-        //Task<int> CountAsync<T>(MoralisQuery<T> query, MoralisUser user, CancellationToken cancellationToken = default) where T : MoralisObject;
+        //Task<int> CountAsync<T>(TheOneQuery<T> query, TheOneUser user, CancellationToken cancellationToken = default) where T : TheOneObject;
 
-        //Task<T> FirstAsync<T>(MoralisQuery<T> query, MoralisUser user, CancellationToken cancellationToken = default) where T : MoralisObject;
+        //Task<T> FirstAsync<T>(TheOneQuery<T> query, TheOneUser user, CancellationToken cancellationToken = default) where T : TheOneObject;
 
-        //Task<IEnumerable<T>> DistinctAsync<T>(MoralisQuery<T> query, MoralisUser user, CancellationToken cancellationToken = default) where T : MoralisObject;
-        UniTask<IEnumerable<T>> FindAsync<T>(MoralisQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : MoralisObject;
+        //Task<IEnumerable<T>> DistinctAsync<T>(TheOneQuery<T> query, TheOneUser user, CancellationToken cancellationToken = default) where T : TheOneObject;
+        UniTask<IEnumerable<T>> FindAsync<T>(TheOneQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : TheOneObject;
 
-        UniTask<IEnumerable<T>> AggregateAsync<T>(MoralisQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : MoralisObject;
+        UniTask<IEnumerable<T>> AggregateAsync<T>(TheOneQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : TheOneObject;
 
-        UniTask<int> CountAsync<T>(MoralisQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : MoralisObject;
+        UniTask<int> CountAsync<T>(TheOneQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : TheOneObject;
 
-        UniTask<T> FirstAsync<T>(MoralisQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : MoralisObject;
+        UniTask<T> FirstAsync<T>(TheOneQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : TheOneObject;
 
-        UniTask<IEnumerable<T>> DistinctAsync<T>(MoralisQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : MoralisObject;
+        UniTask<IEnumerable<T>> DistinctAsync<T>(TheOneQuery<T> query, string sessionToken, CancellationToken cancellationToken = default) where T : TheOneObject;
 
 
     }

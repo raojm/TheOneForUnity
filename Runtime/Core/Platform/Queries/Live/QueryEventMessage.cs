@@ -1,5 +1,5 @@
 ﻿
-namespace MoralisUnity.Platform.Queries.Live
+namespace TheOneUnity.Platform.Queries.Live
 {
     /// <summary>
     /// Defines the base live query request / event message object.

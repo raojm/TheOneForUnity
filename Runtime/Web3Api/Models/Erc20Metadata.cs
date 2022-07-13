@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-namespace MoralisUnity.Web3Api.Models
+namespace TheOneUnity.Web3Api.Models
 {
 	[DataContract]
 	public class Erc20Metadata

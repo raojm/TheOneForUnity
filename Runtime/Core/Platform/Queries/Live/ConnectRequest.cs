@@ -1,5 +1,5 @@
 ﻿
-namespace MoralisUnity.Platform.Queries.Live
+namespace TheOneUnity.Platform.Queries.Live
 {
     /// <summary>
     /// The connect request is sent from a client to the LiveQuery server. It 
@@ -9,7 +9,7 @@ namespace MoralisUnity.Platform.Queries.Live
     public class ConnectRequest : QueryEventMessage
     {
         /// <summary>
-        /// REQUIRED: Moralis Application Id
+        /// REQUIRED: TheOne Application Id
         /// </summary>
         public string applicationId { get; set; }
 
@@ -34,19 +34,19 @@ namespace MoralisUnity.Platform.Queries.Live
         public string windowsKey { get; set; }
 
         /// <summary>
-        /// OPTIONAL: Moralis Master Key - CAUTION should not be used from client 
+        /// OPTIONAL: TheOne Master Key - CAUTION should not be used from client 
         /// application. If an operation requires a master key it is recommended 
         /// that that operation be called via a Cloud Function.
         /// </summary>
         public string masterKey { get; set; }
 
         /// <summary>
-        /// OPTIONAL: Moralis current user session token.
+        /// OPTIONAL: TheOne current user session token.
         /// </summary>
         public string sessionToken { get; set; }
 
         /// <summary>
-        /// OPTIONAL: Moralis Instanllation Id.
+        /// OPTIONAL: TheOne Instanllation Id.
         /// </summary>
         public string installationId { get; set; }
 

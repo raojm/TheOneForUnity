@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Utilities;
 
-namespace MoralisUnity.Platform.Services.ClientServices
+namespace TheOneUnity.Platform.Services.ClientServices
 {
-    public class MoralisService<TUser> : CustomServiceHub<TUser>, IServiceHubComposer<TUser> where TUser : MoralisUser
+    public class TheOneService<TUser> : CustomServiceHub<TUser>, IServiceHubComposer<TUser> where TUser : TheOneUser
     {
 
 
@@ -24,16 +24,16 @@ namespace MoralisUnity.Platform.Services.ClientServices
         };
 
         /// <summary>
-        /// Gets whether or not the assembly using the Moralis SDK was compiled by IL2CPP.
+        /// Gets whether or not the assembly using the TheOne SDK was compiled by IL2CPP.
         /// </summary>
         public static bool IL2CPPCompiled { get; set; } = AppDomain.CurrentDomain?.FriendlyName?.Equals("IL2CPP Root Domain") == true;
 
         /// <summary>
-        /// The configured default instance of <see cref="MoralisClient"/> to use.
+        /// The configured default instance of <see cref="TheOneClient"/> to use.
         /// </summary>
-        public static MoralisService<TUser> Instance { get; private set; }
+        public static TheOneService<TUser> Instance { get; private set; }
 
-        internal static string Version => typeof(MoralisService<TUser>)?.Assembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? typeof(MoralisService<TUser>)?.Assembly?.GetName()?.Version?.ToString();
+        internal static string Version => typeof(TheOneService<TUser>)?.Assembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? typeof(TheOneService<TUser>)?.Assembly?.GetName()?.Version?.ToString();
 
         /// <summary>
         /// Services that provide essential functionality.
@@ -41,22 +41,22 @@ namespace MoralisUnity.Platform.Services.ClientServices
         public override IServiceHub<TUser> Services { get; internal set; }
 
         /// <summary>
-        /// Creates a new <see cref="MoralisClient"/> and authenticates it as belonging to your application. This class is a hub for interacting with the SDK. The recommended way to use this class on client applications is to instantiate it, then call <see cref="Publicize"/> on it in your application entry point. This allows you to access <see cref="Instance"/>.
+        /// Creates a new <see cref="TheOneClient"/> and authenticates it as belonging to your application. This class is a hub for interacting with the SDK. The recommended way to use this class on client applications is to instantiate it, then call <see cref="Publicize"/> on it in your application entry point. This allows you to access <see cref="Instance"/>.
         /// </summary>
-        /// <param name="applicationID">The Application ID provided in the Moralis dashboard.</param>
-        /// <param name="serverURL">The server URL provided in the Moralis dashboard.</param>
-        /// <param name="key">The .NET Key provided in the Moralis dashboard.</param>
-        /// <param name="serviceHub">A service hub to override internal services and thereby make the Moralis SDK operate in a custom manner.</param>
+        /// <param name="applicationID">The Application ID provided in the TheOne dashboard.</param>
+        /// <param name="serverURL">The server URL provided in the TheOne dashboard.</param>
+        /// <param name="key">The .NET Key provided in the TheOne dashboard.</param>
+        /// <param name="serviceHub">A service hub to override internal services and thereby make the TheOne SDK operate in a custom manner.</param>
         /// <param name="configurators">A set of <see cref="IServiceHubMutator"/> implementation instances to tweak the behaviour of the SDK.</param>
-        public MoralisService(string applicationID, string serverURL, string key, IJsonSerializer jsonSerializer, IServiceHub<TUser> serviceHub = default, params IServiceHubMutator[] configurators) : this(new ServerConnectionData { ApplicationID = applicationID, ServerURI = serverURL, Key = key }, jsonSerializer, serviceHub, configurators) { }
+        public TheOneService(string applicationID, string serverURL, string key, IJsonSerializer jsonSerializer, IServiceHub<TUser> serviceHub = default, params IServiceHubMutator[] configurators) : this(new ServerConnectionData { ApplicationID = applicationID, ServerURI = serverURL, Key = key }, jsonSerializer, serviceHub, configurators) { }
 
         /// <summary>
-        /// Creates a new <see cref="MoralisClient"/> and authenticates it as belonging to your application. This class is a hub for interacting with the SDK. The recommended way to use this class on client applications is to instantiate it, then call <see cref="Publicize"/> on it in your application entry point. This allows you to access <see cref="Instance"/>.
+        /// Creates a new <see cref="TheOneClient"/> and authenticates it as belonging to your application. This class is a hub for interacting with the SDK. The recommended way to use this class on client applications is to instantiate it, then call <see cref="Publicize"/> on it in your application entry point. This allows you to access <see cref="Instance"/>.
         /// </summary>
-        /// <param name="configuration">The configuration to initialize Moralis with.</param>
-        /// <param name="serviceHub">A service hub to override internal services and thereby make the Moralis SDK operate in a custom manner.</param>
+        /// <param name="configuration">The configuration to initialize TheOne with.</param>
+        /// <param name="serviceHub">A service hub to override internal services and thereby make the TheOne SDK operate in a custom manner.</param>
         /// <param name="configurators">A set of <see cref="IServiceHubMutator"/> implementation instances to tweak the behaviour of the SDK.</param>
-        public MoralisService(IServerConnectionData configuration, IJsonSerializer jsonSerializer, IServiceHub<TUser> serviceHub = default, params IServiceHubMutator[] configurators)
+        public TheOneService(IServerConnectionData configuration, IJsonSerializer jsonSerializer, IServiceHub<TUser> serviceHub = default, params IServiceHubMutator[] configurators)
         {
             Services = serviceHub is { } ? new OrchestrationServiceHub<TUser> { Custom = serviceHub, Default = new ServiceHub<TUser> { ServerConnectionData = GenerateServerConnectionData(), JsonSerializer = jsonSerializer } } : new ServiceHub<TUser> { ServerConnectionData = GenerateServerConnectionData(), JsonSerializer = jsonSerializer } as IServiceHub<TUser>;
 
@@ -71,11 +71,11 @@ namespace MoralisUnity.Platform.Services.ClientServices
                     MasterKey = data.MasterKey,
                     Test = data.Test,
                     Key = data.Key,
-                    ServerURI = "https://api.Moralis.com/1/"
+                    ServerURI = "https://api.TheOne.com/1/"
                 },
-                { ServerURI: "https://api.Moralis.com/1/" } => throw new InvalidOperationException("Since the official Moralis server has shut down, you must specify a URI that points to a hosted instance."),
+                { ServerURI: "https://api.TheOne.com/1/" } => throw new InvalidOperationException("Since the official TheOne server has shut down, you must specify a URI that points to a hosted instance."),
                 { ApplicationID: { }, ServerURI: { }, Key: { } } data => data,
-                _ => throw new InvalidOperationException("The IServerConnectionData implementation instance provided to the MoralisClient constructor must be populated with the information needed to connect to a Moralis server instance.")
+                _ => throw new InvalidOperationException("The IServerConnectionData implementation instance provided to the TheOneClient constructor must be populated with the information needed to connect to a TheOne server instance.")
             };
 
             // If a WS/WSS URI is not supplied create it from the server URL.
@@ -93,20 +93,20 @@ namespace MoralisUnity.Platform.Services.ClientServices
                 };
             }
 
-            Cloud = new MoralisCloud<TUser>((IServiceHub<TUser>)this.Services);
+            Cloud = new TheOneCloud<TUser>((IServiceHub<TUser>)this.Services);
             
             //Services.ClassController.AddIntrinsic();
         }
 
         /// <summary>
-        /// Initializes a <see cref="MoralisClient"/> instance using the <see cref="IServiceHub.Cloner"/> set on the <see cref="Instance"/>'s <see cref="Services"/> <see cref="IServiceHub"/> implementation instance.
+        /// Initializes a <see cref="TheOneClient"/> instance using the <see cref="IServiceHub.Cloner"/> set on the <see cref="Instance"/>'s <see cref="Services"/> <see cref="IServiceHub"/> implementation instance.
         /// </summary>
-        //public MoralisClient() => Services = (Instance ?? throw new InvalidOperationException("A MoralisClient instance with an initializer service must first be publicized in order for the default constructor to be used.")).Services.Cloner.BuildHub(Instance.Services, this);
+        //public TheOneClient() => Services = (Instance ?? throw new InvalidOperationException("A TheOneClient instance with an initializer service must first be publicized in order for the default constructor to be used.")).Services.Cloner.BuildHub(Instance.Services, this);
 
         /// <summary>
-        /// Sets this <see cref="MoralisClient"/> instance as the template to create new instances from.
+        /// Sets this <see cref="TheOneClient"/> instance as the template to create new instances from.
         /// </summary>
-        ///// <param name="publicize">Declares that the current <see cref="MoralisClient"/> instance should be the publicly-accesible <see cref="Instance"/>.</param>
+        ///// <param name="publicize">Declares that the current <see cref="TheOneClient"/> instance should be the publicly-accesible <see cref="Instance"/>.</param>
         public void Publicize()
         {
             lock (Mutex)
@@ -115,7 +115,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
             }
         }
 
-        public MoralisCloud<TUser> Cloud { get; private set; }
+        public TheOneCloud<TUser> Cloud { get; private set; }
 
 
         static object Mutex { get; } = new object { };

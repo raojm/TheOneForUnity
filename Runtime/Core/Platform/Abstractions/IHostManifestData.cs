@@ -1,6 +1,6 @@
 ﻿
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     /// <summary>
     /// Information about the application using the Parse SDK.

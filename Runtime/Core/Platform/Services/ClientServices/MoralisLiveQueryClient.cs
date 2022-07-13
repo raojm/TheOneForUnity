@@ -3,29 +3,29 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using MoralisUnity.Platform.Utilities;
-using static MoralisUnity.Platform.Exceptions.MoralisFailureException;
+using TheOneUnity.Platform.Utilities;
+using static TheOneUnity.Platform.Exceptions.TheOneFailureException;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Exceptions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Queries;
-using MoralisUnity.Platform.Queries.Live;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Exceptions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Queries;
+using TheOneUnity.Platform.Queries.Live;
 
-namespace MoralisUnity.Platform.Services.ClientServices
+namespace TheOneUnity.Platform.Services.ClientServices
 {
     /// <summary>
     /// Represents a single Live Query subscription.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MoralisLiveQueryClient<T> : ILiveQueryClient where T : MoralisObject
+    public class TheOneLiveQueryClient<T> : ILiveQueryClient where T : TheOneObject
     {
         private bool disposedValue;
         private UniTask subscriptTask;
 
         private CancellationTokenSource cancelSource = new CancellationTokenSource();
         private CancellationToken cancellationToken = CancellationToken.None;
-        private MoralisQuery<T> targetQuery;
+        private TheOneQuery<T> targetQuery;
         private SubscribableWebSocket liveQueryServerClient = default;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
         /// <param name="callbacks"></param>
         /// <param name="sessionToken"></param>
         /// <param name="installationId"></param>
-        public MoralisLiveQueryClient(MoralisQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, string sessionToken = null, string installationId = null)
+        public TheOneLiveQueryClient(TheOneQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, string sessionToken = null, string installationId = null)
         {
             Initialize(query, conncetionData, callbacks, sessionToken, installationId);
 
@@ -55,7 +55,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
         /// <param name="callbacks"></param>
         /// <param name="sessionToken"></param>
         /// <param name="installationId"></param>
-        public MoralisLiveQueryClient(MoralisQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, SubscribableWebSocket webSocket, string sessionToken = null, string installationId = null)
+        public TheOneLiveQueryClient(TheOneQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, SubscribableWebSocket webSocket, string sessionToken = null, string installationId = null)
         {
             Initialize(query, conncetionData, callbacks, sessionToken, installationId);
 
@@ -335,7 +335,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
                     if (OnError != null)
                     {
                         ErrorMessage evt = new ErrorMessage() { 
-                            code = (int)MoralisFailureException.ErrorCode.LiveQueryEventHandlingFailed,
+                            code = (int)TheOneFailureException.ErrorCode.LiveQueryEventHandlingFailed,
                             error = exp.Message
                         };
 
@@ -365,7 +365,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
         }
 
 
-        private void Initialize(MoralisQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, string sessionToken, string installationId)
+        private void Initialize(TheOneQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, string sessionToken, string installationId)
         {
             RequestId = query.ClassName.GetHashCode();
 
@@ -410,19 +410,19 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Queries;
-using MoralisUnity.Platform.Queries.Live;
-using static MoralisUnity.Platform.Exceptions.MoralisFailureException;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Queries;
+using TheOneUnity.Platform.Queries.Live;
+using static TheOneUnity.Platform.Exceptions.TheOneFailureException;
 
-namespace MoralisUnity.Platform.Services.ClientServices
+namespace TheOneUnity.Platform.Services.ClientServices
 {
     /// <summary>
     /// Represents a single Live Query subscription.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MoralisLiveQueryClient<T> : ILiveQueryClient where T : MoralisObject
+    public class TheOneLiveQueryClient<T> : ILiveQueryClient where T : TheOneObject
     {
         /// <summary>
         /// Singleton value should beincremented whenever a client is created.
@@ -434,7 +434,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
         private CancellationTokenSource cancelSource = new CancellationTokenSource();
         private CancellationToken cancellationToken = CancellationToken.None;
         private Dictionary<int, Task> meassageHandlingTasks = new Dictionary<int, Task>();
-        private MoralisQuery<T> targetQuery;
+        private TheOneQuery<T> targetQuery;
         private SubscribableWebSocket liveQueryServerClient = default;
 
         /// <summary>
@@ -445,7 +445,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
         /// <param name="callbacks"></param>
         /// <param name="sessionToken"></param>
         /// <param name="installationId"></param>
-        public MoralisLiveQueryClient(MoralisQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, string sessionToken = null, string installationId = null)
+        public TheOneLiveQueryClient(TheOneQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, string sessionToken = null, string installationId = null)
         {
             Initialize(query, conncetionData, callbacks, sessionToken, installationId);
 
@@ -464,7 +464,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
         /// <param name="callbacks"></param>
         /// <param name="sessionToken"></param>
         /// <param name="installationId"></param>
-        public MoralisLiveQueryClient(MoralisQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, SubscribableWebSocket webSocket, string sessionToken = null, string installationId = null)
+        public TheOneLiveQueryClient(TheOneQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, SubscribableWebSocket webSocket, string sessionToken = null, string installationId = null)
         {
             Initialize(query, conncetionData, callbacks, sessionToken, installationId);
 
@@ -764,7 +764,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
         }
 
 
-        private void Initialize(MoralisQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, string sessionToken, string installationId)
+        private void Initialize(TheOneQuery<T> query, IServerConnectionData conncetionData, ILiveQueryCallbacks<T> callbacks, string sessionToken, string installationId)
         {
             RequestId = NextRequestId++;
             targetQuery = query;

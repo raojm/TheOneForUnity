@@ -1,11 +1,11 @@
 ﻿
 using System;
 using System.Reflection;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
-    public abstract class CustomServiceHub<TUser> : ICustomServiceHub<TUser> where TUser : MoralisUser
+    public abstract class CustomServiceHub<TUser> : ICustomServiceHub<TUser> where TUser : TheOneUser
     {
         public bool AlwaysSave { get; set; }
 
@@ -28,7 +28,7 @@ namespace MoralisUnity.Platform.Abstractions
 
         public IInstallationService InstallationService => Services.InstallationService;
 
-        public virtual IMoralisCommandRunner CommandRunner => Services.CommandRunner;
+        public virtual ITheOneCommandRunner CommandRunner => Services.CommandRunner;
 
         public virtual ICloudFunctionService CloudFunctionService => Services.CloudFunctionService;
 
@@ -61,7 +61,7 @@ namespace MoralisUnity.Platform.Abstractions
         //public virtual IParseDataDecoder Decoder => Services.Decoder;
 
         //public virtual IParseInstallationDataFinalizer InstallationDataFinalizer => Services.InstallationDataFinalizer;
-        public T Create<T>(object[] parameters) where T : MoralisObject
+        public T Create<T>(object[] parameters) where T : TheOneObject
         {
             T thing;
 

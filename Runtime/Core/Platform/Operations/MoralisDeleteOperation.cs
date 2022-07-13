@@ -1,17 +1,17 @@
-﻿using MoralisUnity.Platform.Abstractions;
+﻿using TheOneUnity.Platform.Abstractions;
 
-namespace MoralisUnity.Platform.Operations
+namespace TheOneUnity.Platform.Operations
 {
-    public class MoralisDeleteOperation : IMoralisFieldOperation
+    public class TheOneDeleteOperation : ITheOneFieldOperation
     {
         public string __op { get { return "Delete";  } }
         internal static object Token { get; } = new object { };
 
-        public static MoralisDeleteOperation Instance { get; } = new MoralisDeleteOperation { };
+        public static TheOneDeleteOperation Instance { get; } = new TheOneDeleteOperation { };
 
-        private MoralisDeleteOperation() { }
+        private TheOneDeleteOperation() { }
 
-        public IMoralisFieldOperation MergeWithPrevious(IMoralisFieldOperation previous) => this;
+        public ITheOneFieldOperation MergeWithPrevious(ITheOneFieldOperation previous) => this;
 
         public object Apply(object oldValue, string key) => Token;
     }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 
-namespace MoralisUnity.Platform
+namespace TheOneUnity.Platform
 {
     /// <summary>
-    /// Represents the configuration of the Moralis SDK.
+    /// Represents the configuration of the TheOne SDK.
     /// </summary>
     public struct ServerConnectionData : IServerConnectionData
     {
@@ -17,12 +17,12 @@ namespace MoralisUnity.Platform
         public string ApplicationID { get; set; }
 
         /// <summary>
-        /// A URI pointing to the target Moralis Server instance hosting the app targeted by <see cref="ApplicationID"/>.
+        /// A URI pointing to the target TheOne Server instance hosting the app targeted by <see cref="ApplicationID"/>.
         /// </summary>
         public string ServerURI { get; set; }
 
         /// <summary>
-        /// A URI pointing to the target Moralis WS/WSS server.
+        /// A URI pointing to the target TheOne WS/WSS server.
         /// </summary>
         public string LiveQueryServerURI { get; set; }
 
@@ -33,12 +33,12 @@ namespace MoralisUnity.Platform
         public string ApiKey { get; set; }
 
         /// <summary>
-        /// The .NET Key for the Moralis app targeted by <see cref="ServerURI"/>.
+        /// The .NET Key for the TheOne app targeted by <see cref="ServerURI"/>.
         /// </summary>
         public string Key { get; set; }
 
         /// <summary>
-        /// The Master Key for the Moralis app targeted by <see cref="Key"/>.
+        /// The Master Key for the TheOne app targeted by <see cref="Key"/>.
         /// </summary>
         public string MasterKey { get; set; }
 

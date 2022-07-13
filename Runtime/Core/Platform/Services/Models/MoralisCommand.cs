@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Utilities;
 
-namespace MoralisUnity.Platform.Services.Models
+namespace TheOneUnity.Platform.Services.Models
 {
     /// <summary>
     /// ParseCommand is an <see cref="WebRequest"/> with pre-populated
     /// headers.
     /// </summary>
-    public class MoralisCommand : WebRequest
+    public class TheOneCommand : WebRequest
     {
         //public IDictionary<string, object> DataObject { get; private set; }
         public string DataObject { get; private set; }
@@ -24,10 +24,10 @@ namespace MoralisUnity.Platform.Services.Models
             set => base.Data = value;
         }
 
-        //public MoralisCommand(string relativeUri, string method, string sessionToken = null, IList<KeyValuePair<string, string>> headers = null, IDictionary<string, object> data = null) : this(relativeUri: relativeUri, method: method, sessionToken: sessionToken, headers: headers, stream: null, contentType: data != null ? "application/json" : null) => DataObject = data;
-        public MoralisCommand(string relativeUri, string method, string sessionToken = null, IList<KeyValuePair<string, string>> headers = null, string data = null) : this(relativeUri: relativeUri, method: method, sessionToken: sessionToken, headers: headers, stream: null, contentType: data != null ? "application/json" : null) => DataObject = data;
+        //public TheOneCommand(string relativeUri, string method, string sessionToken = null, IList<KeyValuePair<string, string>> headers = null, IDictionary<string, object> data = null) : this(relativeUri: relativeUri, method: method, sessionToken: sessionToken, headers: headers, stream: null, contentType: data != null ? "application/json" : null) => DataObject = data;
+        public TheOneCommand(string relativeUri, string method, string sessionToken = null, IList<KeyValuePair<string, string>> headers = null, string data = null) : this(relativeUri: relativeUri, method: method, sessionToken: sessionToken, headers: headers, stream: null, contentType: data != null ? "application/json" : null) => DataObject = data;
 
-        public MoralisCommand(string relativeUri, string method, string sessionToken = null, IList<KeyValuePair<string, string>> headers = null, Stream stream = null, string contentType = null)
+        public TheOneCommand(string relativeUri, string method, string sessionToken = null, IList<KeyValuePair<string, string>> headers = null, Stream stream = null, string contentType = null)
         {
             Path = relativeUri;
             Method = method;
@@ -45,7 +45,7 @@ namespace MoralisUnity.Platform.Services.Models
             }
         }
 
-        public MoralisCommand(MoralisCommand other)
+        public TheOneCommand(TheOneCommand other)
         {
             Resource = other.Resource;
             Path = other.Path;

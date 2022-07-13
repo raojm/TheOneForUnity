@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
-    public interface ICurrentUserService<TUser> : ICurrentObjectService<TUser, TUser> where TUser : MoralisUser
+    public interface ICurrentUserService<TUser> : ICurrentObjectService<TUser, TUser> where TUser : TheOneUser
     {
         TUser CurrentUser { get; set; }
 

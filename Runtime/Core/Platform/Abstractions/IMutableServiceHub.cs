@@ -1,8 +1,8 @@
-﻿using MoralisUnity.Platform.Objects;
+﻿using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
-    public interface IMutableServiceHub<TUser> : IServiceHub<TUser> where TUser : MoralisUser
+    public interface IMutableServiceHub<TUser> : IServiceHub<TUser> where TUser : TheOneUser
     {
         new IServerConnectionData ServerConnectionData { set; }
         new IMetadataService MetadataService { set; }
@@ -16,7 +16,7 @@ namespace MoralisUnity.Platform.Abstractions
         //IParseDataDecoder Decoder { set; }
 
         //IParseInstallationController InstallationController { set; }
-        new IMoralisCommandRunner CommandRunner { set; }
+        new ITheOneCommandRunner CommandRunner { set; }
 
         //IParseCloudCodeController CloudCodeController { set; }
         //IParseConfigurationController ConfigurationController { set; }

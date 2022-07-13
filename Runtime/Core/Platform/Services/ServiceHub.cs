@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Net.Http;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Services.ClientServices;
-using MoralisUnity.Platform.Services.Infrastructure;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Services.ClientServices;
+using TheOneUnity.Platform.Services.Infrastructure;
+using TheOneUnity.Platform.Utilities;
 
-namespace MoralisUnity.Platform.Services
+namespace TheOneUnity.Platform.Services
 {
     /// <summary>
-    /// A service hub that uses late initialization to efficiently provide controllers and other dependencies to internal Moralis SDK systems.
+    /// A service hub that uses late initialization to efficiently provide controllers and other dependencies to internal TheOne SDK systems.
     /// </summary>
-    public class ServiceHub<TUser> : IServiceHub<TUser> where TUser : MoralisUser
+    public class ServiceHub<TUser> : IServiceHub<TUser> where TUser : TheOneUser
     {
         private static ServiceHub<TUser> instance;
 
@@ -50,21 +50,21 @@ namespace MoralisUnity.Platform.Services
         public IMetadataService MetadataService => LateInitializer.GetValue(() => new MetadataService { HostManifestData = ManifestData ?? HostManifestData.Inferred, EnvironmentData = EnvironmentData.Inferred });
 
         public IWebClient WebClient => LateInitializer.GetValue(() => webClient);
-        public ICacheService CacheService => LateInitializer.GetValue(() => new MoralisCacheService<TUser> (MoralisCacheService<TUser>.DefineRelativeFilePath("Moralis\\moralis.cachefile")));
+        public ICacheService CacheService => LateInitializer.GetValue(() => new TheOneCacheService<TUser> (TheOneCacheService<TUser>.DefineRelativeFilePath("TheOne\\moralis.cachefile")));
         public IInstallationService InstallationService => LateInitializer.GetValue(() => new InstallationService(CacheService));
-        public IMoralisCommandRunner CommandRunner => LateInitializer.GetValue(() => new MoralisCommandRunner<TUser>(WebClient, InstallationService, MetadataService, ServerConnectionData, new Lazy<IUserService<TUser>>(() => UserService)));
-        public IUserService<TUser> UserService => LateInitializer.GetValue(() => new MoralisUserService<TUser>(CommandRunner, ObjectService, JsonSerializer));
-        public ICurrentUserService<TUser> CurrentUserService => LateInitializer.GetValue(() => new MoralisCurrentUserService<TUser>(CacheService, JsonSerializer));
-        public IObjectService ObjectService => LateInitializer.GetValue(() => new MoralisObjectService(CommandRunner, ServerConnectionData, JsonSerializer));
-        public IQueryService QueryService => LateInitializer.GetValue(() => new MoralisQueryService(CommandRunner, this.CurrentUserService.CurrentUser?.sessionToken, JsonSerializer, ObjectService));
-        public ISessionService<TUser> SessionService => LateInitializer.GetValue(() => new MoralisSessionService<TUser>(CommandRunner, JsonSerializer));
-        public ICloudFunctionService CloudFunctionService => LateInitializer.GetValue(() => new MoralisCloudFunctionService(CommandRunner, ServerConnectionData, JsonSerializer));
-        public IFileService FileService => LateInitializer.GetValue(() => new MoralisFileService(CommandRunner, JsonSerializer));
+        public ITheOneCommandRunner CommandRunner => LateInitializer.GetValue(() => new TheOneCommandRunner<TUser>(WebClient, InstallationService, MetadataService, ServerConnectionData, new Lazy<IUserService<TUser>>(() => UserService)));
+        public IUserService<TUser> UserService => LateInitializer.GetValue(() => new TheOneUserService<TUser>(CommandRunner, ObjectService, JsonSerializer));
+        public ICurrentUserService<TUser> CurrentUserService => LateInitializer.GetValue(() => new TheOneCurrentUserService<TUser>(CacheService, JsonSerializer));
+        public IObjectService ObjectService => LateInitializer.GetValue(() => new TheOneObjectService(CommandRunner, ServerConnectionData, JsonSerializer));
+        public IQueryService QueryService => LateInitializer.GetValue(() => new TheOneQueryService(CommandRunner, this.CurrentUserService.CurrentUser?.sessionToken, JsonSerializer, ObjectService));
+        public ISessionService<TUser> SessionService => LateInitializer.GetValue(() => new TheOneSessionService<TUser>(CommandRunner, JsonSerializer));
+        public ICloudFunctionService CloudFunctionService => LateInitializer.GetValue(() => new TheOneCloudFunctionService(CommandRunner, ServerConnectionData, JsonSerializer));
+        public IFileService FileService => LateInitializer.GetValue(() => new TheOneFileService(CommandRunner, JsonSerializer));
         
 
         public bool Reset() => LateInitializer.Used && LateInitializer.Reset();
 
-        public T Create<T>(object[] parameters) where T : MoralisObject
+        public T Create<T>(object[] parameters) where T : TheOneObject
         {
             T thing;
             

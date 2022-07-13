@@ -4,15 +4,15 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Utilities;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Exceptions;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Exceptions;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Queries
+namespace TheOneUnity.Platform.Queries
 {
-    public class MoralisQuery<T> where T : MoralisObject
+    public class TheOneQuery<T> where T : TheOneObject
     {
         /// <summary>
         /// Serialized <see langword="where"/> clauses.
@@ -57,7 +57,7 @@ namespace MoralisUnity.Platform.Queries
         /// but the remaining values can be null if they won't be changed in this
         /// composition.
         /// </summary>
-        internal MoralisQuery(MoralisQuery<T> source, IDictionary<string, object> where = null, IEnumerable<string> replacementOrderBy = null, IEnumerable<string> thenBy = null, int? skip = null, int? limit = null, IEnumerable<string> includes = null, IEnumerable<string> selectedKeys = null, string redirectClassNameForKey = null)
+        internal TheOneQuery(TheOneQuery<T> source, IDictionary<string, object> where = null, IEnumerable<string> replacementOrderBy = null, IEnumerable<string> thenBy = null, int? skip = null, int? limit = null, IEnumerable<string> includes = null, IEnumerable<string> selectedKeys = null, string redirectClassNameForKey = null)
         {
             if (source == null)
             {
@@ -175,16 +175,16 @@ namespace MoralisUnity.Platform.Queries
         }
 
         /// <summary>
-        /// Constructs a query based upon the MoralisObject subclass used as the generic parameter for the MoralisQuery.
+        /// Constructs a query based upon the TheOneObject subclass used as the generic parameter for the TheOneQuery.
         /// </summary>
-        public MoralisQuery(IQueryService queryService, IInstallationService installationService, IServerConnectionData connectionData, IJsonSerializer jsonSerializer, string sessionToken) : this(queryService, installationService, connectionData, jsonSerializer, sessionToken, typeof(T).Name) { }
+        public TheOneQuery(IQueryService queryService, IInstallationService installationService, IServerConnectionData connectionData, IJsonSerializer jsonSerializer, string sessionToken) : this(queryService, installationService, connectionData, jsonSerializer, sessionToken, typeof(T).Name) { }
 
         /// <summary>
         /// Constructs a query. A default query with no further parameters will retrieve
-        /// all <see cref="MoralisObject"/>s of the provided class.
+        /// all <see cref="TheOneObject"/>s of the provided class.
         /// </summary>
-        /// <param name="className">The name of the class to retrieve MoralisObjects for.</param>
-        public MoralisQuery(IQueryService queryService, IInstallationService installationService, IServerConnectionData connectionData, IJsonSerializer jsonSerializer, string sessionToken, string className) => (ClassName, QueryService, InstallationService, ServerConnectionData, SessionToken, JsonSerializer) = (className != null ? className : throw new ArgumentNullException(nameof(className), "Must specify a MoralisObject class name when creating a MoralisQuery."), queryService, installationService, connectionData, sessionToken, jsonSerializer);
+        /// <param name="className">The name of the class to retrieve TheOneObjects for.</param>
+        public TheOneQuery(IQueryService queryService, IInstallationService installationService, IServerConnectionData connectionData, IJsonSerializer jsonSerializer, string sessionToken, string className) => (ClassName, QueryService, InstallationService, ServerConnectionData, SessionToken, JsonSerializer) = (className != null ? className : throw new ArgumentNullException(nameof(className), "Must specify a TheOneObject class name when creating a TheOneQuery."), queryService, installationService, connectionData, sessionToken, jsonSerializer);
 
         #region Order By
 
@@ -194,7 +194,7 @@ namespace MoralisUnity.Platform.Queries
         /// </summary>
         /// <param name="key">The key to order by.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> OrderBy(string key) => new MoralisQuery<T>(this, replacementOrderBy: new List<string> { key });
+        public TheOneQuery<T> OrderBy(string key) => new TheOneQuery<T>(this, replacementOrderBy: new List<string> { key });
 
         /// <summary>
         /// Sorts the results in descending order by the given key.
@@ -202,7 +202,7 @@ namespace MoralisUnity.Platform.Queries
         /// </summary>
         /// <param name="key">The key to order by.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> OrderByDescending(string key) => new MoralisQuery<T>(this, replacementOrderBy: new List<string> { "-" + key });
+        public TheOneQuery<T> OrderByDescending(string key) => new TheOneQuery<T>(this, replacementOrderBy: new List<string> { "-" + key });
 
         /// <summary>
         /// Sorts the results in ascending order by the given key, after previous
@@ -214,7 +214,7 @@ namespace MoralisUnity.Platform.Queries
         /// </summary>
         /// <param name="key">The key to order by.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> ThenBy(string key) => new MoralisQuery<T>(this, thenBy: new List<string> { key });
+        public TheOneQuery<T> ThenBy(string key) => new TheOneQuery<T>(this, thenBy: new List<string> { key });
 
         /// <summary>
         /// Sorts the results in descending order by the given key, after previous
@@ -225,26 +225,26 @@ namespace MoralisUnity.Platform.Queries
         /// </summary>
         /// <param name="key">The key to order by.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> ThenByDescending(string key) => new MoralisQuery<T>(this, thenBy: new List<string> { "-" + key });
+        public TheOneQuery<T> ThenByDescending(string key) => new TheOneQuery<T>(this, thenBy: new List<string> { "-" + key });
 
         #endregion
 
         /// <summary>
-        /// Include nested MoralisObjects for the provided key. You can use dot notation
+        /// Include nested TheOneObjects for the provided key. You can use dot notation
         /// to specify which fields in the included objects should also be fetched.
         /// </summary>
         /// <param name="key">The key that should be included.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> Include(string key) => new MoralisQuery<T>(this, includes: new List<string> { key });
+        public TheOneQuery<T> Include(string key) => new TheOneQuery<T>(this, includes: new List<string> { key });
 
         /// <summary>
-        /// Restrict the fields of returned MoralisObjects to only include the provided key.
+        /// Restrict the fields of returned TheOneObjects to only include the provided key.
         /// If this is called multiple times, then all of the keys specified in each of
         /// the calls will be included.
         /// </summary>
         /// <param name="key">The key that should be included.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> Select(string key) => new MoralisQuery<T>(this, selectedKeys: new List<string> { key });
+        public TheOneQuery<T> Select(string key) => new TheOneQuery<T>(this, selectedKeys: new List<string> { key });
 
         /// <summary>
         /// Skips a number of results before returning. This is useful for pagination
@@ -253,7 +253,7 @@ namespace MoralisUnity.Platform.Queries
         /// </summary>
         /// <param name="count">The number of results to skip.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> Skip(int count) => new MoralisQuery<T>(this, skip: count);
+        public TheOneQuery<T> Skip(int count) => new TheOneQuery<T>(this, skip: count);
 
         /// <summary>
         /// Controls the maximum number of results that are returned. Setting a negative
@@ -263,9 +263,9 @@ namespace MoralisUnity.Platform.Queries
         /// </summary>
         /// <param name="count">The maximum number of results to return.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> Limit(int count) => new MoralisQuery<T>(this, limit: count);
+        public TheOneQuery<T> Limit(int count) => new TheOneQuery<T>(this, limit: count);
 
-        internal MoralisQuery<T> RedirectClassName(string key) => new MoralisQuery<T>(this, redirectClassNameForKey: key);
+        internal TheOneQuery<T> RedirectClassName(string key) => new TheOneQuery<T>(this, redirectClassNameForKey: key);
 
         #region Where
 
@@ -276,7 +276,7 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key to check.</param>
         /// <param name="values">The values that will match.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereContainedIn<TIn>(string key, IEnumerable<TIn> values) => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$in", values.ToList() } } } });
+        public TheOneQuery<T> WhereContainedIn<TIn>(string key, IEnumerable<TIn> values) => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$in", values.ToList() } } } });
 
         /// <summary>
         /// Add a constraint to the querey that requires a particular key's value to be
@@ -285,7 +285,7 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key to check.</param>
         /// <param name="values">The values that will match.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereContainsAll<TIn>(string key, IEnumerable<TIn> values) => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$all", values.ToList() } } } });
+        public TheOneQuery<T> WhereContainsAll<TIn>(string key, IEnumerable<TIn> values) => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$all", values.ToList() } } } });
 
         /// <summary>
         /// Adds a constraint for finding string values that contain a provided string.
@@ -294,24 +294,24 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key that the string to match is stored in.</param>
         /// <param name="substring">The substring that the value must contain.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereContains(string key, string substring) => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$regex", RegexQuote(substring) } } } });
+        public TheOneQuery<T> WhereContains(string key, string substring) => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$regex", RegexQuote(substring) } } } });
 
         /// <summary>
         /// Adds a constraint for finding objects that do not contain a given key.
         /// </summary>
         /// <param name="key">The key that should not exist.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereDoesNotExist(string key) => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$exists", false } } } });
+        public TheOneQuery<T> WhereDoesNotExist(string key) => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$exists", false } } } });
 
         /// <summary>
         /// Adds a constraint to the query that requires that a particular key's value
-        /// does not match another MoralisQuery. This only works on keys whose values are
-        /// MoralisObjects or lists of MoralisObjects.
+        /// does not match another TheOneQuery. This only works on keys whose values are
+        /// TheOneObjects or lists of TheOneObjects.
         /// </summary>
         /// <param name="key">The key to check.</param>
         /// <param name="query">The query that the value should not match.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereDoesNotMatchQuery<TOther>(string key, MoralisQuery<TOther> query) where TOther : MoralisObject => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$notInQuery", query.BuildParameters(true) } } } });
+        public TheOneQuery<T> WhereDoesNotMatchQuery<TOther>(string key, TheOneQuery<TOther> query) where TOther : TheOneObject => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$notInQuery", query.BuildParameters(true) } } } });
 
         /// <summary>
         /// Adds a constraint for finding string values that end with a provided string.
@@ -320,23 +320,23 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key that the string to match is stored in.</param>
         /// <param name="suffix">The substring that the value must end with.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereEndsWith(string key, string suffix) => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$regex", RegexQuote(suffix) + "$" } } } });
+        public TheOneQuery<T> WhereEndsWith(string key, string suffix) => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$regex", RegexQuote(suffix) + "$" } } } });
 
         /// <summary>
         /// Adds a constraint to the query that requires a particular key's value to be
         /// equal to the provided value.
         /// </summary>
         /// <param name="key">The key to check.</param>
-        /// <param name="value">The value that the MoralisObject must contain.</param>
+        /// <param name="value">The value that the TheOneObject must contain.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereEqualTo(string key, object value) => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, value } });
+        public TheOneQuery<T> WhereEqualTo(string key, object value) => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, value } });
 
         /// <summary>
         /// Adds a constraint for finding objects that contain a given key.
         /// </summary>
         /// <param name="key">The key that should exist.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereExists(string key) => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$exists", true } } } });
+        public TheOneQuery<T> WhereExists(string key) => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$exists", true } } } });
 
         /// <summary>
         /// Adds a constraint to the query that requires a particular key's value to be
@@ -345,7 +345,7 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key to check.</param>
         /// <param name="value">The value that provides a lower bound.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereGreaterThan(string key, object value) => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$gt", value } } } });
+        public TheOneQuery<T> WhereGreaterThan(string key, object value) => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$gt", value } } } });
 
         /// <summary>
         /// Adds a constraint to the query that requires a particular key's value to be
@@ -354,7 +354,7 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key to check.</param>
         /// <param name="value">The value that provides a lower bound.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereGreaterThanOrEqualTo(string key, object value) => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$gte", value } } } });
+        public TheOneQuery<T> WhereGreaterThanOrEqualTo(string key, object value) => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$gte", value } } } });
 
         /// <summary>
         /// Adds a constraint to the query that requires a particular key's value to be
@@ -363,7 +363,7 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key to check.</param>
         /// <param name="value">The value that provides an upper bound.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereLessThan(string key, object value) => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$lt", value } } } });
+        public TheOneQuery<T> WhereLessThan(string key, object value) => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$lt", value } } } });
 
         /// <summary>
         /// Adds a constraint to the query that requires a particular key's value to be
@@ -372,7 +372,7 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key to check.</param>
         /// <param name="value">The value that provides a lower bound.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereLessThanOrEqualTo(string key, object value) => new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$lte", value } } } });
+        public TheOneQuery<T> WhereLessThanOrEqualTo(string key, object value) => new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, new Dictionary<string, object> { { "$lte", value } } } });
 
         /// <summary>
         /// Adds a regular expression constraint for finding string values that match the provided
@@ -385,7 +385,7 @@ namespace MoralisUnity.Platform.Queries
         /// <code>i</code> - Case insensitive search
         /// <code>m</code> Search across multiple lines of input</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereMatches(string key, Regex regex, string modifiers) => !regex.Options.HasFlag(RegexOptions.ECMAScript) ? throw new ArgumentException("Only ECMAScript-compatible regexes are supported. Please use the ECMAScript RegexOptions flag when creating your regex.") : new MoralisQuery<T>(this, where: new Dictionary<string, object> { { key, EncodeRegex(regex, modifiers) } });
+        public TheOneQuery<T> WhereMatches(string key, Regex regex, string modifiers) => !regex.Options.HasFlag(RegexOptions.ECMAScript) ? throw new ArgumentException("Only ECMAScript-compatible regexes are supported. Please use the ECMAScript RegexOptions flag when creating your regex.") : new TheOneQuery<T>(this, where: new Dictionary<string, object> { { key, EncodeRegex(regex, modifiers) } });
 
         /// <summary>
         /// Adds a regular expression constraint for finding string values that match the provided
@@ -395,7 +395,7 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="regex">The regular expression pattern to match. The Regex must
         /// have the <see cref="RegexOptions.ECMAScript"/> options flag set.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereMatches(string key, Regex regex) => WhereMatches(key, regex, null);
+        public TheOneQuery<T> WhereMatches(string key, Regex regex) => WhereMatches(key, regex, null);
 
         /// <summary>
         /// Adds a regular expression constraint for finding string values that match the provided
@@ -407,7 +407,7 @@ namespace MoralisUnity.Platform.Queries
         /// <code>i</code> - Case insensitive search
         /// <code>m</code> Search across multiple lines of input</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereMatches(string key, string pattern, string modifiers = null) => WhereMatches(key, new Regex(pattern, RegexOptions.ECMAScript), modifiers);
+        public TheOneQuery<T> WhereMatches(string key, string pattern, string modifiers = null) => WhereMatches(key, new Regex(pattern, RegexOptions.ECMAScript), modifiers);
 
         /// <summary>
         /// Adds a regular expression constraint for finding string values that match the provided
@@ -416,17 +416,17 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key that the string to match is stored in.</param>
         /// <param name="pattern">The PCRE regular expression pattern to match.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereMatches(string key, string pattern) => WhereMatches(key, pattern, null);
+        public TheOneQuery<T> WhereMatches(string key, string pattern) => WhereMatches(key, pattern, null);
 
         /// <summary>
         /// Adds a constraint to the query that requires a particular key's value
-        /// to match a value for a key in the results of another MoralisQuery.
+        /// to match a value for a key in the results of another TheOneQuery.
         /// </summary>
         /// <param name="key">The key whose value is being checked.</param>
         /// <param name="keyInQuery">The key in the objects from the subquery to look in.</param>
         /// <param name="query">The subquery to run</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereMatchesKeyInQuery<TOther>(string key, string keyInQuery, MoralisQuery<TOther> query) where TOther : MoralisObject => new MoralisQuery<T>(this, where: new Dictionary<string, object>
+        public TheOneQuery<T> WhereMatchesKeyInQuery<TOther>(string key, string keyInQuery, TheOneQuery<TOther> query) where TOther : TheOneObject => new TheOneQuery<T>(this, where: new Dictionary<string, object>
         {
             [key] = new Dictionary<string, object>
             {
@@ -440,13 +440,13 @@ namespace MoralisUnity.Platform.Queries
 
         /// <summary>
         /// Adds a constraint to the query that requires a particular key's value
-        /// does not match any value for a key in the results of another MoralisQuery.
+        /// does not match any value for a key in the results of another TheOneQuery.
         /// </summary>
         /// <param name="key">The key whose value is being checked.</param>
         /// <param name="keyInQuery">The key in the objects from the subquery to look in.</param>
         /// <param name="query">The subquery to run</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereDoesNotMatchesKeyInQuery<TOther>(string key, string keyInQuery, MoralisQuery<TOther> query) where TOther : MoralisObject => new MoralisQuery<T>(this, where: new Dictionary<string, object>
+        public TheOneQuery<T> WhereDoesNotMatchesKeyInQuery<TOther>(string key, string keyInQuery, TheOneQuery<TOther> query) where TOther : TheOneObject => new TheOneQuery<T>(this, where: new Dictionary<string, object>
         {
             [key] = new Dictionary<string, object>
             {
@@ -460,13 +460,13 @@ namespace MoralisUnity.Platform.Queries
 
         /// <summary>
         /// Adds a constraint to the query that requires that a particular key's value
-        /// matches another MoralisQuery. This only works on keys whose values are
-        /// MoralisObjects or lists of MoralisObjects.
+        /// matches another TheOneQuery. This only works on keys whose values are
+        /// TheOneObjects or lists of TheOneObjects.
         /// </summary>
         /// <param name="key">The key to check.</param>
         /// <param name="query">The query that the value should match.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereMatchesQuery<TOther>(string key, MoralisQuery<TOther> query) where TOther : MoralisObject => new MoralisQuery<T>(this, where: new Dictionary<string, object>
+        public TheOneQuery<T> WhereMatchesQuery<TOther>(string key, TheOneQuery<TOther> query) where TOther : TheOneObject => new TheOneQuery<T>(this, where: new Dictionary<string, object>
         {
             [key] = new Dictionary<string, object>
             {
@@ -478,10 +478,10 @@ namespace MoralisUnity.Platform.Queries
         /// Adds a proximity-based constraint for finding objects with keys whose GeoPoint
         /// values are near the given point.
         /// </summary>
-        /// <param name="key">The key that the MoralisGeoPoint is stored in.</param>
-        /// <param name="point">The reference MoralisGeoPoint.</param>
+        /// <param name="key">The key that the TheOneGeoPoint is stored in.</param>
+        /// <param name="point">The reference TheOneGeoPoint.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereNear(string key, MoralisGeoPoint point) => new MoralisQuery<T>(this, where: new Dictionary<string, object>
+        public TheOneQuery<T> WhereNear(string key, TheOneGeoPoint point) => new TheOneQuery<T>(this, where: new Dictionary<string, object>
         {
             [key] = new Dictionary<string, object>
             {
@@ -496,7 +496,7 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key to check.</param>
         /// <param name="values">The values that will match.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereNotContainedIn<TIn>(string key, IEnumerable<TIn> values) => new MoralisQuery<T>(this, where: new Dictionary<string, object>
+        public TheOneQuery<T> WhereNotContainedIn<TIn>(string key, IEnumerable<TIn> values) => new TheOneQuery<T>(this, where: new Dictionary<string, object>
         {
             [key] = new Dictionary<string, object>
             {
@@ -511,7 +511,7 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key to check.</param>
         /// <param name="value">The value that that must not be equalled.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereNotEqualTo(string key, object value) => new MoralisQuery<T>(this, where: new Dictionary<string, object>
+        public TheOneQuery<T> WhereNotEqualTo(string key, object value) => new TheOneQuery<T>(this, where: new Dictionary<string, object>
         {
             [key] = new Dictionary<string, object>
             {
@@ -526,7 +526,7 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="key">The key that the string to match is stored in.</param>
         /// <param name="suffix">The substring that the value must start with.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereStartsWith(string key, string suffix) => new MoralisQuery<T>(this, where: new Dictionary<string, object>
+        public TheOneQuery<T> WhereStartsWith(string key, string suffix) => new TheOneQuery<T>(this, where: new Dictionary<string, object>
         {
             [key] = new Dictionary<string, object>
             {
@@ -542,7 +542,7 @@ namespace MoralisUnity.Platform.Queries
         /// <param name="southwest">The lower-left inclusive corner of the box.</param>
         /// <param name="northeast">The upper-right inclusive corner of the box.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereWithinGeoBox(string key, MoralisGeoPoint southwest, MoralisGeoPoint northeast) => new MoralisQuery<T>(this, where: new Dictionary<string, object>
+        public TheOneQuery<T> WhereWithinGeoBox(string key, TheOneGeoPoint southwest, TheOneGeoPoint northeast) => new TheOneQuery<T>(this, where: new Dictionary<string, object>
         {
             [key] = new Dictionary<string, object>
             {
@@ -561,11 +561,11 @@ namespace MoralisUnity.Platform.Queries
         /// Adds a proximity-based constraint for finding objects with keys whose GeoPoint
         /// values are near the given point and within the maximum distance given.
         /// </summary>
-        /// <param name="key">The key that the MoralisGeoPoint is stored in.</param>
-        /// <param name="point">The reference MoralisGeoPoint.</param>
+        /// <param name="key">The key that the TheOneGeoPoint is stored in.</param>
+        /// <param name="point">The reference TheOneGeoPoint.</param>
         /// <param name="maxDistance">The maximum distance (in radians) of results to return.</param>
         /// <returns>A new query with the additional constraint.</returns>
-        public MoralisQuery<T> WhereWithinDistance(string key, MoralisGeoPoint point, MoralisGeoDistance maxDistance) => new MoralisQuery<T>(WhereNear(key, point), where: new Dictionary<string, object>
+        public TheOneQuery<T> WhereWithinDistance(string key, TheOneGeoPoint point, TheOneGeoDistance maxDistance) => new TheOneQuery<T>(WhereNear(key, point), where: new Dictionary<string, object>
         {
             [key] = new Dictionary<string, object>
             {
@@ -573,7 +573,7 @@ namespace MoralisUnity.Platform.Queries
             }
         });
 
-        internal MoralisQuery<T> WhereRelatedTo(MoralisObject parent, string key) => new MoralisQuery<T>(this, where: new Dictionary<string, object>
+        internal TheOneQuery<T> WhereRelatedTo(TheOneObject parent, string key) => new TheOneQuery<T>(this, where: new Dictionary<string, object>
         {
             ["$relatedTo"] = new Dictionary<string, object>
             {
@@ -587,14 +587,14 @@ namespace MoralisUnity.Platform.Queries
         /// <summary>
         /// Executes an aggregate query and returns aggregate results
         /// </summary>
-        /// <returns>The list of MoralisObjects that match this query.</returns>
+        /// <returns>The list of TheOneObjects that match this query.</returns>
         public UniTask<IEnumerable<T>> AggregateAsync() => AggregateAsync(CancellationToken.None);
 
         /// <summary>
         /// Executes an aggregate query and returns aggregate results
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>The list of MoralisObjects that match this query.</returns>
+        /// <returns>The list of TheOneObjects that match this query.</returns>
         public async UniTask<IEnumerable<T>> AggregateAsync(CancellationToken cancellationToken)
         {
             EnsureNotInstallationQuery();
@@ -610,16 +610,16 @@ namespace MoralisUnity.Platform.Queries
         }
 
         /// <summary>
-        /// Retrieves a list of MoralisObjects that satisfy this query from Moralis.
+        /// Retrieves a list of TheOneObjects that satisfy this query from TheOne.
         /// </summary>
-        /// <returns>The list of MoralisObjects that match this query.</returns>
+        /// <returns>The list of TheOneObjects that match this query.</returns>
         public UniTask<IEnumerable<T>> FindAsync() => FindAsync(CancellationToken.None);
 
         /// <summary>
-        /// Retrieves a list of MoralisObjects that satisfy this query from Moralis.
+        /// Retrieves a list of TheOneObjects that satisfy this query from TheOne.
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>The list of MoralisObjects that match this query.</returns>
+        /// <returns>The list of TheOneObjects that match this query.</returns>
         public async UniTask<IEnumerable<T>> FindAsync(CancellationToken cancellationToken)
         {
             EnsureNotInstallationQuery();
@@ -635,16 +635,16 @@ namespace MoralisUnity.Platform.Queries
         }
 
         /// <summary>
-        /// Retrieves a list of distinct MoralisObjects that satisfy this query from Moralis.
+        /// Retrieves a list of distinct TheOneObjects that satisfy this query from TheOne.
         /// </summary>
-        /// <returns>The list of MoralisObjects that match this query.</returns>
+        /// <returns>The list of TheOneObjects that match this query.</returns>
         public async UniTask<IEnumerable<T>> DistinctAsync() => await DistinctAsync(CancellationToken.None);
 
         /// <summary>
-        /// Retrieves a list of distinct MoralisObjects that satisfy this query from Moralis.
+        /// Retrieves a list of distinct TheOneObjects that satisfy this query from TheOne.
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>The list of MoralisObjects that match this query.</returns>
+        /// <returns>The list of TheOneObjects that match this query.</returns>
         public async UniTask<IEnumerable<T>> DistinctAsync(CancellationToken cancellationToken)
         {
             EnsureNotInstallationQuery();
@@ -660,16 +660,16 @@ namespace MoralisUnity.Platform.Queries
         }
 
         /// <summary>
-        /// Retrieves at most one MoralisObject that satisfies this query.
+        /// Retrieves at most one TheOneObject that satisfies this query.
         /// </summary>
-        /// <returns>A single MoralisObject that satisfies this query, or else null.</returns>
+        /// <returns>A single TheOneObject that satisfies this query, or else null.</returns>
         public async UniTask<T> FirstOrDefaultAsync() => await FirstOrDefaultAsync(CancellationToken.None);
 
         /// <summary>
-        /// Retrieves at most one MoralisObject that satisfies this query.
+        /// Retrieves at most one TheOneObject that satisfies this query.
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>A single MoralisObject that satisfies this query, or else null.</returns>
+        /// <returns>A single TheOneObject that satisfies this query, or else null.</returns>
         public async UniTask<T> FirstOrDefaultAsync(CancellationToken cancellationToken)
         {
             EnsureNotInstallationQuery();
@@ -682,18 +682,18 @@ namespace MoralisUnity.Platform.Queries
         }
 
         /// <summary>
-        /// Retrieves at most one MoralisObject that satisfies this query.
+        /// Retrieves at most one TheOneObject that satisfies this query.
         /// </summary>
-        /// <returns>A single MoralisObject that satisfies this query.</returns>
-        /// <exception cref="MoralisFailureException">If no results match the query.</exception>
+        /// <returns>A single TheOneObject that satisfies this query.</returns>
+        /// <exception cref="TheOneFailureException">If no results match the query.</exception>
         public async UniTask<T> FirstAsync() => await FirstAsync(CancellationToken.None);
 
         /// <summary>
-        /// Retrieves at most one MoralisObject that satisfies this query.
+        /// Retrieves at most one TheOneObject that satisfies this query.
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>A single MoralisObject that satisfies this query.</returns>
-        /// <exception cref="MoralisFailureException">If no results match the query.</exception>
+        /// <returns>A single TheOneObject that satisfies this query.</returns>
+        /// <exception cref="TheOneFailureException">If no results match the query.</exception>
         public async UniTask<T> FirstAsync(CancellationToken cancellationToken) => await FirstOrDefaultAsync(cancellationToken);
 
         /// <summary>
@@ -714,30 +714,30 @@ namespace MoralisUnity.Platform.Queries
         }
 
         /// <summary>
-        /// Constructs a MoralisObject whose id is already known by fetching data
+        /// Constructs a TheOneObject whose id is already known by fetching data
         /// from the server.
         /// </summary>
-        /// <param name="objectId">ObjectId of the MoralisObject to fetch.</param>
-        /// <returns>The MoralisObject for the given objectId.</returns>
+        /// <param name="objectId">ObjectId of the TheOneObject to fetch.</param>
+        /// <returns>The TheOneObject for the given objectId.</returns>
         public async UniTask<T> GetAsync(string objectId) => await GetAsync(objectId, CancellationToken.None);
 
         /// <summary>
-        /// Constructs a MoralisObject whose id is already known by fetching data
+        /// Constructs a TheOneObject whose id is already known by fetching data
         /// from the server.
         /// </summary>
-        /// <param name="objectId">ObjectId of the MoralisObject to fetch.</param>
+        /// <param name="objectId">ObjectId of the TheOneObject to fetch.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>The MoralisObject for the given objectId.</returns>
+        /// <returns>The TheOneObject for the given objectId.</returns>
         public async UniTask<T> GetAsync(string objectId, CancellationToken cancellationToken)
         {
-            MoralisQuery<T> singleItemQuery = new MoralisQuery<T>(QueryService, InstallationService, ServerConnectionData, JsonSerializer, SessionToken, ClassName).WhereEqualTo(nameof(objectId), objectId);
-            singleItemQuery = new MoralisQuery<T>(singleItemQuery, includes: Includes, selectedKeys: KeySelections, limit: 1);
+            TheOneQuery<T> singleItemQuery = new TheOneQuery<T>(QueryService, InstallationService, ServerConnectionData, JsonSerializer, SessionToken, ClassName).WhereEqualTo(nameof(objectId), objectId);
+            singleItemQuery = new TheOneQuery<T>(singleItemQuery, includes: Includes, selectedKeys: KeySelections, limit: 1);
             IEnumerable<T> findResp = await singleItemQuery.FindAsync(cancellationToken);
             T result = findResp.FirstOrDefault();
 
             if (result == null)
             {
-                throw new MoralisFailureException(MoralisFailureException.ErrorCode.ObjectNotFound, "Object with the given objectId not found.");
+                throw new TheOneFailureException(TheOneFailureException.ErrorCode.ObjectNotFound, "Object with the given objectId not found.");
             }
 
             result.ObjectService = this.QueryService.ObjectService;
@@ -801,7 +801,7 @@ namespace MoralisUnity.Platform.Queries
 
         void EnsureNotInstallationQuery()
         {
-            // The MoralisInstallation class is not accessible from this project; using string literal.
+            // The TheOneInstallation class is not accessible from this project; using string literal.
 
             if (ClassName.Equals("_Installation"))
             {
@@ -814,7 +814,7 @@ namespace MoralisUnity.Platform.Queries
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns><c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c></returns>
-        public override bool Equals(object obj) => obj == null || !(obj is MoralisQuery<T> other) ? false : Equals(ClassName, other.ClassName) && Filters.CollectionsEqual(other.Filters) && Orderings.CollectionsEqual(other.Orderings) && Includes.CollectionsEqual(other.Includes) && KeySelections.CollectionsEqual(other.KeySelections) && Equals(SkipAmount, other.SkipAmount) && Equals(LimitAmount, other.LimitAmount);
+        public override bool Equals(object obj) => obj == null || !(obj is TheOneQuery<T> other) ? false : Equals(ClassName, other.ClassName) && Filters.CollectionsEqual(other.Filters) && Orderings.CollectionsEqual(other.Orderings) && Includes.CollectionsEqual(other.Includes) && KeySelections.CollectionsEqual(other.KeySelections) && Equals(SkipAmount, other.SkipAmount) && Equals(LimitAmount, other.LimitAmount);
 
         /// <summary>
         /// Serves as the default hash function.

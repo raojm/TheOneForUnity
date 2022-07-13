@@ -8,16 +8,16 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using UnityEngine.Networking;
-using MoralisUnity.Web3Api;
-using WebRequest = MoralisUnity.Web3Api.Models.WebRequest;
+using TheOneUnity.Web3Api;
+using WebRequest = TheOneUnity.Web3Api.Models.WebRequest;
 using Newtonsoft.Json;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Web3Api.Core;
-using MoralisUnity.Web3Api.Core.Models;
+using TheOneUnity.Web3Api.Core;
+using TheOneUnity.Web3Api.Core.Models;
 using UnityEngine;
 using Object = System.Object;
 
-namespace MoralisUnity.Web3Api.Client
+namespace TheOneUnity.Web3Api.Client
 {
     /// <summary>
     /// API client is mainly responible for making the HTTP call to the API backend.

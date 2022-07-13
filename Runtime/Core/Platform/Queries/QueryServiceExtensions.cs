@@ -2,45 +2,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Queries
+namespace TheOneUnity.Platform.Queries
 {
     public static class QueryServiceExtensions
     {
-        public static MoralisQuery<T> GetQuery<T, TUser>(this IServiceHub<TUser> serviceHub) where T : MoralisObject where TUser : MoralisUser => new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.sessionToken);
+        public static TheOneQuery<T> GetQuery<T, TUser>(this IServiceHub<TUser> serviceHub) where T : TheOneObject where TUser : TheOneUser => new TheOneQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.sessionToken);
 
         /// <summary>
         /// Constructs a query that is the and of the given queries.
         /// </summary>
-        /// <typeparam name="T">The type of MoralisObject being queried.</typeparam>
+        /// <typeparam name="T">The type of TheOneObject being queried.</typeparam>
         /// <param name="serviceHub"></param>
         /// <param name="source">An initial query to 'and' with additional queries.</param>
-        /// <param name="queries">The list of MoralisQueries to 'and' together.</param>
+        /// <param name="queries">The list of TheOneQueries to 'and' together.</param>
         /// <returns>A query that is the and of the given queries.</returns>
-        public static MoralisQuery<T> ConstructAndQuery<T, TUser>(this IServiceHub<TUser> serviceHub, MoralisQuery<T> source, params MoralisQuery<T>[] queries) where T : MoralisObject where TUser : MoralisUser => serviceHub.ConstructAndQuery(queries.Concat(new[] { source }));
+        public static TheOneQuery<T> ConstructAndQuery<T, TUser>(this IServiceHub<TUser> serviceHub, TheOneQuery<T> source, params TheOneQuery<T>[] queries) where T : TheOneObject where TUser : TheOneUser => serviceHub.ConstructAndQuery(queries.Concat(new[] { source }));
 
         // ALTERNATE NAME: BuildOrQuery
 
         /// <summary>
         /// Constructs a query that is the or of the given queries.
         /// </summary>
-        /// <typeparam name="T">The type of MoralisObject being queried.</typeparam>
+        /// <typeparam name="T">The type of TheOneObject being queried.</typeparam>
         /// <param name="source">An initial query to 'or' with additional queries.</param>
-        /// <param name="queries">The list of MoralisQueries to 'or' together.</param>
+        /// <param name="queries">The list of TheOneQueries to 'or' together.</param>
         /// <returns>A query that is the or of the given queries.</returns>
-        public static MoralisQuery<T> ConstructOrQuery<T, TUser>(this IServiceHub<TUser> serviceHub, MoralisQuery<T> source, params MoralisQuery<T>[] queries) where T : MoralisObject where TUser : MoralisUser => serviceHub.ConstructOrQuery(queries.Concat(new[] { source }));
-        public static MoralisQuery<T> ConstructNorQuery<T, TUser>(this IServiceHub<TUser> serviceHub, MoralisQuery<T> source, params MoralisQuery<T>[] queries) where T : MoralisObject where TUser : MoralisUser => serviceHub.ConstructNorQuery(queries.Concat(new[] { source }));
+        public static TheOneQuery<T> ConstructOrQuery<T, TUser>(this IServiceHub<TUser> serviceHub, TheOneQuery<T> source, params TheOneQuery<T>[] queries) where T : TheOneObject where TUser : TheOneUser => serviceHub.ConstructOrQuery(queries.Concat(new[] { source }));
+        public static TheOneQuery<T> ConstructNorQuery<T, TUser>(this IServiceHub<TUser> serviceHub, TheOneQuery<T> source, params TheOneQuery<T>[] queries) where T : TheOneObject where TUser : TheOneUser => serviceHub.ConstructNorQuery(queries.Concat(new[] { source }));
 
         /// <summary>
         /// Construct a query that is the and of two or more queries.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="serviceHub"></param>
-        /// <param name="queries">The list of MoralisQueries to 'and' together.</param>
-        /// <returns>A MoralisQquery that is the 'and' of the passed in queries.</returns>
-        public static MoralisQuery<T> ConstructAndQuery<T, TUser>(this IServiceHub<TUser> serviceHub, IEnumerable<MoralisQuery<T>> queries) where T : MoralisObject where TUser : MoralisUser
+        /// <param name="queries">The list of TheOneQueries to 'and' together.</param>
+        /// <returns>A TheOneQquery that is the 'and' of the passed in queries.</returns>
+        public static TheOneQuery<T> ConstructAndQuery<T, TUser>(this IServiceHub<TUser> serviceHub, IEnumerable<TheOneQuery<T>> queries) where T : TheOneObject where TUser : TheOneUser
         {
             string className = default;
             List<IDictionary<string, object>> andValue = new List<IDictionary<string, object>> { };
@@ -50,7 +50,7 @@ namespace MoralisUnity.Platform.Queries
             IEnumerable nonGenericQueries = queries;
             foreach (object obj in nonGenericQueries)
             {
-                MoralisQuery<T> query = obj as MoralisQuery<T>;
+                TheOneQuery<T> query = obj as TheOneQuery<T>;
 
                 if (className is { } && query.ClassName != className)
                 {
@@ -76,15 +76,15 @@ namespace MoralisUnity.Platform.Queries
                 //andValue.Add(JsonConvert.DeserializeObject<IDictionary<string, object>>(where.ToString()));
             }
 
-            return new MoralisQuery<T>(new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser?.sessionToken, className), where: new Dictionary<string, object> { ["$and"] = andValue });
+            return new TheOneQuery<T>(new TheOneQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser?.sessionToken, className), where: new Dictionary<string, object> { ["$and"] = andValue });
         }
 
         /// <summary>
         /// Constructs a query that is the or of the given queries.
         /// </summary>
-        /// <param name="queries">The list of MoralisQueries to 'or' together.</param>
-        /// <returns>A MoralisQquery that is the 'or' of the passed in queries.</returns>
-        public static MoralisQuery<T> ConstructOrQuery<T, TUser>(this IServiceHub<TUser> serviceHub, IEnumerable<MoralisQuery<T>> queries) where T : MoralisObject where TUser : MoralisUser
+        /// <param name="queries">The list of TheOneQueries to 'or' together.</param>
+        /// <returns>A TheOneQquery that is the 'or' of the passed in queries.</returns>
+        public static TheOneQuery<T> ConstructOrQuery<T, TUser>(this IServiceHub<TUser> serviceHub, IEnumerable<TheOneQuery<T>> queries) where T : TheOneObject where TUser : TheOneUser
         {
             string className = default;
             List<IDictionary<string, object>> orValue = new List<IDictionary<string, object>> { };
@@ -94,7 +94,7 @@ namespace MoralisUnity.Platform.Queries
             IEnumerable nonGenericQueries = queries;
             foreach (object obj in nonGenericQueries)
             {
-                MoralisQuery<T> query = obj as MoralisQuery<T>;
+                TheOneQuery<T> query = obj as TheOneQuery<T>;
 
                 if (className is { } && query.ClassName != className)
                 {
@@ -119,7 +119,7 @@ namespace MoralisUnity.Platform.Queries
                 //orValue.Add(JsonConvert.DeserializeObject<IDictionary<string, object>>(where.ToString()));
             }
 
-            return new MoralisQuery<T>(new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.sessionToken, className), where: new Dictionary<string, object> { ["$or"] = orValue });
+            return new TheOneQuery<T>(new TheOneQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.sessionToken, className), where: new Dictionary<string, object> { ["$or"] = orValue });
         }
 
         /// <summary>
@@ -127,9 +127,9 @@ namespace MoralisUnity.Platform.Queries
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="serviceHub"></param>
-        /// <param name="queries">The list of MoralisQueries to 'nor' together.</param>
-        /// <returns>A MoralisQquery that is the 'nor' of the passed in queries.</returns>
-        public static MoralisQuery<T> ConstructNorQuery<T, TUser>(this IServiceHub<TUser> serviceHub, IEnumerable<MoralisQuery<T>> queries) where T : MoralisObject where TUser : MoralisUser
+        /// <param name="queries">The list of TheOneQueries to 'nor' together.</param>
+        /// <returns>A TheOneQquery that is the 'nor' of the passed in queries.</returns>
+        public static TheOneQuery<T> ConstructNorQuery<T, TUser>(this IServiceHub<TUser> serviceHub, IEnumerable<TheOneQuery<T>> queries) where T : TheOneObject where TUser : TheOneUser
         {
             string className = default;
             List<IDictionary<string, object>> norValue = new List<IDictionary<string, object>> { };
@@ -139,7 +139,7 @@ namespace MoralisUnity.Platform.Queries
             IEnumerable nonGenericQueries = queries;
             foreach (object obj in nonGenericQueries)
             {
-                MoralisQuery<T> query = obj as MoralisQuery<T>;
+                TheOneQuery<T> query = obj as TheOneQuery<T>;
 
                 if (className is { } && query.ClassName != className)
                 {
@@ -162,7 +162,7 @@ namespace MoralisUnity.Platform.Queries
                 norValue.Add(serviceHub.JsonSerializer.Deserialize<IDictionary<string, object>>(where.ToString()));
             }
 
-            return new MoralisQuery<T>(new MoralisQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.sessionToken, className), where: new Dictionary<string, object> { ["$nor"] = norValue });
+            return new TheOneQuery<T>(new TheOneQuery<T>(serviceHub.QueryService, serviceHub.InstallationService, serviceHub.ServerConnectionData, serviceHub.JsonSerializer, serviceHub.CurrentUserService.CurrentUser.sessionToken, className), where: new Dictionary<string, object> { ["$nor"] = norValue });
         }
     }
 

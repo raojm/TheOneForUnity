@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 
-namespace MoralisUnity.Platform
+namespace TheOneUnity.Platform
 {
     /// <summary>
-    /// Inferred data about the environment in which Moralis is operating.
+    /// Inferred data about the environment in which TheOne is operating.
     /// </summary>
     public class EnvironmentData : IEnvironmentData
     {
         /// <summary>
-        /// A <see cref="EnvironmentData"/> instance that the Moralis SDK will attempt to generate from environment metadata it should be able to access.
+        /// A <see cref="EnvironmentData"/> instance that the TheOne SDK will attempt to generate from environment metadata it should be able to access.
         /// </summary>
         public static EnvironmentData Inferred => new EnvironmentData
         {

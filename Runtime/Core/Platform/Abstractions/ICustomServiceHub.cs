@@ -1,8 +1,8 @@
-﻿using MoralisUnity.Platform.Objects;
+﻿using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
-    public interface ICustomServiceHub<TUser> : IServiceHub<TUser> where TUser : MoralisUser
+    public interface ICustomServiceHub<TUser> : IServiceHub<TUser> where TUser : TheOneUser
     {
         IServiceHub<TUser> Services { get; }
     }

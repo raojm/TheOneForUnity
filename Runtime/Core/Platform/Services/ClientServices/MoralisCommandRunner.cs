@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using Status = System.Net.HttpStatusCode;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Utilities;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Exceptions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Services.Models;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Exceptions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Services.Models;
 
-namespace MoralisUnity.Platform.Services.ClientServices
+namespace TheOneUnity.Platform.Services.ClientServices
 {
     /// <summary>
-    /// The command runner for all SDK operations that need to interact with the targeted deployment of Moralis Server.
+    /// The command runner for all SDK operations that need to interact with the targeted deployment of TheOne Server.
     /// </summary>
-    public class MoralisCommandRunner<TUser> : IMoralisCommandRunner where TUser : MoralisUser
+    public class TheOneCommandRunner<TUser> : ITheOneCommandRunner where TUser : TheOneUser
     {
         IWebClient WebClient { get; }
 
@@ -30,11 +30,11 @@ namespace MoralisUnity.Platform.Services.ClientServices
         IWebClient GetWebClient() => WebClient;
 
         /// <summary>
-        /// Creates a new Moralis SDK command runner.
+        /// Creates a new TheOne SDK command runner.
         /// </summary>
         /// <param name="webClient">The <see cref="IWebClient"/> implementation instance to use.</param>
         /// <param name="installationController">The <see cref="IInstallationService"/> implementation instance to use.</param>
-        public MoralisCommandRunner(IWebClient webClient, IInstallationService installationController, IMetadataService metadataController, IServerConnectionData serverConnectionData, Lazy<IUserService<TUser>> userController)
+        public TheOneCommandRunner(IWebClient webClient, IInstallationService installationController, IMetadataService metadataController, IServerConnectionData serverConnectionData, Lazy<IUserService<TUser>> userController)
         {
             WebClient = webClient;
             InstallationService = installationController;
@@ -46,16 +46,16 @@ namespace MoralisUnity.Platform.Services.ClientServices
         }
 
         /// <summary>
-        /// Runs a specified <see cref="MoralisCommand"/>.
+        /// Runs a specified <see cref="TheOneCommand"/>.
         /// </summary>
-        /// <param name="command">The <see cref="MoralisCommand"/> to run.</param>
-        /// <param name="uploadProgress">An <see cref="IProgress{MoralisUploadProgressEventArgs}"/> instance to push upload progress data to.</param>
-        /// <param name="downloadProgress">An <see cref="IProgress{MoralisDownloadProgressEventArgs}"/> instance to push download progress data to.</param>
+        /// <param name="command">The <see cref="TheOneCommand"/> to run.</param>
+        /// <param name="uploadProgress">An <see cref="IProgress{TheOneUploadProgressEventArgs}"/> instance to push upload progress data to.</param>
+        /// <param name="downloadProgress">An <see cref="IProgress{TheOneDownloadProgressEventArgs}"/> instance to push download progress data to.</param>
         /// <param name="cancellationToken">An asynchronous operation cancellation token that dictates if and when the operation should be cancelled.</param>
         /// <returns>Tuple<HttpStatusCode, string></returns>
-        public async UniTask<Tuple<HttpStatusCode, string>> RunCommandAsync(MoralisCommand command, IProgress<IDataTransferLevel> uploadProgress = null, IProgress<IDataTransferLevel> downloadProgress = null, CancellationToken cancellationToken = default)
+        public async UniTask<Tuple<HttpStatusCode, string>> RunCommandAsync(TheOneCommand command, IProgress<IDataTransferLevel> uploadProgress = null, IProgress<IDataTransferLevel> downloadProgress = null, CancellationToken cancellationToken = default)
         {
-            MoralisCommand cmd = await PrepareCommand(command);
+            TheOneCommand cmd = await PrepareCommand(command);
 
             Tuple<Status, string> cmdResult = await GetWebClient().ExecuteAsync(cmd); //, uploadProgress, downloadProgress, cancellationToken);
 
@@ -66,10 +66,10 @@ namespace MoralisUnity.Platform.Services.ClientServices
 
             if (responseCode >= 500)
             {
-                throw new MoralisFailureException(MoralisFailureException.ErrorCode.InternalServerError, cmdResult.Item2);
+                throw new TheOneFailureException(TheOneFailureException.ErrorCode.InternalServerError, cmdResult.Item2);
             }
 
-            // The Moralis server returns POCO saved dates as an object. Convert to ISO datetime string.
+            // The TheOne server returns POCO saved dates as an object. Convert to ISO datetime string.
             string adjustedData = cmdResult.Item2.AdjustJsonForParseDate();
 
             // Remove Results wrapper.
@@ -87,9 +87,9 @@ namespace MoralisUnity.Platform.Services.ClientServices
             return newResponse;
         }
 
-        async UniTask<MoralisCommand> PrepareCommand(MoralisCommand command)
+        async UniTask<TheOneCommand> PrepareCommand(TheOneCommand command)
         {
-            MoralisCommand newCommand = new MoralisCommand(command)
+            TheOneCommand newCommand = new TheOneCommand(command)
             {
                 Resource = ServerConnectionData.ServerURI
             };
@@ -110,7 +110,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
                     newCommand.Headers.Add(appId);
                 }
 
-                KeyValuePair<string, string> clientVersion = new KeyValuePair<string, string>("X-Parse-Client-Version", MoralisService<TUser>.Version.ToString());
+                KeyValuePair<string, string> clientVersion = new KeyValuePair<string, string>("X-Parse-Client-Version", TheOneService<TUser>.Version.ToString());
 
                 if (!newCommand.Headers.Contains(clientVersion))
                 {

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ReadMe
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: 3f2157c8e2f264c4c8eeba93b9b7bfd2, type: 3}
-  title: Moralis Web3 Unity SDK
+  title: TheOne Web3 Unity SDK
   sections:
-  - heading: What is Moralis?
-    subheading: Moralis
-    text: Moralis provides a single workflow for building high performance dapps.
+  - heading: What is TheOne?
+    subheading: TheOne
+    text: TheOne provides a single workflow for building high performance dapps.
       Fully compatible with your favorite web3 tools and services.
     linkText: moralis.io
     url: https://moralis.io
@@ -27,7 +27,7 @@ MonoBehaviour:
     openMenuNameId: 
   - heading: 
     subheading: Web3 Unity SDK
-    text: This SDK brings the power of Moralis to your Unity projects.
+    text: This SDK brings the power of TheOne to your Unity projects.
     linkText: docs.moralis.io/unity
     url: https://docs.moralis.io/unity
     pingObjectName: 
@@ -51,10 +51,10 @@ MonoBehaviour:
     pingObjectName: 
     pingObjectGuid: 
     openMenuName: Web3 Setup Window
-    openMenuNameId: Window/Moralis/Web3 Unity SDK/Open Web3 Setup
+    openMenuNameId: Window/TheOne/Web3 Unity SDK/Open Web3 Setup
   - heading: 
     subheading: 3. Open Any New or Existing Scene
-    text: Learn how to add Moralis
+    text: Learn how to add TheOne
     linkText: docs.moralis.io/unity
     url: https://docs.moralis.io/unity
     pingObjectName: 
@@ -63,7 +63,7 @@ MonoBehaviour:
     openMenuNameId: 
   - heading: Need Help?
     subheading: 
-    text: Contact us in the Moralis Forum.
+    text: Contact us in the TheOne Forum.
     linkText: forum.moralis.io/unity
     url: https://forum.moralis.io/t/ethereum-unity3d-boilerplate-questions/4553
     pingObjectName: 

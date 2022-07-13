@@ -1,5 +1,5 @@
 ﻿
-namespace MoralisUnity.SolanaApi.Models
+namespace TheOneUnity.SolanaApi.Models
 {
     public enum NetworkTypes { mainnet, testnet };
     public enum Method

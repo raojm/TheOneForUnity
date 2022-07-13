@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace MoralisUnity.SolanaApi.Client
+namespace TheOneUnity.SolanaApi.Client
 {
     /// <summary>
     /// Represents a set of configuration settings

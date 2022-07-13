@@ -2,7 +2,7 @@
 using System;
 using UnityEngine.Networking;
 
-namespace MoralisUnity.Web3Api.Core
+namespace TheOneUnity.Web3Api.Core
 {
     public class Parameter : IEquatable<Parameter>
     {

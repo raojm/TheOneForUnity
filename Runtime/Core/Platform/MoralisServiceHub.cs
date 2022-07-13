@@ -1,17 +1,17 @@
-﻿using MoralisUnity.Platform;
-using MoralisUnity.Platform.Utilities;
+﻿using TheOneUnity.Platform;
+using TheOneUnity.Platform.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Services;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Services;
 
-namespace MoralisUnity.Platform
+namespace TheOneUnity.Platform
 {
-    public class MoralisServiceHub : ServiceHub<MoralisUser>
+    public class TheOneServiceHub : ServiceHub<TheOneUser>
     {
-        public MoralisServiceHub (HttpClient httpClient, IServerConnectionData connectionData, IJsonSerializer jsonSerializer) : base(connectionData, jsonSerializer, httpClient) { }
+        public TheOneServiceHub (HttpClient httpClient, IServerConnectionData connectionData, IJsonSerializer jsonSerializer) : base(connectionData, jsonSerializer, httpClient) { }
     }
 }

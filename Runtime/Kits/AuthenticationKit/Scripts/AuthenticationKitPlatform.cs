@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MoralisUnity.Kits.AuthenticationKit
+namespace TheOneUnity.Kits.AuthenticationKit
 {
     /// <summary>
     /// List of possible platforms of the <see cref="AuthenticationKit"/>.

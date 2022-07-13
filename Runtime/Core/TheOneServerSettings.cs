@@ -2,13 +2,13 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     /// <summary>
-    /// Provides a persistable object to hold Moralis related data.
+    /// Provides a persistable object to hold TheOne related data.
     /// </summary>
     [Serializable]
-    public class MoralisServerSettings : ScriptableObject
+    public class TheOneServerSettings : ScriptableObject
     {
         [FormerlySerializedAs("ServerUrl")]
         [FormerlySerializedAs("ServerUri")] 
@@ -21,7 +21,7 @@ namespace MoralisUnity
         [FormerlySerializedAs("DappWebsite")] [FormerlySerializedAs("ApplicationUrl")] public string DappWebsiteUrl;
         public bool DisableAutoOpenWizard = false;
 
-        public MoralisServerSettings()
+        public TheOneServerSettings()
         {
             DappUrl = String.Empty;
             DappId = String.Empty;

@@ -1,11 +1,11 @@
 using System;
 
-namespace MoralisUnity.Core.Exceptions
+namespace TheOneUnity.Core.Exceptions
 {
-    public class MoralisSignupException : Exception
+    public class TheOneSignupException : Exception
     {
-        public MoralisSignupException() { }
+        public TheOneSignupException() { }
 
-        public MoralisSignupException(string message) : base(message) { }
+        public TheOneSignupException(string message) : base(message) { }
     }
 }

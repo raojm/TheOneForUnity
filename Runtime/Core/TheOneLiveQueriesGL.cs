@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using WalletConnectSharp.Core.Models;
-using MoralisUnity.Platform.Queries.Live;
+using TheOneUnity.Platform.Queries.Live;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
-    public class MoralisLiveQueriesGL
+    public class TheOneLiveQueriesGL
     {
         private static bool isConnected;
 

@@ -8,7 +8,7 @@ using UnityEngine;
 using WalletConnectSharp.Core.Models;
 
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     public class Web3GL
     {
@@ -64,7 +64,7 @@ namespace MoralisUnity
         public async static UniTask<string> Connect(ClientMeta clientMeta)
         {
             string account = "";
-            string appLogo = "https://moralis.io/wp-content/uploads/2021/06/Powered-by-Moralis-Badge-Black.svg";
+            string appLogo = "https://moralis.io/wp-content/uploads/2021/06/Powered-by-TheOne-Badge-Black.svg";
             int waitLoops = 240; // approx 2min @ 60FPS
             int loop = 0;
 

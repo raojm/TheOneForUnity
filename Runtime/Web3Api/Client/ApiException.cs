@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MoralisUnity.Web3Api.Client 
+namespace TheOneUnity.Web3Api.Client 
 {
   /// <summary>
   /// API Exception

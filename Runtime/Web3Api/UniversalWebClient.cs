@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
-using WebRequest = MoralisUnity.Web3Api.Models.WebRequest;
+using WebRequest = TheOneUnity.Web3Api.Models.WebRequest;
 using UnityEngine;
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Web3Api.Interfaces;
+using TheOneUnity.Web3Api.Interfaces;
 
-namespace MoralisUnity.Web3Api
+namespace TheOneUnity.Web3Api
 {
     /// <summary>
     /// A universal implementation of <see cref="IWebClient"/>.

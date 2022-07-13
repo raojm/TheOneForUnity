@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
-using MoralisUnity.Sdk.Exceptions;
-using MoralisUnity.Sdk.Data;
+using TheOneUnity.Sdk.Exceptions;
+using TheOneUnity.Sdk.Data;
 using System.Collections.Generic;
 
 
 
-namespace MoralisUnity.Kits.AuthenticationKit
+namespace TheOneUnity.Kits.AuthenticationKit
 {
     /// <summary>
     /// Wrapper of <see cref="AuthenticationKitState"/> which
@@ -98,7 +98,7 @@ namespace MoralisUnity.Kits.AuthenticationKit
                     AuthenticationKitState.WalletSigning,
                     
                     // If the user is already logged in
-                    AuthenticationKitState.MoralisLoggedIn,
+                    AuthenticationKitState.TheOneLoggedIn,
                     
                     // If the user cancels the connect request
                     AuthenticationKitState.Disconnecting
@@ -123,11 +123,11 @@ namespace MoralisUnity.Kits.AuthenticationKit
             {
                 ValidateNewValue(oldValue, newValue, new List<AuthenticationKitState>
                 {
-                    AuthenticationKitState.MoralisLoggingIn
+                    AuthenticationKitState.TheOneLoggingIn
                 });
             }
             
-            if (oldValue == AuthenticationKitState.MoralisLoggedIn)
+            if (oldValue == AuthenticationKitState.TheOneLoggedIn)
             {
                 ValidateNewValue(oldValue, newValue, new List<AuthenticationKitState>
                 {

@@ -1,10 +1,10 @@
 ﻿using System;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Services
+namespace TheOneUnity.Platform.Services
 {
-    public class OrchestrationServiceHub<TUser> : IServiceHub<TUser> where TUser : MoralisUser
+    public class OrchestrationServiceHub<TUser> : IServiceHub<TUser> where TUser : TheOneUser
     {
         public OrchestrationServiceHub()
         {
@@ -28,7 +28,7 @@ namespace MoralisUnity.Platform.Services
 
         public IInstallationService InstallationService => Custom.InstallationService ?? Default.InstallationService;
 
-        public IMoralisCommandRunner CommandRunner => Custom.CommandRunner ?? Default.CommandRunner;
+        public ITheOneCommandRunner CommandRunner => Custom.CommandRunner ?? Default.CommandRunner;
 
         public ICloudFunctionService CloudFunctionService => Custom.CloudFunctionService ?? Default.CloudFunctionService;
 
@@ -57,7 +57,7 @@ namespace MoralisUnity.Platform.Services
         public IServerConnectionData ServerConnectionData => Custom.ServerConnectionData ?? Default.ServerConnectionData;
 
 
-        public T Create<T>(object[] parameters) where T : MoralisObject
+        public T Create<T>(object[] parameters) where T : TheOneObject
         {
             T thing;
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MoralisUnity.Platform.Queries;
+using TheOneUnity.Platform.Queries;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     public interface IObjectState : IEnumerable<KeyValuePair<string, object>>
     {

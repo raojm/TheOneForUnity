@@ -1,12 +1,12 @@
 ﻿/**
- *           Module: MoralisSubscriptionQuery.cs
+ *           Module: TheOneSubscriptionQuery.cs
  *  Descriptiontion: Wraps subscription processes to facilitate automation
  *                   of pause / unpause handling.
- *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich 
+ *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich 
  *  
  *  MIT License
  *  
- *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  Copyright (c) 2021 TheOne Web3 Technology AB, 559307-5988
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -29,30 +29,30 @@
 using System;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Services.ClientServices;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Queries;
+using TheOneUnity.Platform.Services.ClientServices;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Queries;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     /// <summary>
     /// Provides a wrapper around the query subscription process to facilitate automated
     /// subscribe and suspension processes.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MoralisSubscriptionQuery<T> : ISubscriptionQuery where T : MoralisObject
+    public class TheOneSubscriptionQuery<T> : ISubscriptionQuery where T : TheOneObject
     {
-        private MoralisLiveQueryClient<T> subscription;
+        private TheOneLiveQueryClient<T> subscription;
 
         /// <summary>
         /// The client event handlers used to react to this subscription.
         /// </summary>
-        public MoralisLiveQueryCallbacks<T> Callbacks { get; private set; }
+        public TheOneLiveQueryCallbacks<T> Callbacks { get; private set; }
 
         /// <summary>
         /// Query against which the subscription is made.
         /// </summary>
-        public MoralisQuery<T> Query { get; private set; }
+        public TheOneQuery<T> Query { get; private set; }
 
         /// <summary>
         /// Indicates if a connection the server was established.
@@ -70,7 +70,7 @@ namespace MoralisUnity
         /// </summary>
         public string SubscriptionName { get; private set; }
 
-        public MoralisSubscriptionQuery(string keyName, MoralisQuery<T> q, MoralisLiveQueryCallbacks<T> c)
+        public TheOneSubscriptionQuery(string keyName, TheOneQuery<T> q, TheOneLiveQueryCallbacks<T> c)
         {
             Query = q;
             Callbacks = c;

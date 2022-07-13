@@ -1,10 +1,10 @@
-﻿using MoralisUnity.Web3Api.Api;
-using MoralisUnity.Web3Api.Interfaces;
+﻿using TheOneUnity.Web3Api.Api;
+using TheOneUnity.Web3Api.Interfaces;
 
-namespace MoralisUnity.Web3Api.Client
+namespace TheOneUnity.Web3Api.Client
 {
     /// <summary>
-    /// Provides a wrapper class around the Moralis Web3Api REST service. 
+    /// Provides a wrapper class around the TheOne Web3Api REST service. 
     /// Automagically initializes client to use standard server or
     /// personal server Cloud Function API based on use of Api Key.
     /// </summary>

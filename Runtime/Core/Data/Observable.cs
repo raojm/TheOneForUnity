@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System;
-using MoralisUnity.Sdk.Events;
+using TheOneUnity.Sdk.Events;
 
-namespace MoralisUnity.Sdk.Data
+namespace TheOneUnity.Sdk.Data
 {
     /// <summary>
     /// Wrapper so a type can be observable via events

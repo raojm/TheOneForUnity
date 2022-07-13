@@ -1,11 +1,11 @@
 ﻿/**
  *           Module: MobileLogin.cs
- *  Descriptiontion: Class that enables use of Moralis Connector for suthentication.
- *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+ *  Descriptiontion: Class that enables use of TheOne Connector for suthentication.
+ *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich
  *  
  *  MIT License
  *  
- *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  Copyright (c) 2021 TheOne Web3 Technology AB, 559307-5988
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -30,21 +30,21 @@ using Newtonsoft.Json;
 using UnityEngine;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using MoralisUnity;
+using TheOneUnity;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     public class MobileLogin
     {
         private static string TOKEN_REQUEST_URL = "server/requestLoginToken";
         private static string REMOTE_SESSION_URL = "server/getRemoteSession?login_token={0}&_ApplicationId={1}";
 
-        public static async UniTask<MoralisUser> LogIn(string moralisDappUrl, string dappId)
+        public static async UniTask<TheOneUser> LogIn(string moralisDappUrl, string dappId)
         {
-            MoralisUser user = null;
-            MoralisLoginTokenResponse tokenResponse = await RequestLoginToken(moralisDappUrl, dappId);
+            TheOneUser user = null;
+            TheOneLoginTokenResponse tokenResponse = await RequestLoginToken(moralisDappUrl, dappId);
 
             if (tokenResponse != null)
             {
@@ -57,11 +57,11 @@ namespace MoralisUnity
                 {
                     await UniTask.Delay(TimeSpan.FromSeconds(500), ignoreTimeScale: false);
 
-                    MoralisSessionTokenResponse sessionResponse = await CheckSessionResult(moralisDappUrl, tokenResponse.loginToken, dappId);
+                    TheOneSessionTokenResponse sessionResponse = await CheckSessionResult(moralisDappUrl, tokenResponse.loginToken, dappId);
 
                     if (sessionResponse != null && !String.IsNullOrWhiteSpace(sessionResponse.sessionToken))
                     {
-                        user = await Moralis.GetClient().UserFromSession(sessionResponse.sessionToken);
+                        user = await TheOne.GetClient().UserFromSession(sessionResponse.sessionToken);
 
                         break;
                     }
@@ -71,11 +71,11 @@ namespace MoralisUnity
             return user;
         }
 
-        private async static UniTask<MoralisSessionTokenResponse> CheckSessionResult(string moralisDappUrl, string tokenId, string dappId)
+        private async static UniTask<TheOneSessionTokenResponse> CheckSessionResult(string moralisDappUrl, string tokenId, string dappId)
         {
-            MoralisSessionTokenResponse result = null;
+            TheOneSessionTokenResponse result = null;
 
-            MoralisLoginTokenRequest payload = new MoralisLoginTokenRequest()
+            TheOneLoginTokenRequest payload = new TheOneLoginTokenRequest()
             {
                 _ApplicationId = dappId
             };
@@ -95,18 +95,18 @@ namespace MoralisUnity
 
                     Debug.Log($"Session Result: {responseBody}");
 
-                    result = JsonConvert.DeserializeObject<MoralisSessionTokenResponse>(responseBody);
+                    result = JsonConvert.DeserializeObject<TheOneSessionTokenResponse>(responseBody);
                 }
             }
 
             return result;
         }
 
-        private async static UniTask<MoralisLoginTokenResponse> RequestLoginToken(string moralisDappUrl, string dappId)
+        private async static UniTask<TheOneLoginTokenResponse> RequestLoginToken(string moralisDappUrl, string dappId)
         {
-            MoralisLoginTokenResponse result = null;
+            TheOneLoginTokenResponse result = null;
 
-            MoralisLoginTokenRequest payload = new MoralisLoginTokenRequest()
+            TheOneLoginTokenRequest payload = new TheOneLoginTokenRequest()
             {
                 _ApplicationId = dappId
             };
@@ -130,7 +130,7 @@ namespace MoralisUnity
                     // Parse the response body. 
                     string responseBody = await response.Content.ReadAsStringAsync();
 
-                    result = JsonConvert.DeserializeObject<MoralisLoginTokenResponse>(responseBody);
+                    result = JsonConvert.DeserializeObject<TheOneLoginTokenResponse>(responseBody);
                 }
             }
             

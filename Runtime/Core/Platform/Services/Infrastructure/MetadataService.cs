@@ -1,6 +1,6 @@
-﻿using MoralisUnity.Platform.Abstractions;
+﻿using TheOneUnity.Platform.Abstractions;
 
-namespace MoralisUnity.Platform.Services.Infrastructure
+namespace TheOneUnity.Platform.Services.Infrastructure
 {
     public class MetadataService : IMetadataService
     {

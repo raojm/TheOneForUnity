@@ -2,9 +2,9 @@ using System;
 using Status = System.Net.HttpStatusCode;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
-using MoralisUnity.Web3Api.Models;
+using TheOneUnity.Web3Api.Models;
 
-namespace MoralisUnity.Web3Api.Interfaces
+namespace TheOneUnity.Web3Api.Interfaces
 {
     public interface IWebClient
     {

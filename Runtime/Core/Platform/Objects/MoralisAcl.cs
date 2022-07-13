@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 using Newtonsoft.Json;
 
-namespace MoralisUnity.Platform.Objects
+namespace TheOneUnity.Platform.Objects
 {
-    class MoralisAclJsonConvertor : JsonConverter
+    class TheOneAclJsonConvertor : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
@@ -55,26 +55,26 @@ namespace MoralisUnity.Platform.Objects
                 }
             }
 
-            return new MoralisAcl(acl);
+            return new TheOneAcl(acl);
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            if (value == null || !(value is MoralisAcl))
+            if (value == null || !(value is TheOneAcl))
             {
                 serializer.Serialize(writer, null);
                 return;
             }
 
-            Dictionary<string, object> acl = ((MoralisAcl)value).ToParameterDictionary();
+            Dictionary<string, object> acl = ((TheOneAcl)value).ToParameterDictionary();
 
             serializer.Serialize(writer, acl);
         }
     }
 
 
-    [JsonConverter(typeof(MoralisAclJsonConvertor))]
-    public class MoralisAcl
+    [JsonConverter(typeof(TheOneAclJsonConvertor))]
+    public class TheOneAcl
     {
         private enum AccessKind
         {
@@ -85,7 +85,7 @@ namespace MoralisUnity.Platform.Objects
         private readonly ICollection<string> readers = new HashSet<string>();
         private readonly ICollection<string> writers = new HashSet<string>();
 
-        internal MoralisAcl(IDictionary<string, object> jsonObject)
+        internal TheOneAcl(IDictionary<string, object> jsonObject)
         {
             readers = new HashSet<string>(from pair in jsonObject
                                           where ((IDictionary<string, object>)pair.Value).ContainsKey("read")
@@ -98,7 +98,7 @@ namespace MoralisUnity.Platform.Objects
         /// <summary>
         /// Creates an ACL with no permissions granted.
         /// </summary>
-        public MoralisAcl()
+        public TheOneAcl()
         {
         }
 
@@ -106,7 +106,7 @@ namespace MoralisUnity.Platform.Objects
         /// Creates an ACL where only the provided user has access.
         /// </summary>
         /// <param name="owner">The only user that can read or write objects governed by this ACL.</param>
-        public MoralisAcl(MoralisUser owner)
+        public TheOneAcl(TheOneUser owner)
         {
             SetReadAccess(owner, true);
             SetWriteAccess(owner, true);
@@ -206,7 +206,7 @@ namespace MoralisUnity.Platform.Objects
         /// </summary>
         /// <param name="user">The user.</param>
         /// <param name="allowed">Whether the user has permission.</param>
-        public void SetReadAccess(MoralisUser user, bool allowed) => SetReadAccess(user.objectId, allowed);
+        public void SetReadAccess(TheOneUser user, bool allowed) => SetReadAccess(user.objectId, allowed);
 
         /// <summary>
         /// Sets whether the given user id is allowed to write this object.
@@ -220,7 +220,7 @@ namespace MoralisUnity.Platform.Objects
         /// </summary>
         /// <param name="user">The user.</param>
         /// <param name="allowed">Whether the user has permission.</param>
-        public void SetWriteAccess(MoralisUser user, bool allowed) => SetWriteAccess(user.objectId, allowed);
+        public void SetWriteAccess(TheOneUser user, bool allowed) => SetWriteAccess(user.objectId, allowed);
 
         /// <summary>
         /// Gets whether the given user id is *explicitly* allowed to read this object.
@@ -238,7 +238,7 @@ namespace MoralisUnity.Platform.Objects
         /// </summary>
         /// <param name="user">The user to check.</param>
         /// <returns>Whether the user has access.</returns>
-        public bool GetReadAccess(MoralisUser user) => GetReadAccess(user.objectId);
+        public bool GetReadAccess(TheOneUser user) => GetReadAccess(user.objectId);
 
         /// <summary>
         /// Gets whether the given user id is *explicitly* allowed to write this object.
@@ -256,7 +256,7 @@ namespace MoralisUnity.Platform.Objects
         /// </summary>
         /// <param name="user">The user to check.</param>
         /// <returns>Whether the user has access.</returns>
-        public bool GetWriteAccess(MoralisUser user) => GetWriteAccess(user.objectId);
+        public bool GetWriteAccess(TheOneUser user) => GetWriteAccess(user.objectId);
 
         /// <summary>
         /// Sets whether users belonging to the role with the given <paramref name="roleName"/>
@@ -271,7 +271,7 @@ namespace MoralisUnity.Platform.Objects
         /// </summary>
         /// <param name="role">The role.</param>
         /// <param name="allowed">Whether the role has access.</param>
-        public void SetRoleReadAccess(MoralisRole role, bool allowed) => SetRoleReadAccess(role.name, allowed);
+        public void SetRoleReadAccess(TheOneRole role, bool allowed) => SetRoleReadAccess(role.name, allowed);
 
         /// <summary>
         /// Gets whether users belonging to the role with the given <paramref name="roleName"/>
@@ -289,7 +289,7 @@ namespace MoralisUnity.Platform.Objects
         /// </summary>
         /// <param name="role">The name of the role.</param>
         /// <returns>Whether the role has access.</returns>
-        public bool GetRoleReadAccess(MoralisRole role) => GetRoleReadAccess(role.name);
+        public bool GetRoleReadAccess(TheOneRole role) => GetRoleReadAccess(role.name);
 
         /// <summary>
         /// Sets whether users belonging to the role with the given <paramref name="roleName"/>
@@ -304,7 +304,7 @@ namespace MoralisUnity.Platform.Objects
         /// </summary>
         /// <param name="role">The role.</param>
         /// <param name="allowed">Whether the role has access.</param>
-        public void SetRoleWriteAccess(MoralisRole role, bool allowed) => SetRoleWriteAccess(role.name, allowed);
+        public void SetRoleWriteAccess(TheOneRole role, bool allowed) => SetRoleWriteAccess(role.name, allowed);
 
         /// <summary>
         /// Gets whether users belonging to the role with the given <paramref name="roleName"/>
@@ -322,6 +322,6 @@ namespace MoralisUnity.Platform.Objects
         /// </summary>
         /// <param name="role">The name of the role.</param>
         /// <returns>Whether the role has access.</returns>
-        public bool GetRoleWriteAccess(MoralisRole role) => GetRoleWriteAccess(role.name);
+        public bool GetRoleWriteAccess(TheOneRole role) => GetRoleWriteAccess(role.name);
     }
 }

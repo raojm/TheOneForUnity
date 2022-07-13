@@ -8,9 +8,9 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using UnityEngine.Events;
-using MoralisUnity.Sdk.Exceptions;
+using TheOneUnity.Sdk.Exceptions;
 
-namespace MoralisUnity.Kits.AuthenticationKit
+namespace TheOneUnity.Kits.AuthenticationKit
 {
     /// <summary>
     /// See <see cref="AuthenticationKit"/> comments for a feature overview.
@@ -250,10 +250,10 @@ namespace MoralisUnity.Kits.AuthenticationKit
                 case AuthenticationKitState.WalletSigned:
                     SetActiveUIAllParts(false);
                     break;
-                case AuthenticationKitState.MoralisLoggingIn:
+                case AuthenticationKitState.TheOneLoggingIn:
                     // No UI changes here
                     break;
-                case AuthenticationKitState.MoralisLoggedIn:
+                case AuthenticationKitState.TheOneLoggedIn:
                     // Show Button "Disconnect"
                     SetActiveUIAllParts(false);
                     _disconnectButton.gameObject.SetActive(true);

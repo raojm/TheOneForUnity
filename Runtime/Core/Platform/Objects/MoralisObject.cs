@@ -3,37 +3,37 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Operations;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Operations;
+using TheOneUnity.Platform.Utilities;
 
-namespace MoralisUnity.Platform.Objects
+namespace TheOneUnity.Platform.Objects
 {
     /// <summary>
-    /// Base class for any objects that can be processed via Moralis. 
+    /// Base class for any objects that can be processed via TheOne. 
     /// Note: JsonIgnore internals just incase someone changes JsonSerializerSettings 
     /// </summary>
-    public class MoralisObject
+    public class TheOneObject
     {
         private IObjectService objectService = null;
 
-        public MoralisObject()
+        public TheOneObject()
         {
             this.ClassName = this.GetType().Name;
             this.objectId = null; 
             this.createdAt = DateTime.Now;
             this.updatedAt = DateTime.Now;
-            this.ACL = new MoralisAcl();
+            this.ACL = new TheOneAcl();
             this.IsDirty = false;
             this.sessionToken = string.Empty;
         }
 
-        public MoralisObject(string className, 
+        public TheOneObject(string className, 
             string objectId = null,
             string sessionToken = null,
             DateTime? createdAt = null,
             DateTime? updatedAt = null,
-            MoralisAcl ACL = null)
+            TheOneAcl ACL = null)
         {
             this.ClassName = className;
             this.objectId = objectId;
@@ -48,7 +48,7 @@ namespace MoralisUnity.Platform.Objects
         public string sessionToken;
         public DateTime? createdAt;
         public DateTime? updatedAt;
-        public MoralisAcl ACL; 
+        public TheOneAcl ACL; 
         public string ClassName { get; set; }
         internal bool IsDirty { get; set; }
         internal IObjectService ObjectService 
@@ -59,10 +59,10 @@ namespace MoralisUnity.Platform.Objects
                 {
                     // This functionality is only available in a Unity Context and
                     // not in the SDK outside of Unity.
-                    if (MoralisState.Initialized.Equals(Moralis.State))
+                    if (TheOneState.Initialized.Equals(TheOne.State))
                     { 
-                        // Initialize Object Service from the Moralis Client.
-                        objectService = Moralis.Client?.ServiceHub?.ObjectService;
+                        // Initialize Object Service from the TheOne Client.
+                        objectService = TheOne.Client?.ServiceHub?.ObjectService;
                     }
                 }
 
@@ -76,18 +76,18 @@ namespace MoralisUnity.Platform.Objects
         }
 
         internal object Mutex { get; } = new object { };
-        internal IDictionary<string, IMoralisFieldOperation> CurrentOperations
+        internal IDictionary<string, ITheOneFieldOperation> CurrentOperations
         {
             get
             {
                 lock (Mutex)
                 {
-                    return OperationSetQueue.Count > 0 ? OperationSetQueue.Last.Value : new Dictionary<string, IMoralisFieldOperation>();
+                    return OperationSetQueue.Count > 0 ? OperationSetQueue.Last.Value : new Dictionary<string, ITheOneFieldOperation>();
                 }
             }
         }
 
-        LinkedList<IDictionary<string, IMoralisFieldOperation>> OperationSetQueue { get; } = new LinkedList<IDictionary<string, IMoralisFieldOperation>>();
+        LinkedList<IDictionary<string, ITheOneFieldOperation>> OperationSetQueue { get; } = new LinkedList<IDictionary<string, ITheOneFieldOperation>>();
 
         /// <summary>
         /// Deletes this object on the server.
@@ -100,10 +100,10 @@ namespace MoralisUnity.Platform.Objects
 
         public virtual async UniTask<bool> SaveAsync(CancellationToken cancellationToken = default)
         {
-            // MoralisUser is a special case not all properties can be passed to save.
-            if (this is MoralisUser) ((MoralisUser)this).SetSaving(true);
+            // TheOneUser is a special case not all properties can be passed to save.
+            if (this is TheOneUser) ((TheOneUser)this).SetSaving(true);
 
-            IDictionary<string, IMoralisFieldOperation> operations = this.StartSave();
+            IDictionary<string, ITheOneFieldOperation> operations = this.StartSave();
             string resp = await this.ObjectService.SaveAsync(this, operations, sessionToken, cancellationToken);
                 
             Dictionary<string, object> obj = JsonUtilities.Parse(resp) as Dictionary<string, object>;
@@ -132,7 +132,7 @@ namespace MoralisUnity.Platform.Objects
             }
 
             // Set user saving false so that local persistence has full object.
-            if (this is MoralisUser) ((MoralisUser)this).SetSaving(false);
+            if (this is TheOneUser) ((TheOneUser)this).SetSaving(false);
 
             Console.WriteLine($"Save response: {resp}");
 
@@ -156,21 +156,21 @@ namespace MoralisUnity.Platform.Objects
         {
             lock (Mutex)
             {
-                PerformOperation(key, new MoralisIncrementOperation(amount));
+                PerformOperation(key, new TheOneIncrementOperation(amount));
             }
         }
         public void Increment(string key, int amount)
         {
             lock (Mutex)
             {
-                PerformOperation(key, new MoralisIncrementOperation(amount));
+                PerformOperation(key, new TheOneIncrementOperation(amount));
             }
         }
         public void Increment(string key, long amount)
         {
             lock (Mutex)
             {
-                PerformOperation(key, new MoralisIncrementOperation(amount));
+                PerformOperation(key, new TheOneIncrementOperation(amount));
             }
         }
         /// <summary>
@@ -182,32 +182,32 @@ namespace MoralisUnity.Platform.Objects
         {
             lock (Mutex)
             {
-                PerformOperation(key, new MoralisIncrementOperation(amount));
+                PerformOperation(key, new TheOneIncrementOperation(amount));
             }
         }
         public void Increment(string key, decimal amount)
         {
             lock (Mutex)
             {
-                PerformOperation(key, new MoralisIncrementOperation(amount));
+                PerformOperation(key, new TheOneIncrementOperation(amount));
             }
         }
         public void Increment(string key, float amount)
         {
             lock (Mutex)
             {
-                PerformOperation(key, new MoralisIncrementOperation(amount));
+                PerformOperation(key, new TheOneIncrementOperation(amount));
             }
         }
         /// <summary>
         /// Pushes new operations onto the queue and returns the current set of operations.
         /// </summary>
-        internal IDictionary<string, IMoralisFieldOperation> StartSave()
+        internal IDictionary<string, ITheOneFieldOperation> StartSave()
         {
             lock (Mutex)
             {
-                IDictionary<string, IMoralisFieldOperation> currentOperations = CurrentOperations;
-                OperationSetQueue.AddLast(new Dictionary<string, IMoralisFieldOperation>());
+                IDictionary<string, ITheOneFieldOperation> currentOperations = CurrentOperations;
+                OperationSetQueue.AddLast(new Dictionary<string, ITheOneFieldOperation>());
                 return currentOperations;
             }
         }
@@ -216,9 +216,9 @@ namespace MoralisUnity.Platform.Objects
 
         /// <summary>
         /// PerformOperation is like setting a value at an index, but instead of
-        /// just taking a new value, it takes a MoralisFieldOperation that modifies the value.
+        /// just taking a new value, it takes a TheOneFieldOperation that modifies the value.
         /// </summary>
-        internal void PerformOperation(string key, IMoralisFieldOperation operation)
+        internal void PerformOperation(string key, ITheOneFieldOperation operation)
         {
             lock (Mutex)
             {
@@ -233,8 +233,8 @@ namespace MoralisUnity.Platform.Objects
                 }
 
                 bool wasDirty = CurrentOperations.Count > 0;
-                CurrentOperations.TryGetValue(key, out IMoralisFieldOperation oldOperation);
-                IMoralisFieldOperation newOperation = operation.MergeWithPrevious(oldOperation);
+                CurrentOperations.TryGetValue(key, out ITheOneFieldOperation oldOperation);
+                ITheOneFieldOperation newOperation = operation.MergeWithPrevious(oldOperation);
                 CurrentOperations[key] = newOperation;
 
             }

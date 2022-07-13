@@ -1,16 +1,16 @@
 ﻿using System;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Services.ClientServices;
-using MoralisUnity.Platform.Services.Infrastructure;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Services.ClientServices;
+using TheOneUnity.Platform.Services.Infrastructure;
 
-namespace MoralisUnity.Platform.Services
+namespace TheOneUnity.Platform.Services
 {
     /// <summary>
     /// A service hub that is mutable.
     /// </summary>
     /// <remarks>This class is not thread safe; the mutability is allowed for the purposes of overriding values before it is used, as opposed to modifying it while it is in use.</remarks>
-    public class MutableServiceHub<TUser> : IMutableServiceHub<TUser> where TUser : MoralisUser
+    public class MutableServiceHub<TUser> : IMutableServiceHub<TUser> where TUser : TheOneUser
     {
         /// <summary>
         /// Included so that this can be set prior to initialization for systems
@@ -33,7 +33,7 @@ namespace MoralisUnity.Platform.Services
 
         public IInstallationService InstallationService { get; set; }
 
-        public IMoralisCommandRunner CommandRunner { get; set; }
+        public ITheOneCommandRunner CommandRunner { get; set; }
 
         public ICloudFunctionService CloudFunctionService { get; set; }
         //public IParseConfigurationController ConfigurationController { get; set; }
@@ -46,7 +46,7 @@ namespace MoralisUnity.Platform.Services
 
         public ICurrentUserService<TUser> CurrentUserService { get; set; }
 
-        public T Create<T>(object[] parameters) where T : MoralisObject
+        public T Create<T>(object[] parameters) where T : TheOneObject
         {
             T thing;
 
@@ -72,19 +72,19 @@ namespace MoralisUnity.Platform.Services
 
 
             WebClient ??= new UniversalWebClient { };
-            CacheService ??= new MoralisCacheService<TUser> (MoralisCacheService<TUser>.DefineRelativeFilePath("Moralis\\moralis.cachefile"));
+            CacheService ??= new TheOneCacheService<TUser> (TheOneCacheService<TUser>.DefineRelativeFilePath("TheOne\\moralis.cachefile"));
 
             InstallationService ??= new InstallationService(CacheService);
-            CommandRunner ??= new MoralisCommandRunner<TUser>(WebClient, InstallationService, MetadataService, ServerConnectionData, new Lazy<IUserService<TUser>>(() => UserService));
+            CommandRunner ??= new TheOneCommandRunner<TUser>(WebClient, InstallationService, MetadataService, ServerConnectionData, new Lazy<IUserService<TUser>>(() => UserService));
 
-            CloudFunctionService ??= new MoralisCloudFunctionService(CommandRunner, ServerConnectionData, JsonSerializer);
+            CloudFunctionService ??= new TheOneCloudFunctionService(CommandRunner, ServerConnectionData, JsonSerializer);
             //ConfigurationController ??= new ParseConfigurationController(CommandRunner, CacheController, Decoder);
-            FileService ??= new MoralisFileService(CommandRunner, JsonSerializer);
-            ObjectService ??= new MoralisObjectService(CommandRunner, ServerConnectionData, JsonSerializer);
-            QueryService ??= new MoralisQueryService(CommandRunner, this.CurrentUserService.CurrentUser.sessionToken, JsonSerializer, ObjectService);
-            SessionService ??= new MoralisSessionService<TUser>(CommandRunner, JsonSerializer);
-            UserService ??= new MoralisUserService<TUser>(CommandRunner, ObjectService, JsonSerializer);
-            CurrentUserService ??= new MoralisCurrentUserService<TUser>(CacheService, JsonSerializer);
+            FileService ??= new TheOneFileService(CommandRunner, JsonSerializer);
+            ObjectService ??= new TheOneObjectService(CommandRunner, ServerConnectionData, JsonSerializer);
+            QueryService ??= new TheOneQueryService(CommandRunner, this.CurrentUserService.CurrentUser.sessionToken, JsonSerializer, ObjectService);
+            SessionService ??= new TheOneSessionService<TUser>(CommandRunner, JsonSerializer);
+            UserService ??= new TheOneUserService<TUser>(CommandRunner, ObjectService, JsonSerializer);
+            CurrentUserService ??= new TheOneCurrentUserService<TUser>(CacheService, JsonSerializer);
 
             //AnalyticsController ??= new ParseAnalyticsController(CommandRunner);
 

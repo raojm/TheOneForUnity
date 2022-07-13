@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using MoralisUnity.Platform.Utilities;
+using TheOneUnity.Platform.Utilities;
 using Cysharp.Threading.Tasks;
 using System.Net;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Services.Models;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Services.Models;
 
-namespace MoralisUnity.Platform.Services.ClientServices
+namespace TheOneUnity.Platform.Services.ClientServices
 {
     /// <summary>
-    /// This service enables an application to call Moralis Cloud Functions.
+    /// This service enables an application to call TheOne Cloud Functions.
     /// </summary>
-    public class MoralisCloudFunctionService : ICloudFunctionService
+    public class TheOneCloudFunctionService : ICloudFunctionService
     {
-        IMoralisCommandRunner CommandRunner { get; }
+        ITheOneCommandRunner CommandRunner { get; }
 
         IServerConnectionData ServerConnectionData { get; }
 
         IJsonSerializer JsonSerializer { get; }
 
-        public MoralisCloudFunctionService(IMoralisCommandRunner commandRunner, IServerConnectionData serverConnectionData, IJsonSerializer jsonSerializer) => (CommandRunner, ServerConnectionData, JsonSerializer) = (commandRunner, serverConnectionData, jsonSerializer);
+        public TheOneCloudFunctionService(ITheOneCommandRunner commandRunner, IServerConnectionData serverConnectionData, IJsonSerializer jsonSerializer) => (CommandRunner, ServerConnectionData, JsonSerializer) = (commandRunner, serverConnectionData, jsonSerializer);
 
         /// <summary>
-        /// Calls Moralis cloud function specified by 'name'.
+        /// Calls TheOne cloud function specified by 'name'.
         /// </summary>
         /// <typeparam name="T">Expected result type</typeparam>
         /// <param name="name">Name of cloud function</param>
@@ -33,7 +33,7 @@ namespace MoralisUnity.Platform.Services.ClientServices
         /// <returns>T - result of cloud function call.</returns>
         public async UniTask<T> CallFunctionAsync<T>(string name, IDictionary<string, object> parameters, string sessionToken, System.Threading.CancellationToken cancellationToken = default)
         {
-            MoralisCommand command = new MoralisCommand($"server/functions/{Uri.EscapeDataString(name)}", method: "POST", sessionToken: sessionToken, data: parameters is { } && parameters.Count > 0 ? JsonSerializer.Serialize(parameters) : "{}");
+            TheOneCommand command = new TheOneCommand($"server/functions/{Uri.EscapeDataString(name)}", method: "POST", sessionToken: sessionToken, data: parameters is { } && parameters.Count > 0 ? JsonSerializer.Serialize(parameters) : "{}");
 
             Tuple<HttpStatusCode, string> cmdResult = await CommandRunner.RunCommandAsync(command, cancellationToken: cancellationToken);
             

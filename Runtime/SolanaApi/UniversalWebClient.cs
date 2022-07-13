@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
-using WebRequest = MoralisUnity.SolanaApi.Models.WebRequest;
+using WebRequest = TheOneUnity.SolanaApi.Models.WebRequest;
 using UnityEngine;
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.SolanaApi.Interfaces;
+using TheOneUnity.SolanaApi.Interfaces;
 
-namespace MoralisUnity.SolanaApi
+namespace TheOneUnity.SolanaApi
 {
     /// <summary>
     /// A universal implementation of <see cref="IWebClient"/>.

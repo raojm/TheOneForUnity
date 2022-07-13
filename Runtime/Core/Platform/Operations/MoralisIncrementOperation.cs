@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 
-namespace MoralisUnity.Platform.Operations
+namespace TheOneUnity.Platform.Operations
 {
-    class MoralisIncrementOperation : IMoralisFieldOperation
+    class TheOneIncrementOperation : ITheOneFieldOperation
     {
 
         static IDictionary<Tuple<Type, Type>, Func<object, object, object>> Adders { get; } = new Dictionary<Tuple<Type, Type>, Func<object, object, object>>
@@ -83,20 +83,20 @@ namespace MoralisUnity.Platform.Operations
         //[JsonProperty("amount")]
         public object amount { get; }
 
-        public MoralisIncrementOperation(object amt) => amount = amt;
+        public TheOneIncrementOperation(object amt) => amount = amt;
 
 
 
-        public IMoralisFieldOperation MergeWithPrevious(IMoralisFieldOperation previous) => previous switch
+        public ITheOneFieldOperation MergeWithPrevious(ITheOneFieldOperation previous) => previous switch
         {
             null => this,
-            MoralisDeleteOperation _ => new MoralisSetOperation(amount),
+            TheOneDeleteOperation _ => new TheOneSetOperation(amount),
 
             // This may be a bug, but it was in the original logic.
 
-            MoralisSetOperation { Value: string { } } => throw new InvalidOperationException("Cannot increment a non-number type."),
-            MoralisSetOperation { Value: var value } => new MoralisSetOperation(Add(value, amount)),
-            MoralisIncrementOperation { amount: var amt } => new MoralisIncrementOperation(Add(amt, amount)),
+            TheOneSetOperation { Value: string { } } => throw new InvalidOperationException("Cannot increment a non-number type."),
+            TheOneSetOperation { Value: var value } => new TheOneSetOperation(Add(value, amount)),
+            TheOneIncrementOperation { amount: var amt } => new TheOneIncrementOperation(Add(amt, amount)),
             _ => throw new InvalidOperationException("Operation is invalid after previous operation.")
         };
 

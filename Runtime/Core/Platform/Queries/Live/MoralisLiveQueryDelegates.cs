@@ -1,6 +1,6 @@
-﻿using MoralisUnity.Platform.Objects;
+﻿using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Queries.Live
+namespace TheOneUnity.Platform.Queries.Live
 {
     /// <summary>
     /// Delegate to define a event to fire when a connection to the live query 
@@ -22,7 +22,7 @@ namespace MoralisUnity.Platform.Queries.Live
     /// <typeparam name="T"></typeparam>
     /// <param name="item"></param>
     /// <param name="requestId"></param>
-    public delegate void LiveQueryActionHandler<T>(T item, int requestId) where T : MoralisObject;
+    public delegate void LiveQueryActionHandler<T>(T item, int requestId) where T : TheOneObject;
 
     /// <summary>
     /// A delgate to define an event to fire when a client has successfully 
@@ -32,7 +32,7 @@ namespace MoralisUnity.Platform.Queries.Live
     public delegate void LiveQueryUnsubscribedHandler(int requestId);
 
     /// <summary>
-    /// Provides a delegate for Moralis Live Query error messages.
+    /// Provides a delegate for TheOne Live Query error messages.
     /// </summary>
     /// <param name="evt"></param>
     public delegate void LiveQueryErrorHandler(ErrorMessage evt);

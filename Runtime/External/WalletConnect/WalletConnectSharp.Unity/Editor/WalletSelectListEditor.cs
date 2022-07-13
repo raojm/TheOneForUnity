@@ -7,11 +7,11 @@
  *                   greatly enhances the user experience by speeding up how 
  *                   quickly the wallet options are displayed.
  *                   
- *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+ *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich
  *  
  *  MIT License
  *  
- *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  Copyright (c) 2021 TheOne Web3 Technology AB, 559307-5988
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal

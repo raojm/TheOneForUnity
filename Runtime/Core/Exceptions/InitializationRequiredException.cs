@@ -1,7 +1,7 @@
 ﻿using System;
-using MoralisUnity.Sdk.Interfaces;
+using TheOneUnity.Sdk.Interfaces;
 
-namespace MoralisUnity.Sdk.Exceptions
+namespace TheOneUnity.Sdk.Exceptions
 {
     /// <summary>
     /// Exception thrown within <see cref="IInitializable"/> when

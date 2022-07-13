@@ -1,8 +1,8 @@
 
 using System;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 
-namespace MoralisUnity.Platform.Services.Models
+namespace TheOneUnity.Platform.Services.Models
 {
     /// <summary>
     /// Represents upload progress.

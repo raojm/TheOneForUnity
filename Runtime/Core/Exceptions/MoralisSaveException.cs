@@ -1,11 +1,11 @@
 using System;
 
-namespace MoralisUnity.Core.Exceptions
+namespace TheOneUnity.Core.Exceptions
 {
-    public class MoralisSaveException : Exception
+    public class TheOneSaveException : Exception
     {
-        public MoralisSaveException() { }
+        public TheOneSaveException() { }
 
-        public MoralisSaveException(string message) : base(message) { }
+        public TheOneSaveException(string message) : base(message) { }
     }
 }

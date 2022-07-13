@@ -1,10 +1,10 @@
 ﻿using System;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Utilities
+namespace TheOneUnity.Platform.Utilities
 {
-    public class MoralisFileExtensions
+    public class TheOneFileExtensions
     {
-        public static MoralisFile Create(string name, Uri uri, string mimeType = null) => new MoralisFile(name, uri, mimeType);
+        public static TheOneFile Create(string name, Uri uri, string mimeType = null) => new TheOneFile(name, uri, mimeType);
     }
 }

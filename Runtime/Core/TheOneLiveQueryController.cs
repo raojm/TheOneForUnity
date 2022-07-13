@@ -1,12 +1,12 @@
 ﻿/**
- *           Module: MoralisLiveQueryController.cs
+ *           Module: TheOneLiveQueryController.cs
  *  Descriptiontion: A class that autonmates subscription handling for vaious 
  *                   game cycles.
- *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich 
+ *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich 
  *  
  *  MIT License
  *  
- *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  Copyright (c) 2021 TheOne Web3 Technology AB, 559307-5988
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -29,44 +29,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Queries;
-using MoralisUnity;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Queries;
+using TheOneUnity;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     /// <summary>
     /// A class that autonmates subscription handling for vaious 
     /// game cycles.
     /// </summary>
-    public class MoralisLiveQueryController : MonoBehaviour
+    public class TheOneLiveQueryController : MonoBehaviour
     {
         // Singleton instance.
-        private static MoralisLiveQueryService instance = new MoralisLiveQueryService();
+        private static TheOneLiveQueryService instance = new TheOneLiveQueryService();
 
         private void OnDestroy()
         {
-            Debug.Log("MoralisLiveQueryController - OnDestroy called.");
+            Debug.Log("TheOneLiveQueryController - OnDestroy called.");
             instance.UnsubscribeFromAll();
             instance.subscriptions.Clear();
         }
 
         private void OnApplicationQuit()
         {
-            Debug.Log("MoralisLiveQueryController - OnApplicationQuit called.");
+            Debug.Log("TheOneLiveQueryController - OnApplicationQuit called.");
             instance.UnsubscribeFromAll();
             instance.subscriptions.Clear();
         }
 
         private void OnApplicationPause(bool pauseStatus)
         {
-            Debug.Log("MoralisLiveQueryController - OnApplicationPause called.");
+            Debug.Log("TheOneLiveQueryController - OnApplicationPause called.");
             instance.UnsubscribeFromAll();
         }
 
         protected void Awake()
         {
-            Debug.Log("MoralisLiveQueryController - Awake called.");
+            Debug.Log("TheOneLiveQueryController - Awake called.");
             List<UniTask> tasks = new List<UniTask>();
 
             foreach (string key in instance.subscriptions.Keys)
@@ -87,13 +87,13 @@ namespace MoralisUnity
         /// <param name="q"></param>
         /// <param name="c"></param>
         /// <returns></returns>
-        public static ISubscriptionQuery AddSubscription<T>(string keyName, MoralisQuery<T> q, MoralisLiveQueryCallbacks<T> c) where T : MoralisObject
+        public static ISubscriptionQuery AddSubscription<T>(string keyName, TheOneQuery<T> q, TheOneLiveQueryCallbacks<T> c) where T : TheOneObject
         {
             ISubscriptionQuery resp = null;
 
             if (!instance.subscriptions.ContainsKey(keyName))
             {
-                resp = new MoralisSubscriptionQuery<T>(keyName, q, c);
+                resp = new TheOneSubscriptionQuery<T>(keyName, q, c);
             }
             else
             {
@@ -109,13 +109,13 @@ namespace MoralisUnity
         /// <typeparam name="T"></typeparam>
         /// <param name="keyName"></param>
         /// <returns></returns>
-        public static MoralisSubscriptionQuery<T> GetSubscription<T>(string keyName) where T : MoralisObject
+        public static TheOneSubscriptionQuery<T> GetSubscription<T>(string keyName) where T : TheOneObject
         {
-            MoralisSubscriptionQuery<T> resp = null;
+            TheOneSubscriptionQuery<T> resp = null;
 
             if (instance.subscriptions.ContainsKey(keyName))
             {
-                resp = (MoralisSubscriptionQuery<T>)instance.subscriptions[keyName];
+                resp = (TheOneSubscriptionQuery<T>)instance.subscriptions[keyName];
             }
 
             return resp;
@@ -136,11 +136,11 @@ namespace MoralisUnity
         }
     }
 
-    internal class MoralisLiveQueryService
+    internal class TheOneLiveQueryService
     {
         public Dictionary<string, ISubscriptionQuery> subscriptions;
 
-        public MoralisLiveQueryService()
+        public TheOneLiveQueryService()
         {
             subscriptions = new Dictionary<string, ISubscriptionQuery>();
         }

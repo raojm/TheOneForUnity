@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MoralisUnity.Sdk.DesignPatterns.Creational.Singleton.SingletonMonobehaviour
+namespace TheOneUnity.Sdk.DesignPatterns.Creational.Singleton.SingletonMonobehaviour
 {
 	public abstract class SingletonMonobehaviour<T> : MonoBehaviour where T : MonoBehaviour
 	{

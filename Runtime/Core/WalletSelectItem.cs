@@ -2,11 +2,11 @@
  *           Module: WalletSelectItem.cs
  *  Descriptiontion: An child set object of the WalletConnect AppEntry object
  *                   used to identify a specific Wallet menu option.
- *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+ *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich
  *  
  *  MIT License
  *  
- *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  Copyright (c) 2021 TheOne Web3 Technology AB, 559307-5988
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  */
 using System;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     [Serializable]
     public class WalletSelectItem

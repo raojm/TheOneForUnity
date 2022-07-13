@@ -1,25 +1,24 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using System.Threading;
-using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Queries;
-using MoralisUnity.Platform.Services;
-using MoralisUnity.Platform.Services.ClientServices;
-using MoralisUnity.Platform.Services.Infrastructure;
-using MoralisUnity.Platform.Utilities;
-using MoralisUnity.SolanaApi.Interfaces;
-using MoralisUnity.Web3Api.Interfaces;
+using TheOneUnity.Platform;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Queries;
+using TheOneUnity.Platform.Services;
+using TheOneUnity.Platform.Services.ClientServices;
+using TheOneUnity.Platform.Services.Infrastructure;
+using TheOneUnity.SolanaApi.Interfaces;
+using TheOneUnity.Web3Api.Interfaces;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
-    public class MoralisClient : IDisposable
+    public class TheOneClient<TUser> where TUser : TheOneUser
     {
         string serverAuthToken = String.Empty;
 
-        public MoralisClient(ServerConnectionData connectionData, IWeb3Api web3Api = null, ISolanaApi solanaApi = null, IJsonSerializer jsonSerializer = null)
+        public TheOneClient(ServerConnectionData connectionData, IWeb3Api web3Api = null, ISolanaApi solanaApi = null, IJsonSerializer jsonSerializer = null)
         {
             if (jsonSerializer == null)
             {
@@ -28,20 +27,16 @@ namespace MoralisUnity
 
             connectionData.Key = connectionData.Key != null ? connectionData.Key : "";
 
-            moralisService = new MoralisService<MoralisUser>(connectionData.ApplicationID, connectionData.ServerURI, connectionData.Key, jsonSerializer);
+            moralisService = new TheOneService<TUser>(connectionData.ApplicationID, connectionData.ServerURI, connectionData.Key, jsonSerializer);
             moralisService.ServerConnectionData.Key = connectionData.Key;
             moralisService.ServerConnectionData.ServerURI = connectionData.ServerURI;
-            moralisService.ServerConnectionData.ApplicationID = connectionData.ApplicationID;
-            moralisService.ServerConnectionData.LocalStoragePath = connectionData.LocalStoragePath;
+            moralisService.ServerConnectionData.ApplicationID = connectionData.ApplicationID; moralisService.ServerConnectionData.LocalStoragePath = connectionData.LocalStoragePath;
 
             // Make sure local folder for Unity apps is used if defined.
-            MoralisCacheService<MoralisUser>.BaseFilePath = connectionData.LocalStoragePath;
+            TheOneCacheService<TUser>.BaseFilePath = connectionData.LocalStoragePath;
 
             // Make sure singleton instance is available.
             moralisService.Publicize();
-
-            // Default to always save.
-            ServiceHub.AlwaysSave = true;
 
             this.Web3Api = web3Api;
 
@@ -73,11 +68,11 @@ namespace MoralisUnity
         }
 
 
-        public string EthAddress { get; private set; }
+        public string EthAddress { get; }
 
-        public IServiceHub<MoralisUser> ServiceHub => moralisService.Services;
+        public IServiceHub<TUser> ServiceHub => moralisService.Services;
 
-        MoralisService<MoralisUser> moralisService;
+        TheOneService<TUser> moralisService;
 
         public void SetLocalDatastoreController()
         {
@@ -117,18 +112,7 @@ namespace MoralisUnity
             set
             {
                 moralisService.ServerConnectionData.ServerURI = value;
-
-                if (string.IsNullOrWhiteSpace(moralisService.ServerConnectionData.LiveQueryServerURI))
-                {
-                    LiveQueryServerUrl = Conversion.WebUriToWsURi(moralisService.ServerConnectionData.ServerURI);
-                }
             }
-        }
-
-        public string LiveQueryServerUrl
-        {
-            get => moralisService.ServerConnectionData.LiveQueryServerURI;
-            set => moralisService.ServerConnectionData.LiveQueryServerURI = value;
         }
 
         public void SetServerAuthToken(string value)
@@ -150,36 +134,77 @@ namespace MoralisUnity
         {
             return serverAuthToken;
         }
+
+        public void SetLiveQueryServerURL(string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetLiveQueryServerURL()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetEncryptedUser(string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetEncryptedUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetSecret(string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetSecret()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetIdempotency(string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetIdempotency()
+        {
+            throw new NotImplementedException();
+        }
+
         public IFileService File => moralisService.FileService;
+
         public IInstallationService InstallationService => moralisService.InstallationService;
         public IQueryService QueryService => moralisService.QueryService;
-        public ISessionService<MoralisUser> Session => moralisService.SessionService;
-        public IUserService<MoralisUser> UserService => moralisService.UserService;
+        public ISessionService<TUser> Session => moralisService.SessionService;
+        public IUserService<TUser> UserService => moralisService.UserService;
 
-        public MoralisCloud<MoralisUser> Cloud => moralisService.Cloud;
+        public TheOneCloud<TUser> Cloud => moralisService.Cloud;
+
 
         public async UniTask<Guid?> GetInstallationIdAsync() => await InstallationService.GetAsync();
 
-        public async UniTask<MoralisQuery<T>> Query<T>() where T : MoralisObject
+        public async UniTask<TheOneQuery<T>> Query<T>() where T : TheOneObject
         {
-            MoralisUser user = await GetCurrentUserAsync();
-            return new MoralisQuery<T>(this.QueryService, InstallationService, moralisService.ServerConnectionData, moralisService.JsonSerializer, user.sessionToken); //, logger);
+            TUser user = await GetCurrentUserAsync();
+            return new TheOneQuery<T>(this.QueryService, InstallationService, moralisService.ServerConnectionData, moralisService.JsonSerializer, user.sessionToken); //, logger);
         }
 
-        public T Create<T>(object[] parameters = null) where T : MoralisObject
+        public T Create<T>(object[] parameters = null) where T : TheOneObject
         {
             return this.ServiceHub.Create<T>(parameters);
         }
 
-        public async UniTask<MoralisUser> GetCurrentUser() => await this.ServiceHub.GetCurrentUser();
-
-        public async UniTask<MoralisUser> GetCurrentUserAsync() => await this.ServiceHub.GetCurrentUserAsync();
+        public async UniTask<TUser> GetCurrentUserAsync() => await this.ServiceHub.GetCurrentUserAsync();
 
 
         public void Dispose()
         {
 #if UNITY_WEBGL
-            MoralisLiveQueryManager.DisposeService();
+            TheOneLiveQueryManager.DisposeService();
 #endif
         }
 
@@ -187,27 +212,27 @@ namespace MoralisUnity
         /// Retrieve user object by sesion token.
         /// </summary>
         /// <param name="sessionToken"></param>
-        /// <returns>Task<MoralisUser</returns>
-        public UniTask<MoralisUser> UserFromSession(string sessionToken)
+        /// <returns>Task<TheOneUser</returns>
+        public UniTask<TUser> UserFromSession(string sessionToken)
         {
-            return this.ServiceHub.BecomeAsync<MoralisUser>(sessionToken);
+            return this.ServiceHub.BecomeAsync<TUser>(sessionToken);
         }
 
         /// <summary>
-        /// Provide async user login.
+        /// Provid async user login.
         /// data: 
         ///     id: Address
         ///     signature: Signature from wallet
         ///     data: Message that was signed
         /// </summary>
         /// <param name="data">Authentication data</param>
-        /// <returns>Task<MoralisUser></returns>
-        public UniTask<MoralisUser> LogInAsync(IDictionary<string, object> data)
+        /// <returns>Task<TUser></returns>
+        public async UniTask<TUser> LogInAsync(IDictionary<string, object> data)
         {
-            return this.LogInAsync(data, CancellationToken.None);
+            return await this.LogInAsync(data, CancellationToken.None);
         }
-        
-        /// Provide async user login.
+
+        /// Provid async user login.
         /// data: 
         ///     id: Address
         ///     signature: Signature from wallet
@@ -215,51 +240,32 @@ namespace MoralisUnity
         /// </summary>
         /// <param name="data">Authentication data</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>Task<MoralisUser></returns>
-        public async UniTask<MoralisUser> LogInAsync(IDictionary<string, object> data, CancellationToken cancellationToken)
+        /// <returns>Task<TUser></returns>
+        public async UniTask<TUser> LogInAsync(IDictionary<string, object> data, CancellationToken cancellationToken)
         {
-            MoralisUser u = await this.ServiceHub.LogInWithAsync("moralisEth", data, cancellationToken);
-
-            if (u != null)
-            {
-                EthAddress = u.ethAddress;
-            }
-
-            return u;
-        }
-
-        public async UniTask<MoralisUser> LogInAsync(string username, string password, CancellationToken cancellationToken = default)
-        {
-            MoralisUser u = await this.ServiceHub.LogInAsync(username, password, cancellationToken);
-
-            if (u != null && !String.IsNullOrEmpty(u.ethAddress))
-            {
-                EthAddress = u.ethAddress;
-            }
-
-            return u;
+            return await this.ServiceHub.LogInWithAsync("moralisEth", data, cancellationToken);
         }
 
         /// <summary>
         /// Logs out the current user.
         /// </summary>
         /// <returns></returns>
-        public UniTask LogOutAsync()
+        public async UniTask LogOutAsync()
         {
-            return this.ServiceHub.LogOutAsync();
+            await this.ServiceHub.LogOutAsync<TUser>();
         }
 
         /// <summary>
         /// Constructs a query that is the and of the given queries.
         /// </summary>
-        /// <typeparam name="T">The type of MoralisObject being queried.</typeparam>
+        /// <typeparam name="T">The type of TheOneObject being queried.</typeparam>
         /// <param name="serviceHub"></param>
         /// <param name="source">An initial query to 'and' with additional queries.</param>
-        /// <param name="queries">The list of MoralisQueries to 'and' together.</param>
+        /// <param name="queries">The list of TheOneQueries to 'and' together.</param>
         /// <returns>A query that is the and of the given queries.</returns>
-        public MoralisQuery<T> BuildAndQuery<T>(MoralisQuery<T> source, params MoralisQuery<T>[] queries) where T : MoralisObject
+        public TheOneQuery<T> BuildAndQuery<T>(TheOneQuery<T> source, params TheOneQuery<T>[] queries) where T : TheOneObject
         {
-            return ServiceHub.ConstructAndQuery<T, MoralisUser>(source, queries);
+            return ServiceHub.ConstructAndQuery<T, TUser>(source, queries);
         }
 
         /// <summary>
@@ -267,23 +273,23 @@ namespace MoralisUnity
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="serviceHub"></param>
-        /// <param name="queries">The list of MoralisQueries to 'and' together.</param>
-        /// <returns>A MoralisQquery that is the 'and' of the passed in queries.</returns>
-        public MoralisQuery<T> BuildAndQuery<T>(IEnumerable<MoralisQuery<T>> queries) where T : MoralisObject
+        /// <param name="queries">The list of TheOneQueries to 'and' together.</param>
+        /// <returns>A TheOneQquery that is the 'and' of the passed in queries.</returns>
+        public TheOneQuery<T> BuildAndQuery<T>(IEnumerable<TheOneQuery<T>> queries) where T : TheOneObject
         {
-            return ServiceHub.ConstructAndQuery<T, MoralisUser>(queries);
+            return ServiceHub.ConstructAndQuery<T, TUser>(queries);
         }
-        
+
         /// <summary>
         /// Constructs a query that is the or of the given queries.
         /// </summary>
-        /// <typeparam name="T">The type of MoralisObject being queried.</typeparam>
+        /// <typeparam name="T">The type of TheOneObject being queried.</typeparam>
         /// <param name="source">An initial query to 'or' with additional queries.</param>
-        /// <param name="queries">The list of MoralisQueries to 'or' together.</param>
+        /// <param name="queries">The list of TheOneQueries to 'or' together.</param>
         /// <returns>A query that is the or of the given queries.</returns>
-        public MoralisQuery<T> BuildOrQuery<T>(MoralisQuery<T> source, params MoralisQuery<T>[] queries) where T : MoralisObject
+        public TheOneQuery<T> BuildOrQuery<T>(TheOneQuery<T> source, params TheOneQuery<T>[] queries) where T : TheOneObject
         {
-            return ServiceHub.ConstructOrQuery<T, MoralisUser>(source, queries);
+            return ServiceHub.ConstructOrQuery<T, TUser>(source, queries);
         }
 
         /// <summary>
@@ -291,23 +297,23 @@ namespace MoralisUnity
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="serviceHub"></param>
-        /// <param name="queries">The list of MoralisQueries to 'and' together.</param>
-        /// <returns>A MoralisQquery that is the 'or' of the passed in queries.</returns>
-        public MoralisQuery<T> BuildOrQuery<T>(IEnumerable<MoralisQuery<T>> queries) where T : MoralisObject
+        /// <param name="queries">The list of TheOneQueries to 'and' together.</param>
+        /// <returns>A TheOneQquery that is the 'or' of the passed in queries.</returns>
+        public TheOneQuery<T> BuildOrQuery<T>(IEnumerable<TheOneQuery<T>> queries) where T : TheOneObject
         {
-            return ServiceHub.ConstructOrQuery<T, MoralisUser>(queries);
+            return ServiceHub.ConstructOrQuery<T, TUser>(queries);
         }
 
         /// <summary>
         /// Constructs a query that is the nor of the given queries.
         /// </summary>
-        /// <typeparam name="T">The type of MoralisObject being queried.</typeparam>
+        /// <typeparam name="T">The type of TheOneObject being queried.</typeparam>
         /// <param name="source">An initial query to 'or' with additional queries.</param>
-        /// <param name="queries">The list of MoralisQueries to 'or' together.</param>
+        /// <param name="queries">The list of TheOneQueries to 'or' together.</param>
         /// <returns>A query that is the nor of the given queries.</returns>
-        public MoralisQuery<T> BuildNorQuery<T>(MoralisQuery<T> source, params MoralisQuery<T>[] queries) where T : MoralisObject
+        public TheOneQuery<T> BuildNorQuery<T>(TheOneQuery<T> source, params TheOneQuery<T>[] queries) where T : TheOneObject
         {
-            return ServiceHub.ConstructNorQuery<T, MoralisUser>(source, queries);
+            return ServiceHub.ConstructNorQuery<T, TUser>(source, queries);
         }
 
         /// <summary>
@@ -315,20 +321,20 @@ namespace MoralisUnity
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="serviceHub"></param>
-        /// <param name="queries">The list of MoralisQueries to 'and' together.</param>
-        /// <returns>A MoralisQquery that is the 'nor' of the passed in queries.</returns>
-        public MoralisQuery<T> BuildNorQuery<T>(IEnumerable<MoralisQuery<T>> queries) where T : MoralisObject
+        /// <param name="queries">The list of TheOneQueries to 'and' together.</param>
+        /// <returns>A TheOneQquery that is the 'nor' of the passed in queries.</returns>
+        public TheOneQuery<T> BuildNorQuery<T>(IEnumerable<TheOneQuery<T>> queries) where T : TheOneObject
         {
-            return ServiceHub.ConstructNorQuery<T, MoralisUser>(queries);
+            return ServiceHub.ConstructNorQuery<T, TUser>(queries);
         }
 
         /// <summary>
-        /// Deletes target object from the Moralis database.
+        /// Deletes target object from the TheOne database.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="target"></param>
         /// <returns></returns>
-        public UniTask DeleteAsync<T>(T target) where T : MoralisObject
+        public UniTask DeleteAsync<T>(T target) where T : TheOneObject
         {
             return target.DeleteAsync();
         }
@@ -350,13 +356,14 @@ namespace MoralisUnity
         /// </summary>
         public static HostManifestData ManifestData
         {
-            get => ServiceHub<MoralisUser>.ManifestData;
+            get => ServiceHub<TUser>.ManifestData;
             set
             {
-                ServiceHub<MoralisUser>.ManifestData = value;
-                MutableServiceHub<MoralisUser>.ManifestData = value;
+                ServiceHub<TUser>.ManifestData = value;
+                MutableServiceHub<TUser>.ManifestData = value;
             }
         }
     }
-}
 
+
+}

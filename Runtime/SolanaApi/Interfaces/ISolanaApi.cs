@@ -1,5 +1,5 @@
 ﻿
-namespace MoralisUnity.SolanaApi.Interfaces
+namespace TheOneUnity.SolanaApi.Interfaces
 {
     public interface ISolanaApi
     {

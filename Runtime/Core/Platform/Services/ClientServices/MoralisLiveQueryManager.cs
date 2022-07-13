@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Queries;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Queries;
 
-namespace MoralisUnity.Platform.Services.ClientServices
+namespace TheOneUnity.Platform.Services.ClientServices
 {
-    public class MoralisLiveQueryManager : ILiveQueryService
+    public class TheOneLiveQueryManager : ILiveQueryService
     {
         private List<ILiveQueryClient> clients = new List<ILiveQueryClient>();
 
-        private static MoralisLiveQueryManager instance = new MoralisLiveQueryManager();
+        private static TheOneLiveQueryManager instance = new TheOneLiveQueryManager();
 
-        private MoralisLiveQueryManager() { }
+        private TheOneLiveQueryManager() { }
         /// <summary>
         /// Adds a live query subscription to the service
         /// </summary>
@@ -86,10 +86,10 @@ namespace MoralisUnity.Platform.Services.ClientServices
         /// <param name="callbacks"></param>
         /// <param name="sessionToken"></param>
         /// <param name="installationId"></param>
-        /// <returns>MoralisLiveQueryClient<T</returns>
-        public static MoralisLiveQueryClient<T> CreateSubscription<T>(MoralisQuery<T> query, IServerConnectionData connectionData, ILiveQueryCallbacks<T> callbacks, IJsonSerializer jsonSerializer, string sessionToken = null, string installationId = null) where T : MoralisObject
+        /// <returns>TheOneLiveQueryClient<T</returns>
+        public static TheOneLiveQueryClient<T> CreateSubscription<T>(TheOneQuery<T> query, IServerConnectionData connectionData, ILiveQueryCallbacks<T> callbacks, IJsonSerializer jsonSerializer, string sessionToken = null, string installationId = null) where T : TheOneObject
         {
-            MoralisLiveQueryClient<T> client = new MoralisLiveQueryClient<T>(query, connectionData, callbacks, sessionToken, installationId);
+            TheOneLiveQueryClient<T> client = new TheOneLiveQueryClient<T>(query, connectionData, callbacks, sessionToken, installationId);
             instance.AddSubscription(client);
 
             return client;

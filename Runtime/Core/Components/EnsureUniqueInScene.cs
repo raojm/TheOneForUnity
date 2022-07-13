@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MoralisUnity.Sdk.Components
+namespace TheOneUnity.Sdk.Components
 {
     /// <summary>
     /// Some workflows allow too many components too

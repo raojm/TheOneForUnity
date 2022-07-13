@@ -1,9 +1,9 @@
-﻿using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Queries.Live;
+﻿using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Queries.Live;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
-    public interface ILiveQueryCallbacks<T> where T : MoralisObject
+    public interface ILiveQueryCallbacks<T> where T : TheOneObject
     {
         /// <summary>
         /// Called when a connected event is returned from the server.

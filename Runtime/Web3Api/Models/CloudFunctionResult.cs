@@ -4,7 +4,7 @@ using System.Text;
 using Newtonsoft.Json;
 using UnityEngine.Scripting;
 
-namespace MoralisUnity.Web3Api.Models
+namespace TheOneUnity.Web3Api.Models
 {
     public class CloudFunctionResult<T>
     {

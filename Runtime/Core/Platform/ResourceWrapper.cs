@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoralisUnity.Platform
+namespace TheOneUnity.Platform
 {
     public class ResourceWrapper
     {

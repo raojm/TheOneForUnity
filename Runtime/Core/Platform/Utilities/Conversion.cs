@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MoralisUnity.Platform.Utilities
+namespace TheOneUnity.Platform.Utilities
 {
 
     /// <summary>

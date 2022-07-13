@@ -1,8 +1,8 @@
-﻿using MoralisUnity.Platform.Services.Infrastructure;
-using MoralisUnity.Platform.Abstractions;
-using MoralisUnity.Platform.Objects;
+﻿using TheOneUnity.Platform.Services.Infrastructure;
+using TheOneUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Services
+namespace TheOneUnity.Platform.Services
 {
     /// <summary>
     /// An <see cref="IServiceHubMutator"/> implementation which changes the <see cref="IServiceHub{TUser}.CacheController"/>'s <see cref="IDiskFileCacheService.AbsoluteCacheFilePath"/> if available.
@@ -24,7 +24,7 @@ namespace MoralisUnity.Platform.Services
         /// </summary>
         /// <param name="target"><inheritdoc/></param>
         /// <param name="composedHub"><inheritdoc/></param>
-        public void Mutate<TUser>(ref IMutableServiceHub<TUser> target, in IServiceHub<TUser> composedHub) where TUser : MoralisUser
+        public void Mutate<TUser>(ref IMutableServiceHub<TUser> target, in IServiceHub<TUser> composedHub) where TUser : TheOneUser
         {
             if ((target as IServiceHub<TUser>).CacheService is IDiskFileCacheService { } diskFileCacheController)
             {

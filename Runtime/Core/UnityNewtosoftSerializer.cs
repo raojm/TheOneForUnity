@@ -3,12 +3,12 @@
  *  Descriptiontion: Class that wraps json serialization routione. Since Unity supports
  *                   multiple versions of Newtonsoft this class wraps the Newtonsoft library
  *                   installed in this Unity instance so that it can be passed to and used
- *                   internally in Moralis.
- *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+ *                   internally in TheOne.
+ *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich
  *  
  *  MIT License
  *  
- *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  Copyright (c) 2021 TheOne Web3 Technology AB, 559307-5988
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -29,16 +29,16 @@
  *  SOFTWARE.
  */
 using System.Collections.Generic;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 using Newtonsoft.Json;
 
 #if UNITY_WEBGL
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     /// <summary>
     /// Defines a Newtonsoft wrapper around the Unity specific Newtonsoft library so that is
-    /// can be passed into Moralis.
+    /// can be passed into TheOne.
     /// </summary>
     public class UnityNewtosoftSerializer : IJsonSerializer
     {
@@ -91,11 +91,11 @@ namespace MoralisUnity
 }
 #else
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     /// <summary>
     /// Defines a Newtonsoft wrapper around the Unity specific Newtonsoft library so that is
-    /// can be passed into Moralis.
+    /// can be passed into TheOne.
     /// </summary>
     public class UnityNewtosoftSerializer : IJsonSerializer
     {

@@ -1,10 +1,10 @@
-﻿using MoralisUnity.SolanaApi.Api;
-using MoralisUnity.SolanaApi.Interfaces;
+﻿using TheOneUnity.SolanaApi.Api;
+using TheOneUnity.SolanaApi.Interfaces;
 
-namespace MoralisUnity.SolanaApi.Client
+namespace TheOneUnity.SolanaApi.Client
 {
     /// <summary>
-    /// Provides a wrapper class around the Moralis Web3Api REST service. 
+    /// Provides a wrapper class around the TheOne Web3Api REST service. 
     /// Automagically initializes client to use standard server or
     /// personal server Cloud Function API based on use of Api Key.
     /// </summary>

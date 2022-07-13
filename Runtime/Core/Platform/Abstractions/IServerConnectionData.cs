@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     public interface IServerConnectionData
     {
@@ -10,12 +10,12 @@ namespace MoralisUnity.Platform.Abstractions
         string ApplicationID { get; set; }
 
         /// <summary>
-        /// A URI pointing to the target Moralis Server instance hosting the app targeted by <see cref="ApplicationID"/>.
+        /// A URI pointing to the target TheOne Server instance hosting the app targeted by <see cref="ApplicationID"/>.
         /// </summary>
         string ServerURI { get; set; }
 
         /// <summary>
-        /// A URI pointing to the target Moralis WS/WSS server.
+        /// A URI pointing to the target TheOne WS/WSS server.
         /// </summary>
         string LiveQueryServerURI { get; set; }
 
@@ -26,12 +26,12 @@ namespace MoralisUnity.Platform.Abstractions
         string ApiKey { get; set; }
 
         /// <summary>
-        /// The .NET Key for the Moralis app targeted by <see cref="ServerURI"/>.
+        /// The .NET Key for the TheOne app targeted by <see cref="ServerURI"/>.
         /// </summary>
         string Key { get; set; }
 
         /// <summary>
-        /// The Master Key for the Moralis app targeted by <see cref="Key"/>.
+        /// The Master Key for the TheOne app targeted by <see cref="Key"/>.
         /// </summary>
         string MasterKey { get; set; }
 

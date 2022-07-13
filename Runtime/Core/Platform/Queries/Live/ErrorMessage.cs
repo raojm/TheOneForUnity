@@ -1,5 +1,5 @@
 ﻿
-namespace MoralisUnity.Platform.Queries.Live
+namespace TheOneUnity.Platform.Queries.Live
 {
     public class ErrorMessage : QueryEventMessage
     {

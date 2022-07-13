@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Reflection;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 
-namespace MoralisUnity.Platform
+namespace TheOneUnity.Platform
 {
     /// <summary>
-    /// In the event that you would like to use the Moralis SDK
+    /// In the event that you would like to use the TheOne SDK
     /// from a completely portable project, with no platform-specific library required,
     /// to get full access to all of our features available on Parse Dashboard
     /// (A/B testing, slow queries, etc.), you must set the values of this struct

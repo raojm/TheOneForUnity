@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-namespace MoralisUnity.Sdk.Exceptions
+namespace TheOneUnity.Sdk.Exceptions
 {
     /// <summary>
     /// Thrown when changing from/to unacceptable values.

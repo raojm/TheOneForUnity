@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace MoralisUnity.Platform.Objects
+namespace TheOneUnity.Platform.Objects
 {
-    public class MoralisFileState
+    public class TheOneFileState
     {
         static string SecureHyperTextTransferScheme { get; } = "https";
 
@@ -10,7 +10,7 @@ namespace MoralisUnity.Platform.Objects
         public string mediatype { get; set; }
         public Uri url { get; set; }
 
-        public MoralisFileState() { }
+        public TheOneFileState() { }
 
         public Uri SecureLocation => url switch
         {

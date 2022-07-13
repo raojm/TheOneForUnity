@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
-using MoralisUnity.SolanaApi.Models;
+using TheOneUnity.SolanaApi.Models;
 
-namespace MoralisUnity.SolanaApi.Interfaces
+namespace TheOneUnity.SolanaApi.Interfaces
 {
     public interface INftApi
     {

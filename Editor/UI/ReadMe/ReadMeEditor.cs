@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace MoralisUnity.Sdk.UI.ReadMe
+namespace TheOneUnity.Sdk.UI.ReadMe
 {
 	/// <summary>
 	/// Format a ReadMe for prettyfied viewing in the Unity Inspector

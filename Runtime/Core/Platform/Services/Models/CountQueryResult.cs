@@ -1,5 +1,5 @@
 ﻿
-namespace MoralisUnity.Platform.Services.Models
+namespace TheOneUnity.Platform.Services.Models
 {
     internal class CountQueryResult
     {

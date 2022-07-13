@@ -2,9 +2,9 @@ using System;
 using Status = System.Net.HttpStatusCode;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
-using MoralisUnity.SolanaApi.Models;
+using TheOneUnity.SolanaApi.Models;
 
-namespace MoralisUnity.SolanaApi.Interfaces
+namespace TheOneUnity.SolanaApi.Interfaces
 {
     public interface IWebClient
     {

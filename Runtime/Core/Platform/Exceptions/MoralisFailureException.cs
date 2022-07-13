@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace MoralisUnity.Platform.Exceptions
+namespace TheOneUnity.Platform.Exceptions
 {
     /// <summary>
-    /// Exceptions that may occur when sending requests to Moralis.
+    /// Exceptions that may occur when sending requests to TheOne.
     /// </summary>
-    public class MoralisFailureException : Exception
+    public class TheOneFailureException : Exception
     {
         /// <summary>
-        /// Error codes that may be delivered in response to requests to Moralis.
+        /// Error codes that may be delivered in response to requests to TheOne.
         /// </summary>
         public enum ErrorCode
         {
@@ -20,7 +20,7 @@ namespace MoralisUnity.Platform.Exceptions
 
             /// <summary>
             /// Error code indicating that something has gone wrong with the server.
-            /// If you get this error code, it is Moralis' fault. Please report the bug.
+            /// If you get this error code, it is TheOne' fault. Please report the bug.
             /// </summary>
             InternalServerError = 1,
 
@@ -78,7 +78,7 @@ namespace MoralisUnity.Platform.Exceptions
             CommandUnavailable = 108,
 
             /// <summary>
-            /// You must call Moralis.initialize before using the Moralis library.
+            /// You must call TheOne.initialize before using the TheOne library.
             /// </summary>
             NotInitialized = 109,
 
@@ -266,7 +266,7 @@ namespace MoralisUnity.Platform.Exceptions
             ServerUrlNullOrEmtpy = 301
         }
 
-        internal MoralisFailureException(ErrorCode code, string message, Exception cause = null) : base(message, cause) => Code = code;
+        internal TheOneFailureException(ErrorCode code, string message, Exception cause = null) : base(message, cause) => Code = code;
 
         /// <summary>
         /// The error code associated with the exception.

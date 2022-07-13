@@ -1,11 +1,11 @@
 ﻿/**
  *           Module: EvmContractItem.cs
  *  Descriptiontion: Class that wraps a list on Nethereum contract instances by chain
- *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+ *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich
  *  
  *  MIT License
  *  
- *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  Copyright (c) 2021 TheOne Web3 Technology AB, 559307-5988
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -27,14 +27,14 @@
  */
 using System;
 using System.Collections.Generic;
-using MoralisUnity;
+using TheOneUnity;
 
 #if !UNITY_WEBGL
 
 using Nethereum.Contracts;
 using Nethereum.Web3;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     /// <summary>
     /// Wraps a list on Nethereum contract instances by chain

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MoralisUnity.Kits.AuthenticationKit
+namespace TheOneUnity.Kits.AuthenticationKit
 {
     /// <summary>
     /// List of possible states of the <see cref="AuthenticationKit"/>.
@@ -15,8 +15,8 @@ namespace MoralisUnity.Kits.AuthenticationKit
         WalletConnected,
         WalletSigning,
         WalletSigned,
-        MoralisLoggingIn,
-        MoralisLoggedIn,
+        TheOneLoggingIn,
+        TheOneLoggedIn,
         Disconnecting,
         Disconnected
     }

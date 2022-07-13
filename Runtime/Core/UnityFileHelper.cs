@@ -3,11 +3,11 @@
 *           Module: UnityFileHelper.cs
 *  Descriptiontion: Class that provides some functions for working with 
 *                   files in a Unity project.
-*           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+*           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich
 *  
 *  MIT License
 *  
-*  Copyright (c) 2022 Moralis Web3 Technology AB, 559307-5988
+*  Copyright (c) 2022 TheOne Web3 Technology AB, 559307-5988
 *  
 *  Permission is hereby granted, free of charge, to any person obtaining a copy
 *  of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ using System;
 using System.IO;
 using UnityEditor;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     public class UnityFileHelper
     {
@@ -69,16 +69,16 @@ namespace MoralisUnity
         }
 
         /// <summary>
-        /// Finds the Moralis asset folder. Something like Assets/Moralis Web3 Unity SDK/Resources/
+        /// Finds the TheOne asset folder. Something like Assets/TheOne Web3 Unity SDK/Resources/
         /// </summary>
-        /// <returns>The Moralis asset folder.</returns>
-        public static string FindMoralisAssetFolder()
+        /// <returns>The TheOne asset folder.</returns>
+        public static string FindTheOneAssetFolder()
         {
-            string path = FindPathFromAsset("MoralisServerSettings", "Moralis Web3 Unity SDK");
+            string path = FindPathFromAsset("TheOneServerSettings", "TheOne Web3 Unity SDK");
 
             if (String.IsNullOrEmpty(path))
             {
-                return "Assets/Moralis Web3 Unity SDK/Resources/";
+                return "Assets/TheOne Web3 Unity SDK/Resources/";
             }
             else 
             {
@@ -90,13 +90,13 @@ namespace MoralisUnity
         /// 
         /// </summary>
         /// <returns></returns>
-        public static string FindMoralisEditorFolder()
+        public static string FindTheOneEditorFolder()
         {
-            string path = FindPathFromAsset("MoralisWeb3SdkEditor", "Editor", "MoralisWeb3SdkEditor.cs");
+            string path = FindPathFromAsset("TheOneWeb3SdkEditor", "Editor", "TheOneWeb3SdkEditor.cs");
 
             if (String.IsNullOrEmpty(path))
             {
-                return "Assets/Moralis Web3 Unity SDK/Resources/";
+                return "Assets/TheOne Web3 Unity SDK/Resources/";
             }
             else
             {

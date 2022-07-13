@@ -1,13 +1,13 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     /// <summary>
-    /// The dependency injection container for all internal .NET Moralis SDK services.
+    /// The dependency injection container for all internal .NET TheOne SDK services.
     /// </summary>
-    public interface IServiceHub <TUser> where TUser : MoralisUser
+    public interface IServiceHub <TUser> where TUser : TheOneUser
     {
         /// <summary>
         /// If true when an object is requested to be saved it is always saved regardless of if it was
@@ -16,7 +16,7 @@ namespace MoralisUnity.Platform.Abstractions
         bool AlwaysSave { get; set; }
 
         /// <summary>
-        /// The current server connection data that the the Moralis SDK has been initialized with.
+        /// The current server connection data that the the TheOne SDK has been initialized with.
         /// </summary>
         IServerConnectionData ServerConnectionData { get; }
         IMetadataService MetadataService { get; }
@@ -30,7 +30,7 @@ namespace MoralisUnity.Platform.Abstractions
         ICacheService CacheService { get; }
 
         IInstallationService InstallationService{ get; }
-        IMoralisCommandRunner CommandRunner { get; }
+        ITheOneCommandRunner CommandRunner { get; }
 
         ICloudFunctionService CloudFunctionService { get; }
 
@@ -41,7 +41,7 @@ namespace MoralisUnity.Platform.Abstractions
         IUserService<TUser> UserService { get; }
         ICurrentUserService<TUser> CurrentUserService { get; }
 
-        T Create<T>(object[] parameters) where T : MoralisObject;
+        T Create<T>(object[] parameters) where T : TheOneObject;
 
     }
 }

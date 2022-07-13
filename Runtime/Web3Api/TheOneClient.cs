@@ -1,28 +1,28 @@
 ﻿using System;
-using MoralisUnity.Web3Api.Client;
+using TheOneUnity.Web3Api.Client;
 
-namespace MoralisUnity.Web3Api
+namespace TheOneUnity.Web3Api
 {
     /// <summary>
-    /// Provides an easy to wrapper around the Moralis Web3Api REST services.
+    /// Provides an easy to wrapper around the TheOne Web3Api REST services.
     /// </summary>
-    public class MoralisClient
+    public class TheOneClient
     {
         Web3ApiClient client = new Web3ApiClient();
 
-        static MoralisClient instance = new MoralisClient();
+        static TheOneClient instance = new TheOneClient();
 
-        private MoralisClient() { }
+        private TheOneClient() { }
 
         /// <summary>
-        /// Initialize Moralis Web3API. Use this to initialize to your personal 
-        /// Moralis server. Major advantage is api key is supplied 
+        /// Initialize TheOne Web3API. Use this to initialize to your personal 
+        /// TheOne server. Major advantage is api key is supplied 
         /// </summary>
         /// <param name="url"></param>
         public static void Initialize(string url) => instance.client.Initialize(url);
 
         /// <summary>
-        /// Initialize Moralis Web3API. 
+        /// Initialize TheOne Web3API. 
         /// </summary>
         /// <param name="useStandardServer">If true enforces use of the standard REST server</param>
         /// <param name="apiKey">Required if useStandardServer is true</param>
@@ -36,13 +36,13 @@ namespace MoralisUnity.Web3Api
         }
 
         /// <summary>
-        /// Gets the Web3ApiClient instance. Moralis.Initialize must be called first.
-        /// If Moralis is not initialized this will throw an ApiException.
+        /// Gets the Web3ApiClient instance. TheOne.Initialize must be called first.
+        /// If TheOne is not initialized this will throw an ApiException.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when Moralis.Initialize has not been called.</exception>
+        /// <exception cref="ApiException">Thrown when TheOne.Initialize has not been called.</exception>
         public static Web3ApiClient Web3Api
         {
-            get => instance.client.IsInitialized ? instance.client : throw new ApiException(109, "Moralis must be initialized before use.");
+            get => instance.client.IsInitialized ? instance.client : throw new ApiException(109, "TheOne must be initialized before use.");
         }
     }
 }

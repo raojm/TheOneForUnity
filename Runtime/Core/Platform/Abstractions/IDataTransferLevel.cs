@@ -1,4 +1,4 @@
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     public interface IDataTransferLevel
     {

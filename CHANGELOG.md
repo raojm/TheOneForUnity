@@ -11,12 +11,12 @@ Always do a full authentication cycle (Connecting,Signing,GetUser) There current
 - Fixed UnityWebRequest memory leaks
 - Fixed WebSocket.jslib naming conflict with Photon
 - Improved menu items for better exposure of the AuthenticationKit
-- Issue #125 Update MoralisUserService to send signin with username/password from GET to POST
+- Issue #125 Update TheOneUserService to send signin with username/password from GET to POST
 
 ## 1.2.2 (2022-06-20)
-- Issue #64 BUG: MoralisLiveQueryController logs runtime warning
+- Issue #64 BUG: TheOneLiveQueryController logs runtime warning
 - Issue #104 No Response When obj.SaveAsync() Fails
-- Issue #105 MoralisWeb3SdkEditor Spelling error in Warning Message
+- Issue #105 TheOneWeb3SdkEditor Spelling error in Warning Message
 - Issue #107 WebGL - Multiple Livequeries Does not connect
 ```
 The requestId was not being updated properly for WebGL so connections created close together had the same requestId in WebGL.
@@ -36,12 +36,12 @@ The requestId was not being updated properly for WebGL so connections created cl
 ```
 The Web3Api Token Endpoint is missing the SyncNftContract and ResyncMetadata oppperations
 ```
-- Issue #87 MoralisUser Should be Fully Functional Using Default Constructor
+- Issue #87 TheOneUser Should be Fully Functional Using Default Constructor
 ```
-Update MoralisObject so that MoralisUser and other objects derived from MoralisObject are
+Update TheOneObject so that TheOneUser and other objects derived from TheOneObject are
 fully function when an instance is created from the default constructor when in a Unity context
 
-_MoralisUser user = new MoralisUser();_ now is the same as _MoralisUser user = Moralis.Create<MoralisUser>();_
+_TheOneUser user = new TheOneUser();_ now is the same as _TheOneUser user = TheOne.Create<TheOneUser>();_
 ```
 
 - Issue #88 TaskQueue Causes Unexpected Behavior but is No Longer Needed
@@ -52,8 +52,8 @@ When _user.SignUpAsync()_ is called, if _user.LogInAsync()_ is called immediatel
 - Issue #89 Cronos Integration - Added support for Cronos chain.
 
 ## 1.2.0 (2022-04-19)
-- Changed namespace from MoralisWeb3ApiSdk to MoralisUnity
-- Package now is visible in the Unity Editor as Moralis Web3 Unity SDK
+- Changed namespace from TheOneWeb3ApiSdk to TheOneUnity
+- Package now is visible in the Unity Editor as TheOne Web3 Unity SDK
 - No need to set the Allow unsafe code in the project. This now gets handled in the new Assembly Definitions
 - Removed all the Unity specific code from the Dotnet SDK and moved it to the Runtime/Core folder
 - All external libraries are now under the Runtime/External folder
@@ -98,20 +98,20 @@ When _user.SignUpAsync()_ is called, if _user.LogInAsync()_ is called immediatel
 - Issue #43 - Authentication - retrieve and add server time to authentication message.
 
 ## 1.0.4 (2022-02-08)
-- Issue #19 - Moralis User and Moralis Object both have a session token property
-- Issue #23 - Moralis Web3Api (non WebGl) API Clients are not Asynchronous. 
+- Issue #19 - TheOne User and TheOne Object both have a session token property
+- Issue #23 - TheOne Web3Api (non WebGl) API Clients are not Asynchronous. 
 - Issue #25 - iOS XCODE Update Causes Build Error 
 - Issue #27 - Create Object Does Not Set ClassName 
-- Issue #31 - Integrate SolanaAPI into Moralis / Unity SDK 
-- Issue #34 - Null ObjectService in MoralisObjects loaded via Query 
+- Issue #31 - Integrate SolanaAPI into TheOne / Unity SDK 
+- Issue #34 - Null ObjectService in TheOneObjects loaded via Query 
 
 ## 1.0.3 (2022-01-21)
 - Wallet Connect Update Integration - fixes iOS and Android sign issues with Wallet Connect.
 - Nethereum integration - Include wallet connect / NEthereum library to support changing chain state in game.
 - Fix FileSave method, WebGL - Under WebGL the FileSave uri for the backend was incorrect, corrected this.
 - Issue #10 - HttpUtility does not exist in current context
-- Issue #13 - Moralis Client Delete Method not Implemented
-- Issue #14 - Moralis Object DeleteAsync not Implemented
+- Issue #13 - TheOne Client Delete Method not Implemented
+- Issue #14 - TheOne Object DeleteAsync not Implemented
 - Issue #17 - Wallet Connect Unity, move dependencies
 - Issue #18 - Wallet Connect duplicate files
 - Add Gif Decoder
@@ -132,5 +132,5 @@ When _user.SignUpAsync()_ is called, if _user.LogInAsync()_ is called immediatel
 ## 1.0.0 (2021-12-08)
 - Re-layout whole project to group the assets into a format  recommened for a Unity Asset Package.
 - Update .gitignore to ignoe Unity .meta files and Unity .log files.
-- Update Moralis.Web3Api AccountApi to integrate scheme correction that fixes the return type.
+- Update TheOne.Web3Api AccountApi to integrate scheme correction that fixes the return type.
 - Update README to reflect the Web3Api changes and use of the Unity Asset Package.

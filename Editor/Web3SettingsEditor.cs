@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using System.IO;
-using MoralisUnity.Sdk.Constants;
+using TheOneUnity.Sdk.Constants;
 
-namespace MoralisUnity.Editor
+namespace TheOneUnity.Editor
 {
     public class Web3SettingsEditor : EditorWindow
     {
@@ -25,7 +25,7 @@ namespace MoralisUnity.Editor
         /// <summary>
         /// Menu show event - displays the setup window when menu selection made.
         /// </summary>
-        [MenuItem( MoralisConstants.PathMoralisWindowMenu + "/" + MoralisConstants.Open + " " + "Web3 Request Settings", false, 15 )]
+        [MenuItem( TheOneConstants.PathTheOneWindowMenu + "/" + TheOneConstants.Open + " " + "Web3 Request Settings", false, 15 )]
         public static void ShowWindow()
         {
             var window = GetWindow<Web3SettingsEditor>();
@@ -42,7 +42,7 @@ namespace MoralisUnity.Editor
         // unity 5.3 changes the usecase for SetDirty(). but here we don't modify a scene object! so it's ok to use
         private static void SaveSettings()
         {
-            EditorUtility.SetDirty(MoralisSettings.MoralisData);
+            EditorUtility.SetDirty(TheOneSettings.TheOneData);
         }
 
         /// <summary>
@@ -54,17 +54,17 @@ namespace MoralisUnity.Editor
             {
                 // Only draw once
                 windowDrawn = true;
-                string moralisEditorwindowPath = UnityFileHelper.FindMoralisEditorFolder();
+                string moralisEditorwindowPath = UnityFileHelper.FindTheOneEditorFolder();
 
-                if (MoralisSettings.MoralisData == null)
+                if (TheOneSettings.TheOneData == null)
                 {
                     // Just in case moralisData has not been loaded, handle it here.
-                    MoralisSettings.LoadOrCreateSettings();
+                    TheOneSettings.LoadOrCreateSettings();
                 }
 
                 rootElement = rootVisualElement;
                 
-                bool mdLoaded = MoralisSettings.MoralisData != null;
+                bool mdLoaded = TheOneSettings.TheOneData != null;
 
                 // Loads the page definition.
                 VisualTreeAsset original = AssetDatabase
@@ -83,7 +83,7 @@ namespace MoralisUnity.Editor
 
                 // Load stylsheet
                 StyleSheet styleSheet = AssetDatabase
-                    .LoadAssetAtPath<StyleSheet>(moralisEditorwindowPath + "MoralisWeb3SdkEditorStyles.uss");
+                    .LoadAssetAtPath<StyleSheet>(moralisEditorwindowPath + "TheOneWeb3SdkEditorStyles.uss");
                 // Apply stylesheet root element.
                 rootVisualElement.styleSheets.Add(styleSheet);
 
@@ -99,43 +99,43 @@ namespace MoralisUnity.Editor
 
                 #region TextField Values Setup
                 var DappNameField = rootVisualElement.Q<TextField>("DappNameField");
-                DappNameField.SetValueWithoutNotify(MoralisSettings.MoralisData.DappName);
+                DappNameField.SetValueWithoutNotify(TheOneSettings.TheOneData.DappName);
                 DappNameField.RegisterValueChangedCallback(evt =>
                 {
-                    MoralisSettings.MoralisData.DappName = evt.newValue;
+                    TheOneSettings.TheOneData.DappName = evt.newValue;
                     SaveSettings();
                 });
 
                 var DappDescriptionField = rootVisualElement.Q<TextField>("DappDescriptionField");
-                DappDescriptionField.SetValueWithoutNotify(MoralisSettings.MoralisData.DappDescription);
+                DappDescriptionField.SetValueWithoutNotify(TheOneSettings.TheOneData.DappDescription);
                 DappDescriptionField.RegisterValueChangedCallback(evt =>
                 {
-                    MoralisSettings.MoralisData.DappDescription = evt.newValue;
+                    TheOneSettings.TheOneData.DappDescription = evt.newValue;
                     SaveSettings();
                 });
 
 
                 var DappVersionField = rootVisualElement.Q<TextField>("DappVersionField");
-                DappVersionField.SetValueWithoutNotify(MoralisSettings.MoralisData.DappVersion);
+                DappVersionField.SetValueWithoutNotify(TheOneSettings.TheOneData.DappVersion);
                 DappVersionField.RegisterValueChangedCallback(evt =>
                 {
-                    MoralisSettings.MoralisData.DappVersion = evt.newValue;
+                    TheOneSettings.TheOneData.DappVersion = evt.newValue;
                     SaveSettings();
                 });
 
                 var DappWebsiteUrlField = rootVisualElement.Q<TextField>("DappWebsiteUrlField");
-                DappWebsiteUrlField.SetValueWithoutNotify(MoralisSettings.MoralisData.DappWebsiteUrl);
+                DappWebsiteUrlField.SetValueWithoutNotify(TheOneSettings.TheOneData.DappWebsiteUrl);
                 DappWebsiteUrlField.RegisterValueChangedCallback(evt =>
                 {
-                    MoralisSettings.MoralisData.DappWebsiteUrl = evt.newValue;
+                    TheOneSettings.TheOneData.DappWebsiteUrl = evt.newValue;
                     SaveSettings();
                 });
 
                 var DappIconUrlField = rootVisualElement.Q<TextField>("DappIconUrlField");
-                DappIconUrlField.SetValueWithoutNotify(MoralisSettings.MoralisData.DappIconUrl);
+                DappIconUrlField.SetValueWithoutNotify(TheOneSettings.TheOneData.DappIconUrl);
                 DappIconUrlField.RegisterValueChangedCallback(evt =>
                 {
-                    MoralisSettings.MoralisData.DappIconUrl = evt.newValue;
+                    TheOneSettings.TheOneData.DappIconUrl = evt.newValue;
                     SaveSettings();
                 });
                 #endregion

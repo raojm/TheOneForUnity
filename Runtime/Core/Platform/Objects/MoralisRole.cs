@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace MoralisUnity.Platform.Objects
+namespace TheOneUnity.Platform.Objects
 {
-    public class MoralisRole : MoralisObject
+    public class TheOneRole : TheOneObject
     {
         private static readonly Regex namePattern = new Regex("^[0-9a-zA-Z_\\- ]+$");
         private string roleName;
@@ -11,13 +11,13 @@ namespace MoralisUnity.Platform.Objects
         /// <summary>
         /// Default constructor
         /// </summary>
-        public MoralisRole() : base("_Role") { }
+        public TheOneRole() : base("_Role") { }
         /// <summary>
-        /// Constructs a new MoralisRole with the given name.
+        /// Constructs a new TheOneRole with the given name.
         /// </summary>
         /// <param name="name">The name of the role to create.</param>
         /// <param name="acl">The ACL for this role. Roles must have an ACL.</param>
-        public MoralisRole(string rolName, MoralisAcl acl) : this()
+        public TheOneRole(string rolName, TheOneAcl acl) : this()
         {
             name = roleName;
             ACL = acl;
@@ -46,21 +46,21 @@ namespace MoralisUnity.Platform.Objects
 
 
         /// <summary>
-        /// Gets the <see cref="Moralis{ParseUser}"/> for the <see cref="ParseUser"/>s that are
+        /// Gets the <see cref="TheOne{ParseUser}"/> for the <see cref="ParseUser"/>s that are
         /// direct children of this role. These users are granted any privileges that
         /// this role has been granted (e.g. read or write access through ACLs). You can
         /// add or remove child users from the role through this relation.
         /// </summary>
         //[JsonProperty("users")]
-        //public Moralis<MoralisUser> Users => GetRelationProperty<MoralisUser>("Users");
+        //public TheOne<TheOneUser> Users => GetRelationProperty<TheOneUser>("Users");
 
         /// <summary>
-        /// Gets the <see cref="Moralis{ParseRole}"/> for the <see cref="ParseRole"/>s that are
+        /// Gets the <see cref="TheOne{ParseRole}"/> for the <see cref="ParseRole"/>s that are
         /// direct children of this role. These roles' users are granted any privileges that
         /// this role has been granted (e.g. read or write access through ACLs). You can
         /// add or remove child roles from the role through this relation.
         /// </summary>
         //[JsonProperty("roles")]
-        //public Moralis<MoralisRole> Roles => GetRelationProperty<MoralisRole>("Roles");
+        //public TheOne<TheOneRole> Roles => GetRelationProperty<TheOneRole>("Roles");
     }
 }

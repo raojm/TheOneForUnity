@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace MoralisUnity.Web3Api.Models
+namespace TheOneUnity.Web3Api.Models
 {
     /// <summary>
     /// <code>IHttpRequest</code> is an interface that provides an API to execute HTTP request data.

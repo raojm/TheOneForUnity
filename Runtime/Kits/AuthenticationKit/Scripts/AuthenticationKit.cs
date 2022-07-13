@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Sdk.Exceptions;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Sdk.Exceptions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -12,10 +12,10 @@ using WalletConnectSharp.Unity;
 using WalletConnectSharp.Unity.Models;
 
 #pragma warning disable CS1998
-namespace MoralisUnity.Kits.AuthenticationKit
+namespace TheOneUnity.Kits.AuthenticationKit
 {
     /// <summary>
-    /// Moralis "kits" each provide drag-and-drop functionality for developers.
+    /// TheOne "kits" each provide drag-and-drop functionality for developers.
     /// Developers add a kit at edit-time to give additional runtime functionality for users.
     ///
     /// The "AuthenticationKit" provides cross-platform 
@@ -40,7 +40,7 @@ namespace MoralisUnity.Kits.AuthenticationKit
         //  Events ----------------------------------------
 
         /// <summary>
-        /// Invoked when State==AuthenticationKitState.MoralisLoggedIn
+        /// Invoked when State==AuthenticationKitState.TheOneLoggedIn
         /// </summary>
         [Header("Events")] public UnityEvent OnConnected = new UnityEvent();
 
@@ -119,11 +119,11 @@ namespace MoralisUnity.Kits.AuthenticationKit
         {
             State = AuthenticationKitState.Initializing;
 
-            // Initialize Moralis
-            Moralis.Start();
+            // Initialize TheOne
+            TheOne.Start();
             
             // Log out any old users so we do a full authentication cycle
-            await Moralis.LogOutAsync();
+            await TheOne.LogOutAsync();
 
             State = AuthenticationKitState.Initialized;
         }
@@ -209,7 +209,7 @@ namespace MoralisUnity.Kits.AuthenticationKit
             {
                 if (!Web3GL.IsConnected())
                 {
-                    await Moralis.SetupWeb3();
+                    await TheOne.SetupWeb3();
                     userAddr = Web3GL.Account();
                 }
                 else
@@ -235,20 +235,20 @@ namespace MoralisUnity.Kits.AuthenticationKit
             else 
             {
                 string address = Web3GL.Account().ToLower();
-                string appId = Moralis.DappId;
+                string appId = TheOne.DappId;
                 long serverTime = 0;
 
-                // Retrieve server time from Moralis Server for message signature
+                // Retrieve server time from TheOne Server for message signature
                 Dictionary<string, object> serverTimeResponse =
-                    await Moralis.Cloud.RunAsync<Dictionary<string, object>>("getServerTime", new Dictionary<string, object>());
+                    await TheOne.Cloud.RunAsync<Dictionary<string, object>>("getServerTime", new Dictionary<string, object>());
 
                 if (serverTimeResponse == null || !serverTimeResponse.ContainsKey("dateTime") ||
                     !long.TryParse(serverTimeResponse["dateTime"].ToString(), out serverTime))
                 {
-                    Debug.LogError("Failed to retrieve server time from Moralis Server!");
+                    Debug.LogError("Failed to retrieve server time from TheOne Server!");
                 }
 
-                string signMessage = $"Moralis Authentication\n\nId: {appId}:{serverTime}";
+                string signMessage = $"TheOne Authentication\n\nId: {appId}:{serverTime}";
                 
                 string signature = null;
                 
@@ -267,9 +267,9 @@ namespace MoralisUnity.Kits.AuthenticationKit
                 
                 State = AuthenticationKitState.WalletSigned;
 
-                State = AuthenticationKitState.MoralisLoggingIn;
+                State = AuthenticationKitState.TheOneLoggingIn;
                 
-                // Create Moralis auth data from message signing response.
+                // Create TheOne auth data from message signing response.
                 Dictionary<string, object> authData = new Dictionary<string, object>
                 {
                     { "id", address }, { "signature", signature }, { "data", signMessage }
@@ -279,11 +279,11 @@ namespace MoralisUnity.Kits.AuthenticationKit
                 int chainId = Web3GL.ChainId();
 
                 // Attempt to login user.
-                MoralisUser user = await Moralis.LogInAsync(authData, chainId);
+                TheOneUser user = await TheOne.LogInAsync(authData, chainId);
 
                 if (user != null)
                 {
-                    State = AuthenticationKitState.MoralisLoggedIn;
+                    State = AuthenticationKitState.TheOneLoggedIn;
                 }
             }
 #endif
@@ -323,14 +323,14 @@ namespace MoralisUnity.Kits.AuthenticationKit
         /// </summary>
         /// <param name="session"></param>
         /// <returns></returns>
-        private async void WalletConnect_SignAndLoginToMoralis(WalletConnectUnitySession session)
+        private async void WalletConnect_SignAndLoginToTheOne(WalletConnectUnitySession session)
         {
             // Debug.Log($"WalletConnect_OnConnectedEventSession() wcSessionData = {session}");
 
-            // If there is already a Moralis user we can skip the sign and login and go straight to connected
-            if (await Moralis.GetUserAsync() != null)
+            // If there is already a TheOne user we can skip the sign and login and go straight to connected
+            if (await TheOne.GetUserAsync() != null)
             {
-                State = AuthenticationKitState.MoralisLoggedIn;
+                State = AuthenticationKitState.TheOneLoggedIn;
                 return;
             }
 
@@ -338,20 +338,20 @@ namespace MoralisUnity.Kits.AuthenticationKit
 
             // Extract wallet address from the Wallet Connect Session data object.
             string address = session.Accounts[0].ToLower();
-            string appId = Moralis.DappId;
+            string appId = TheOne.DappId;
             long serverTime = 0;
 
-            // Retrieve server time from Moralis Server for message signature
-            Dictionary<string, object> serverTimeResponse = await Moralis.Cloud
+            // Retrieve server time from TheOne Server for message signature
+            Dictionary<string, object> serverTimeResponse = await TheOne.Cloud
                 .RunAsync<Dictionary<string, object>>("getServerTime", new Dictionary<string, object>());
 
             if (serverTimeResponse == null || !serverTimeResponse.ContainsKey("dateTime") ||
                 !long.TryParse(serverTimeResponse["dateTime"].ToString(), out serverTime))
             {
-                Debug.LogError("Failed to retrieve server time from Moralis Server!");
+                Debug.LogError("Failed to retrieve server time from TheOne Server!");
             }
 
-            string signMessage = $"Moralis Authentication\n\nId: {appId}:{serverTime}";
+            string signMessage = $"TheOne Authentication\n\nId: {appId}:{serverTime}";
 
             string signature = null;
 
@@ -369,20 +369,20 @@ namespace MoralisUnity.Kits.AuthenticationKit
 
             State = AuthenticationKitState.WalletSigned;
 
-            State = AuthenticationKitState.MoralisLoggingIn;
+            State = AuthenticationKitState.TheOneLoggingIn;
 
-            // Create Moralis auth data from message signing response.
+            // Create TheOne auth data from message signing response.
             Dictionary<string, object> authData = new Dictionary<string, object>
             {
                 { "id", address }, { "signature", signature }, { "data", signMessage }
             };
 
             // Attempt to login user.
-            MoralisUser user = await Moralis.LogInAsync(authData, session.ChainId);
+            TheOneUser user = await TheOne.LogInAsync(authData, session.ChainId);
 
             if (user != null)
             {
-                State = AuthenticationKitState.MoralisLoggedIn;
+                State = AuthenticationKitState.TheOneLoggedIn;
             }
         }
         
@@ -411,15 +411,15 @@ namespace MoralisUnity.Kits.AuthenticationKit
         }
 
         /// <summary>
-        /// Disconnect Moralis and WalletConnect.
+        /// Disconnect TheOne and WalletConnect.
         /// </summary>
         public async void Disconnect()
         {
             State = AuthenticationKitState.Disconnecting;
             try
             {
-                // Logout the Moralis User.
-                await Moralis.LogOutAsync();
+                // Logout the TheOne User.
+                await TheOne.LogOutAsync();
             }
             catch (Exception e)
             {
@@ -549,13 +549,13 @@ namespace MoralisUnity.Kits.AuthenticationKit
                         case AuthenticationKitPlatform.WalletConnect:
                             
                             // If the Wallet connection has been accepted first Setup Web3
-                            await Moralis.SetupWeb3();
+                            await TheOne.SetupWeb3();
                             
                             // If there is a Wallet connected and we got a session
-                            // try to Sign and Login to Moralis or else Disconnect and start over
+                            // try to Sign and Login to TheOne or else Disconnect and start over
                             if (_walletConnect.Session != null)
                             {
-                                WalletConnect_SignAndLoginToMoralis(_walletConnect.Session);
+                                WalletConnect_SignAndLoginToTheOne(_walletConnect.Session);
                             }
                             else
                             {
@@ -573,7 +573,7 @@ namespace MoralisUnity.Kits.AuthenticationKit
 
                     break;
 
-                case AuthenticationKitState.MoralisLoggedIn:
+                case AuthenticationKitState.TheOneLoggedIn:
 
                     // Invoke OnConnected event
                     OnConnected.Invoke();

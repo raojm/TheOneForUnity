@@ -1,6 +1,6 @@
-﻿using MoralisUnity.Platform.Objects;
+﻿using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     /// <summary>
     /// A class which makes a deliberate mutation to a service.
@@ -17,6 +17,6 @@ namespace MoralisUnity.Platform.Abstractions
         /// </summary>
         /// <param name="target">The target <see cref="IMutableServiceHub"/> implementation instance</param>
         /// <param name="composedHub">A hub which the <paramref name="target"/> is composed onto that should be used when <see cref="Mutate(ref IMutableServiceHub, in IServiceHub)"/> needs to access services.</param>
-        void Mutate<TUser>(ref IMutableServiceHub<TUser> target, in IServiceHub<TUser> composedHub) where TUser : MoralisUser;
+        void Mutate<TUser>(ref IMutableServiceHub<TUser> target, in IServiceHub<TUser> composedHub) where TUser : TheOneUser;
     }
 }

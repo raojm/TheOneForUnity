@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using MoralisUnity.Platform.Abstractions;
+using TheOneUnity.Platform.Abstractions;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Platform.Objects;
+using TheOneUnity.Platform.Objects;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     public interface IObjectService
     {
-        UniTask<T> FetchAsync<T>(T item, string sessionToken, CancellationToken cancellationToken = default) where T : MoralisObject;
+        UniTask<T> FetchAsync<T>(T item, string sessionToken, CancellationToken cancellationToken = default) where T : TheOneObject;
 
-        UniTask<string> SaveAsync(MoralisObject item, IDictionary<string, IMoralisFieldOperation> operations, string sessionToken, CancellationToken cancellationToken = default);
+        UniTask<string> SaveAsync(TheOneObject item, IDictionary<string, ITheOneFieldOperation> operations, string sessionToken, CancellationToken cancellationToken = default);
 
-        //IList<Task<T>> SaveAllAsync<T>(IList<IObjectState> states, IList<IDictionary<string, string sessionToken, IServiceHub<MoralisUser> serviceHub, CancellationToken cancellationToken = default) where T : MoralisObject;
+        //IList<Task<T>> SaveAllAsync<T>(IList<IObjectState> states, IList<IDictionary<string, string sessionToken, IServiceHub<TheOneUser> serviceHub, CancellationToken cancellationToken = default) where T : TheOneObject;
 
-        UniTask DeleteAsync(MoralisObject item, string sessionToken, CancellationToken cancellationToken = default);
+        UniTask DeleteAsync(TheOneObject item, string sessionToken, CancellationToken cancellationToken = default);
 
-        //IList<Task> DeleteAllAsync<T>(IList<T> items, string sessionToken, CancellationToken cancellationToken = default) where T : MoralisObject;
+        //IList<Task> DeleteAllAsync<T>(IList<T> items, string sessionToken, CancellationToken cancellationToken = default) where T : TheOneObject;
     }
 }

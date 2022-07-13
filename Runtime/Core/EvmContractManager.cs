@@ -1,11 +1,11 @@
 ﻿/**
  *           Module: EvmContractManager.cs
  *  Descriptiontion: Creates a simple way to create and access a set of contracts by chain.
- *           Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+ *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich
  *  
  *  MIT License
  *  
- *  Copyright (c) 2021 Moralis Web3 Technology AB, 559307-5988
+ *  Copyright (c) 2021 TheOne Web3 Technology AB, 559307-5988
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ using Nethereum.Web3;
 using System;
 using System.Collections.Generic;
 
-namespace MoralisUnity
+namespace TheOneUnity
 {
     /// <summary>
     /// Creates a simple way to create and access a set of contracts by chain.

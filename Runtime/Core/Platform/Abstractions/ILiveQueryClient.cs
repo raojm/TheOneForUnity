@@ -1,8 +1,8 @@
 ﻿using System;
-using MoralisUnity.Platform.Objects;
-using MoralisUnity.Platform.Queries.Live;
+using TheOneUnity.Platform.Objects;
+using TheOneUnity.Platform.Queries.Live;
 
-namespace MoralisUnity.Platform.Abstractions
+namespace TheOneUnity.Platform.Abstractions
 {
     public interface ILiveQueryClient : IDisposable
     {

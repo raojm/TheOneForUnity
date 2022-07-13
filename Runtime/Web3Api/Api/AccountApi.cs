@@ -1,14 +1,14 @@
 /**
 *            Module: AccountApi.cs
 *       Description: Represents a collection of functions to interact with the API endpoints
-*            Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
+*            Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich
 *  
 * NOTE: THIS FILE HAS BEEN AUTOMATICALLY GENERATED. ANY CHANGES MADE TO THIS 
 * FILE WILL BE LOST
 *
 * MIT License
 *  
-* Copyright (c) 2022 Moralis Web3 Technology AB, 559307-5988
+* Copyright (c) 2022 TheOne Web3 Technology AB, 559307-5988
 *  
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the 'Software'), to deal
@@ -33,13 +33,13 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Net;
 using Cysharp.Threading.Tasks;
-using MoralisUnity.Web3Api.Client;
-using MoralisUnity.Web3Api.Core;
-using MoralisUnity.Web3Api.Core.Models;
-using MoralisUnity.Web3Api.Interfaces;
-using MoralisUnity.Web3Api.Models;
+using TheOneUnity.Web3Api.Client;
+using TheOneUnity.Web3Api.Core;
+using TheOneUnity.Web3Api.Core.Models;
+using TheOneUnity.Web3Api.Interfaces;
+using TheOneUnity.Web3Api.Models;
 
-namespace MoralisUnity.Web3Api.Api
+namespace TheOneUnity.Web3Api.Api
 {
 	/// <summary>
 	/// Represents a collection of functions to interact with the API endpoints

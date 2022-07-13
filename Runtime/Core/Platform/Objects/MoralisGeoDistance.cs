@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MoralisUnity.Platform.Objects
+namespace TheOneUnity.Platform.Objects
 {
     /// <summary>
-    /// Represents a distance between two MoralisGeoPoints.
+    /// Represents a distance between two TheOneGeoPoints.
     /// </summary>
-    public struct MoralisGeoDistance
+    public struct TheOneGeoDistance
     {
         private const double EarthMeanRadiusKilometers = 6371.0;
         private const double EarthMeanRadiusMiles = 3958.8;
@@ -16,7 +16,7 @@ namespace MoralisUnity.Platform.Objects
         /// Creates a ParseGeoDistance.
         /// </summary>
         /// <param name="radians">The distance in radians.</param>
-        public MoralisGeoDistance(double radians)
+        public TheOneGeoDistance(double radians)
           : this() => Radians = radians;
 
         /// <summary>
@@ -35,24 +35,24 @@ namespace MoralisUnity.Platform.Objects
         public double Kilometers => Radians * EarthMeanRadiusKilometers;
 
         /// <summary>
-        /// Gets a MoralisGeoDistance from a number of miles.
+        /// Gets a TheOneGeoDistance from a number of miles.
         /// </summary>
         /// <param name="miles">The number of miles.</param>
-        /// <returns>A MoralisGeoDistance for the given number of miles.</returns>
-        public static MoralisGeoDistance FromMiles(double miles) => new MoralisGeoDistance(miles / EarthMeanRadiusMiles);
+        /// <returns>A TheOneGeoDistance for the given number of miles.</returns>
+        public static TheOneGeoDistance FromMiles(double miles) => new TheOneGeoDistance(miles / EarthMeanRadiusMiles);
 
         /// <summary>
-        /// Gets a MoralisGeoDistance from a number of kilometers.
+        /// Gets a TheOneGeoDistance from a number of kilometers.
         /// </summary>
         /// <param name="kilometers">The number of kilometers.</param>
-        /// <returns>A MoralisGeoDistance for the given number of kilometers.</returns>
-        public static MoralisGeoDistance FromKilometers(double kilometers) => new MoralisGeoDistance(kilometers / EarthMeanRadiusKilometers);
+        /// <returns>A TheOneGeoDistance for the given number of kilometers.</returns>
+        public static TheOneGeoDistance FromKilometers(double kilometers) => new TheOneGeoDistance(kilometers / EarthMeanRadiusKilometers);
 
         /// <summary>
-        /// Gets a MoralisGeoDistance from a number of radians.
+        /// Gets a TheOneGeoDistance from a number of radians.
         /// </summary>
         /// <param name="radians">The number of radians.</param>
-        /// <returns>A MoralisGeoDistance for the given number of radians.</returns>
-        public static MoralisGeoDistance FromRadians(double radians) => new MoralisGeoDistance(radians);
+        /// <returns>A TheOneGeoDistance for the given number of radians.</returns>
+        public static TheOneGeoDistance FromRadians(double radians) => new TheOneGeoDistance(radians);
     }
 }
