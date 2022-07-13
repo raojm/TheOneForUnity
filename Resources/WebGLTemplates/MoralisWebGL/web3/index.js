@@ -29,7 +29,7 @@ window.web3gl = {
 };
 
 // Define Live Queries
-window.moralisLiveQueries = {
+window.theoneLiveQueries = {
     requestId: 0,
     webSockets: {},
     openSocket,
@@ -45,7 +45,7 @@ window.moralisLiveQueries = {
 
 async function openSocket(key, path) {
     return new Promise((resolve, reject) => {
-        let reqId = window.moralisLiveQueries.requestId++;
+        let reqId = window.theoneLiveQueries.requestId++;
         let ws = {
             socketUrl: path,
             requestId: reqId,
@@ -72,42 +72,42 @@ async function openSocket(key, path) {
         ws.socket.onopen = function (e) {
             var msg = JSON.stringify(e);
 
-            window.moralisLiveQueries.openSocketResponse = msg;
+            window.theoneLiveQueries.openSocketResponse = msg;
             // Resolve the promise - we are connected
             resolve();
         };
 
         ws.socket.onclose = function (event) {
             if (event.wasClean) {
-                window.moralisLiveQueries.closeSocketResponse = event; //`[${key} close] Connection closed cleanly, code=${event.code} reason=${event.reason}`;
+                window.theoneLiveQueries.closeSocketResponse = event; //`[${key} close] Connection closed cleanly, code=${event.code} reason=${event.reason}`;
             } else {
                 // e.g. server process killed or network down
                 // event.code is usually 1006 in this case
-                window.moralisLiveQueries.closeSocketResponse = `[${key} close] Connection died`;
+                window.theoneLiveQueries.closeSocketResponse = `[${key} close] Connection died`;
             }
         };
 
-        window.moralisLiveQueries.webSockets[key] = ws;
+        window.theoneLiveQueries.webSockets[key] = ws;
     });
 }
 
 function getSocketState(key) {
     var state = 3; // default to closed.
-    if (window.moralisLiveQueries.webSockets[key]) {
-        state = window.moralisLiveQueries.webSockets[key].socket.readyState;
+    if (window.theoneLiveQueries.webSockets[key]) {
+        state = window.theoneLiveQueries.webSockets[key].socket.readyState;
     }
     return state;
 }
 
 function closeSocket(key) {
-    if (window.moralisLiveQueries.webSockets[key]) {
-        window.moralisLiveQueries.webSockets[key].socket.close();
+    if (window.theoneLiveQueries.webSockets[key]) {
+        window.theoneLiveQueries.webSockets[key].socket.close();
     }
 }
 
 function sendRequest(key, msg) {
-    if (window.moralisLiveQueries.webSockets[key]) {
-        window.moralisLiveQueries.webSockets[key].socket.send(msg);
+    if (window.theoneLiveQueries.webSockets[key]) {
+        window.theoneLiveQueries.webSockets[key].socket.send(msg);
     }
 }
 
@@ -115,9 +115,9 @@ function sendRequest(key, msg) {
 function getMessages(key) {
     var resp = [];
 
-    if (window.moralisLiveQueries.webSockets[key]) {
-        resp = [...window.moralisLiveQueries.webSockets[key].messages];
-        window.moralisLiveQueries.webSockets[key].messages = [];
+    if (window.theoneLiveQueries.webSockets[key]) {
+        resp = [...window.theoneLiveQueries.webSockets[key].messages];
+        window.theoneLiveQueries.webSockets[key].messages = [];
     }
 
     return resp;
@@ -127,9 +127,9 @@ function getMessages(key) {
 function getErrors(key) {
     var resp = [];
 
-    if (window.moralisLiveQueries.webSockets[key]) {
-        resp = [...window.moralisLiveQueries.webSockets[key].errors];
-        window.moralisLiveQueries.webSockets[key].errors = [];
+    if (window.theoneLiveQueries.webSockets[key]) {
+        resp = [...window.theoneLiveQueries.webSockets[key].errors];
+        window.theoneLiveQueries.webSockets[key].errors = [];
     }
 
     return resp;

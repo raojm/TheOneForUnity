@@ -100,7 +100,7 @@ namespace TheOneUnity.Web3Api.CloudApi
 		/// </summary>
 		/// <param name="addresses">The addresses to get metadata for</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
 		/// <returns>Returns metadata (name, symbol, decimals, logo) for a given token contract address.</returns>
 		public async UniTask<List<Erc20Metadata>> GetTokenMetadata (List<String> addresses, ChainList chain, string subdomain=null, string providerUrl=null)
@@ -248,7 +248,7 @@ namespace TheOneUnity.Web3Api.CloudApi
 		/// </summary>
 		/// <param name="symbols">The symbols to get metadata for</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <returns>Returns metadata (name, symbol, decimals, logo) for a given token contract address.</returns>
 		public async UniTask<List<Erc20Metadata>> GetTokenMetadataBySymbol (List<String> symbols, ChainList chain, string subdomain=null)
 		{
@@ -330,7 +330,7 @@ namespace TheOneUnity.Web3Api.CloudApi
 		/// </summary>
 		/// <param name="address">The address of the token contract</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="fromBlock">The minimum block number from where to get the transfers
 		/// * Provide the param 'from_block' or 'from_date'
 		/// * If 'from_date' and 'from_block' are provided, 'from_block' will be used.

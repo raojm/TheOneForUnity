@@ -12,7 +12,7 @@ namespace TheOneUnity.Web3Api.Models
 	{
 		/// <summary>
 		/// Path to file
-		/// example: https://ipfs.moralis.io/QmPQ3YJ3hgfsBzJ1U4MGyV2C1GhDy6MWCENr1qMdMpKVnY/moralis/logo.jpg
+		/// example: https://ipfs.theone.io/QmPQ3YJ3hgfsBzJ1U4MGyV2C1GhDy6MWCENr1qMdMpKVnY/theone/logo.jpg
 		/// </summary>
 		[DataMember(Name = "path", EmitDefaultValue = false)]
 		[JsonProperty(PropertyName = "path")]

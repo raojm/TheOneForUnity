@@ -64,7 +64,7 @@ namespace TheOneUnity
         public async static UniTask<string> Connect(ClientMeta clientMeta)
         {
             string account = "";
-            string appLogo = "https://moralis.io/wp-content/uploads/2021/06/Powered-by-TheOne-Badge-Black.svg";
+            string appLogo = "https://theone.io/wp-content/uploads/2021/06/Powered-by-TheOne-Badge-Black.svg";
             int waitLoops = 240; // approx 2min @ 60FPS
             int loop = 0;
 

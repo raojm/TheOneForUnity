@@ -9,21 +9,21 @@ namespace TheOneUnity.Platform.Operations
     {
         bool IEqualityComparer<object>.Equals(object p1, object p2)
         {
-            TheOneObject moralisObj1 = p1 as TheOneObject;
-            TheOneObject moralisObj2 = p2 as TheOneObject;
-            if (moralisObj1 != null && moralisObj1 != null)
+            TheOneObject theoneObj1 = p1 as TheOneObject;
+            TheOneObject theoneObj2 = p2 as TheOneObject;
+            if (theoneObj1 != null && theoneObj1 != null)
             {
-                return Equals(moralisObj1.objectId, moralisObj1.objectId);
+                return Equals(theoneObj1.objectId, theoneObj1.objectId);
             }
             return Equals(p1, p2);
         }
 
         public int GetHashCode(object p)
         {
-            TheOneObject moralisObject = p as TheOneObject;
-            if (moralisObject != null)
+            TheOneObject theoneObject = p as TheOneObject;
+            if (theoneObject != null)
             {
-                return moralisObject.objectId.GetHashCode();
+                return theoneObject.objectId.GetHashCode();
             }
             return p.GetHashCode();
         }

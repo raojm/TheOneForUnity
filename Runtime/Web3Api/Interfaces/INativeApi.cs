@@ -16,7 +16,7 @@ namespace TheOneUnity.Web3Api.Interfaces
 		/// </summary>
 		/// <param name="blockNumberOrHash">The block hash or block number</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <returns>Returns the contents of a block</returns>
 		UniTask<Block> GetBlock (string blockNumberOrHash, ChainList chain, string subdomain=null);
 
@@ -34,7 +34,7 @@ namespace TheOneUnity.Web3Api.Interfaces
 		/// </summary>
 		/// <param name="address">address</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="blockNumber">The block number
 		/// * Provide the param 'block_numer' or ('from_block' and / or 'to_block')
 		/// * If 'block_numer' is provided in conbinaison with 'from_block' and / or 'to_block', 'block_number' will will be used
@@ -69,7 +69,7 @@ namespace TheOneUnity.Web3Api.Interfaces
 		/// </summary>
 		/// <param name="blockNumberOrHash">The block hash or block number</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns the contents of a block</returns>
@@ -80,7 +80,7 @@ namespace TheOneUnity.Web3Api.Interfaces
 		/// </summary>
 		/// <param name="transactionHash">The transaction hash</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <returns>Returns the contents of a block transaction</returns>
 		UniTask<BlockTransaction> GetTransaction (string transactionHash, ChainList chain, string subdomain=null);
 
@@ -91,7 +91,7 @@ namespace TheOneUnity.Web3Api.Interfaces
 		/// <param name="topic">The topic of the event</param>
 		/// <param name="abi">ABI of the specific event</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
 		/// <param name="fromBlock">The minimum block number from where to get the logs
 		/// * Provide the param 'from_block' or 'from_date'
@@ -121,7 +121,7 @@ namespace TheOneUnity.Web3Api.Interfaces
 		/// <param name="functionName">function_name</param>
 		/// <param name="abi">Body</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="providerUrl">web3 provider url to user when using local dev chain</param>
 		/// <returns>Returns response of the function executed</returns>
 		UniTask<string> RunContractFunction (string address, string functionName, RunContractDto abi, ChainList chain, string subdomain=null, string providerUrl=null);

@@ -6,20 +6,20 @@ namespace TheOneUnity
 {
     public class TheOneSettings
     {
- 		private static TheOneServerSettings moralisData;
+ 		private static TheOneServerSettings theoneData;
         
         public static TheOneServerSettings TheOneData
         {
             get
             {
-                if (moralisData == null)
+                if (theoneData == null)
                 {
                     LoadOrCreateSettings();
                 }
 
-                return moralisData;
+                return theoneData;
             }
-            private set { moralisData = value; }
+            private set { theoneData = value; }
         }
 
         private static string TheOneDataFilename = "TheOneServerSettings";
@@ -32,10 +32,10 @@ namespace TheOneUnity
         {
             if (reload)
             {
-                // Force reload of the moralisData Settings.
-                moralisData = null;    
+                // Force reload of the theoneData Settings.
+                theoneData = null;    
             }
-            else if (moralisData != null)
+            else if (theoneData != null)
             {
                 // TheOne Data setting have already been loaded.
                 return;
@@ -43,31 +43,31 @@ namespace TheOneUnity
 
             // Try to load the resource / asset (TheOneServerSettings
             // a.k.a. TheOne Data Settings)
-            moralisData = (TheOneServerSettings)Resources.Load(TheOneDataFilename, typeof(TheOneServerSettings));
+            theoneData = (TheOneServerSettings)Resources.Load(TheOneDataFilename, typeof(TheOneServerSettings));
             
             // If TheOne Data Setting were loaded successfully, all is well,
             // exit the method.
-            if (moralisData != null)
+            if (theoneData != null)
             {
                 return;
             }
 
 #if UNITY_EDITOR
             // The TheOneServerSettings a.k.a TheOne Data Settings does not exist so create it.
-            if (moralisData == null)
+            if (theoneData == null)
             {
                 // Create a fresh instance of the TheOne Datat Setting sasset.
-                moralisData = (TheOneServerSettings)TheOneServerSettings.CreateInstance("TheOneServerSettings");
+                theoneData = (TheOneServerSettings)TheOneServerSettings.CreateInstance("TheOneServerSettings");
                 
-                if (moralisData == null)
+                if (theoneData == null)
                 {
                     Debug.LogError("Failed to create TheOneServerSettings. TheOne is unable to run this way. If you deleted it from the project, reload the Editor.");
                     return;
                 }
             }
 
-            string moralisResourcesDirectory = UnityFileHelper.FindTheOneAssetFolder() ;
-            string serverSettingsAssetPath = moralisResourcesDirectory + TheOneDataFilename + ".asset";
+            string theoneResourcesDirectory = UnityFileHelper.FindTheOneAssetFolder() ;
+            string serverSettingsAssetPath = theoneResourcesDirectory + TheOneDataFilename + ".asset";
             string serverSettingsDirectory = Path.GetDirectoryName(serverSettingsAssetPath);
 
             if (!Directory.Exists(serverSettingsDirectory))
@@ -78,7 +78,7 @@ namespace TheOneUnity
 
             if (!File.Exists(serverSettingsAssetPath))
             {
-                AssetDatabase.CreateAsset(moralisData, serverSettingsAssetPath);
+                AssetDatabase.CreateAsset(theoneData, serverSettingsAssetPath);
             }
 
             AssetDatabase.SaveAssets();

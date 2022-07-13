@@ -101,7 +101,7 @@ namespace TheOneUnity.Web3Api.CloudApi
 		/// </summary>
 		/// <param name="address">address</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="fromBlock">The minimum block number from where to get the transactions
 		/// * Provide the param 'from_block' or 'from_date'
 		/// * If 'from_date' and 'from_block' are provided, 'from_block' will be used.
@@ -205,7 +205,7 @@ namespace TheOneUnity.Web3Api.CloudApi
 		/// </summary>
 		/// <param name="address">The address for which token balances will be checked</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="toBlock">The block number on which the balances should be checked</param>
 		/// <returns>Returns token balances for a specific address</returns>
 		public async UniTask<List<Erc20TokenBalance>> GetTokenBalances (string address, ChainList chain, string subdomain=null, decimal? toBlock=null)
@@ -246,7 +246,7 @@ namespace TheOneUnity.Web3Api.CloudApi
 		/// </summary>
 		/// <param name="address">address</param>
 		/// <param name="chain">The chain to query</param>
-		/// <param name="subdomain">The subdomain of the moralis server to use (Only use when selecting local devchain as chain)</param>
+		/// <param name="subdomain">The subdomain of the theone server to use (Only use when selecting local devchain as chain)</param>
 		/// <param name="fromBlock">The minimum block number from where to get the transactions
 		/// * Provide the param 'from_block' or 'from_date'
 		/// * If 'from_date' and 'from_block' are provided, 'from_block' will be used.

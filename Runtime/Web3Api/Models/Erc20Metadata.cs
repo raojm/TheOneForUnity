@@ -44,7 +44,7 @@ namespace TheOneUnity.Web3Api.Models
 
 		/// <summary>
 		/// The logo of the token
-		/// example: https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c.png
+		/// example: https://cdn.theone.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c.png
 		/// </summary>
 		[DataMember(Name = "logo", EmitDefaultValue = false)]
 		[JsonProperty(PropertyName = "logo")]
@@ -60,7 +60,7 @@ namespace TheOneUnity.Web3Api.Models
 
 		/// <summary>
 		/// The thumbnail of the logo
-		/// example: https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c_thumb.png
+		/// example: https://cdn.theone.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c_thumb.png
 		/// </summary>
 		[DataMember(Name = "thumbnail", EmitDefaultValue = false)]
 		[JsonProperty(PropertyName = "thumbnail")]

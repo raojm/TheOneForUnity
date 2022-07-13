@@ -19,8 +19,8 @@ MonoBehaviour:
     subheading: TheOne
     text: TheOne provides a single workflow for building high performance dapps.
       Fully compatible with your favorite web3 tools and services.
-    linkText: moralis.io
-    url: https://moralis.io
+    linkText: theone.io
+    url: https://theone.io
     pingObjectName: 
     pingObjectGuid: 
     openMenuName: 
@@ -28,8 +28,8 @@ MonoBehaviour:
   - heading: 
     subheading: Web3 Unity SDK
     text: This SDK brings the power of TheOne to your Unity projects.
-    linkText: docs.moralis.io/unity
-    url: https://docs.moralis.io/unity
+    linkText: docs.theone.io/unity
+    url: https://docs.theone.io/unity
     pingObjectName: 
     pingObjectGuid: 
     openMenuName: 
@@ -37,8 +37,8 @@ MonoBehaviour:
   - heading: Getting Started
     subheading: 1. Get the Configuration
     text: Setup the server and copy the config
-    linkText: admin.moralis.io
-    url: https://admin.moralis.io
+    linkText: admin.theone.io
+    url: https://admin.theone.io
     pingObjectName: 
     pingObjectGuid: 
     openMenuName: 
@@ -55,8 +55,8 @@ MonoBehaviour:
   - heading: 
     subheading: 3. Open Any New or Existing Scene
     text: Learn how to add TheOne
-    linkText: docs.moralis.io/unity
-    url: https://docs.moralis.io/unity
+    linkText: docs.theone.io/unity
+    url: https://docs.theone.io/unity
     pingObjectName: 
     pingObjectGuid: 
     openMenuName: 
@@ -64,8 +64,8 @@ MonoBehaviour:
   - heading: Need Help?
     subheading: 
     text: Contact us in the TheOne Forum.
-    linkText: forum.moralis.io/unity
-    url: https://forum.moralis.io/t/ethereum-unity3d-boilerplate-questions/4553
+    linkText: forum.theone.io/unity
+    url: https://forum.theone.io/t/ethereum-unity3d-boilerplate-questions/4553
     pingObjectName: 
     pingObjectGuid: 
     openMenuName: 

@@ -85,7 +85,7 @@ MonoBehaviour:
       m_Calls: []
   AppData:
     Description: A sample application using TheOne
-    URL: https://www.moralis.io/
+    URL: https://www.theone.io/
     Icons:
-    - '"https://moralis.io/wp-content/uploads/2021/06/Powered-by-TheOne-Badge-Black.svg"'
+    - '"https://theone.io/wp-content/uploads/2021/06/Powered-by-TheOne-Badge-Black.svg"'
     Name: TheOne Sample dApp

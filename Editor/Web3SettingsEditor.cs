@@ -54,11 +54,11 @@ namespace TheOneUnity.Editor
             {
                 // Only draw once
                 windowDrawn = true;
-                string moralisEditorwindowPath = UnityFileHelper.FindTheOneEditorFolder();
+                string theoneEditorwindowPath = UnityFileHelper.FindTheOneEditorFolder();
 
                 if (TheOneSettings.TheOneData == null)
                 {
-                    // Just in case moralisData has not been loaded, handle it here.
+                    // Just in case theoneData has not been loaded, handle it here.
                     TheOneSettings.LoadOrCreateSettings();
                 }
 
@@ -68,7 +68,7 @@ namespace TheOneUnity.Editor
 
                 // Loads the page definition.
                 VisualTreeAsset original = AssetDatabase
-                    .LoadAssetAtPath<VisualTreeAsset>(moralisEditorwindowPath + "Web3SettingsEditorWindow.uxml");
+                    .LoadAssetAtPath<VisualTreeAsset>(theoneEditorwindowPath + "Web3SettingsEditorWindow.uxml");
 
                 // If page not found, close and exit window
                 if (original == null)
@@ -83,7 +83,7 @@ namespace TheOneUnity.Editor
 
                 // Load stylsheet
                 StyleSheet styleSheet = AssetDatabase
-                    .LoadAssetAtPath<StyleSheet>(moralisEditorwindowPath + "TheOneWeb3SdkEditorStyles.uss");
+                    .LoadAssetAtPath<StyleSheet>(theoneEditorwindowPath + "TheOneWeb3SdkEditorStyles.uss");
                 // Apply stylesheet root element.
                 rootVisualElement.styleSheets.Add(styleSheet);
 

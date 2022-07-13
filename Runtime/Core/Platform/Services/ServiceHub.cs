@@ -50,7 +50,7 @@ namespace TheOneUnity.Platform.Services
         public IMetadataService MetadataService => LateInitializer.GetValue(() => new MetadataService { HostManifestData = ManifestData ?? HostManifestData.Inferred, EnvironmentData = EnvironmentData.Inferred });
 
         public IWebClient WebClient => LateInitializer.GetValue(() => webClient);
-        public ICacheService CacheService => LateInitializer.GetValue(() => new TheOneCacheService<TUser> (TheOneCacheService<TUser>.DefineRelativeFilePath("TheOne\\moralis.cachefile")));
+        public ICacheService CacheService => LateInitializer.GetValue(() => new TheOneCacheService<TUser> (TheOneCacheService<TUser>.DefineRelativeFilePath("TheOne\\theone.cachefile")));
         public IInstallationService InstallationService => LateInitializer.GetValue(() => new InstallationService(CacheService));
         public ITheOneCommandRunner CommandRunner => LateInitializer.GetValue(() => new TheOneCommandRunner<TUser>(WebClient, InstallationService, MetadataService, ServerConnectionData, new Lazy<IUserService<TUser>>(() => UserService)));
         public IUserService<TUser> UserService => LateInitializer.GetValue(() => new TheOneUserService<TUser>(CommandRunner, ObjectService, JsonSerializer));

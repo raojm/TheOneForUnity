@@ -10,7 +10,7 @@ namespace TheOneUnity.SolanaApi.Client
     /// </summary>
     public class SolanaApiClient : ISolanaApi
     {
-        private static string defaultServerUrl = "https://deep-index.moralis.io/api/v2";
+        private static string defaultServerUrl = "https://deep-index.theone.io/api/v2";
 
         /// <summary>
         /// AccountApi operations.
@@ -56,7 +56,7 @@ namespace TheOneUnity.SolanaApi.Client
                 this.Account = new AccountApi(client);
                 this.Nft = new NftApi(client);
             }
-            // Api key not set assume the url is for moralis personal server
+            // Api key not set assume the url is for theone personal server
             // and Cloud Function API should be used.
             else
             {

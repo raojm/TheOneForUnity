@@ -72,7 +72,7 @@ namespace TheOneUnity.Platform.Services
 
 
             WebClient ??= new UniversalWebClient { };
-            CacheService ??= new TheOneCacheService<TUser> (TheOneCacheService<TUser>.DefineRelativeFilePath("TheOne\\moralis.cachefile"));
+            CacheService ??= new TheOneCacheService<TUser> (TheOneCacheService<TUser>.DefineRelativeFilePath("TheOne\\theone.cachefile"));
 
             InstallationService ??= new InstallationService(CacheService);
             CommandRunner ??= new TheOneCommandRunner<TUser>(WebClient, InstallationService, MetadataService, ServerConnectionData, new Lazy<IUserService<TUser>>(() => UserService));

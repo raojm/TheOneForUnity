@@ -41,10 +41,10 @@ namespace TheOneUnity
         private static string TOKEN_REQUEST_URL = "server/requestLoginToken";
         private static string REMOTE_SESSION_URL = "server/getRemoteSession?login_token={0}&_ApplicationId={1}";
 
-        public static async UniTask<TheOneUser> LogIn(string moralisDappUrl, string dappId)
+        public static async UniTask<TheOneUser> LogIn(string theoneDappUrl, string dappId)
         {
             TheOneUser user = null;
-            TheOneLoginTokenResponse tokenResponse = await RequestLoginToken(moralisDappUrl, dappId);
+            TheOneLoginTokenResponse tokenResponse = await RequestLoginToken(theoneDappUrl, dappId);
 
             if (tokenResponse != null)
             {
@@ -57,7 +57,7 @@ namespace TheOneUnity
                 {
                     await UniTask.Delay(TimeSpan.FromSeconds(500), ignoreTimeScale: false);
 
-                    TheOneSessionTokenResponse sessionResponse = await CheckSessionResult(moralisDappUrl, tokenResponse.loginToken, dappId);
+                    TheOneSessionTokenResponse sessionResponse = await CheckSessionResult(theoneDappUrl, tokenResponse.loginToken, dappId);
 
                     if (sessionResponse != null && !String.IsNullOrWhiteSpace(sessionResponse.sessionToken))
                     {
@@ -71,7 +71,7 @@ namespace TheOneUnity
             return user;
         }
 
-        private async static UniTask<TheOneSessionTokenResponse> CheckSessionResult(string moralisDappUrl, string tokenId, string dappId)
+        private async static UniTask<TheOneSessionTokenResponse> CheckSessionResult(string theoneDappUrl, string tokenId, string dappId)
         {
             TheOneSessionTokenResponse result = null;
 
@@ -84,7 +84,7 @@ namespace TheOneUnity
 
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(moralisDappUrl);
+                client.BaseAddress = new Uri(theoneDappUrl);
 
                 HttpResponseMessage response = client.GetAsync(String.Format(REMOTE_SESSION_URL, tokenId, dappId)).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
 
@@ -102,7 +102,7 @@ namespace TheOneUnity
             return result;
         }
 
-        private async static UniTask<TheOneLoginTokenResponse> RequestLoginToken(string moralisDappUrl, string dappId)
+        private async static UniTask<TheOneLoginTokenResponse> RequestLoginToken(string theoneDappUrl, string dappId)
         {
             TheOneLoginTokenResponse result = null;
 
@@ -115,7 +115,7 @@ namespace TheOneUnity
 
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(moralisDappUrl);
+                client.BaseAddress = new Uri(theoneDappUrl);
 
                 // Add an Accept header for JSON format.
                 client.DefaultRequestHeaders.Accept.Add(

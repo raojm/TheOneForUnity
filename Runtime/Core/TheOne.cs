@@ -1,6 +1,6 @@
 /**
  *           Module: TheOneUnity.cs
- *  Descriptiontion: Class that wraps moralis integration points. Provided as an 
+ *  Descriptiontion: Class that wraps theone integration points. Provided as an 
  *                   example of how TheOne can be integrated into Unity
  *           Author: TheOne Web3 Technology AB, 559307-5988 - David B. Goodrich
  *  
@@ -607,7 +607,7 @@ namespace TheOneUnity
 
             // Retrieve from address, the address used to authenticate the user.
             TheOneUser user = await TheOne.GetUserAsync();
-            string fromAddress = user.authData["moralisEth"]["id"].ToString();
+            string fromAddress = user.authData["theoneEth"]["id"].ToString();
 
             try
             {
@@ -675,7 +675,7 @@ namespace TheOneUnity
 #else
                 // Retrieve from address, the address used to authenticate the user.
                 TheOneUser user = await TheOne.GetUserAsync();
-                string fromAddress = user.authData["moralisEth"]["id"].ToString();
+                string fromAddress = user.authData["theoneEth"]["id"].ToString();
 
                 Contract contractInstance = Web3Client.Eth.GetContract(abi, contractAddress);
                 Function function = contractInstance.GetFunction(functionName);

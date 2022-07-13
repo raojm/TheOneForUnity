@@ -10,7 +10,7 @@ namespace TheOneUnity.Web3Api.Client
     /// </summary>
     public class Web3ApiClient : IWeb3Api
     {
-        private static string defaultServerUrl = "https://deep-index.moralis.io/api/v2";
+        private static string defaultServerUrl = "https://deep-index.theone.io/api/v2";
 
         /// <summary>
         /// AccountApi operations.
@@ -80,7 +80,7 @@ namespace TheOneUnity.Web3Api.Client
                 this.Storage = new StorageApi(client);
                 this.Token = new TokenApi(client);
             }
-            // Api key not set assume the url is for moralis personal server
+            // Api key not set assume the url is for theone personal server
             // and Cloud Function API should be used.
             else
             {

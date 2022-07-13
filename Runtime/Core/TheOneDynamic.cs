@@ -27,16 +27,16 @@ namespace TheOneUnity
 
             connectionData.Key = connectionData.Key != null ? connectionData.Key : "";
 
-            moralisService = new TheOneService<TUser>(connectionData.ApplicationID, connectionData.ServerURI, connectionData.Key, jsonSerializer);
-            moralisService.ServerConnectionData.Key = connectionData.Key;
-            moralisService.ServerConnectionData.ServerURI = connectionData.ServerURI;
-            moralisService.ServerConnectionData.ApplicationID = connectionData.ApplicationID; moralisService.ServerConnectionData.LocalStoragePath = connectionData.LocalStoragePath;
+            theoneService = new TheOneService<TUser>(connectionData.ApplicationID, connectionData.ServerURI, connectionData.Key, jsonSerializer);
+            theoneService.ServerConnectionData.Key = connectionData.Key;
+            theoneService.ServerConnectionData.ServerURI = connectionData.ServerURI;
+            theoneService.ServerConnectionData.ApplicationID = connectionData.ApplicationID; theoneService.ServerConnectionData.LocalStoragePath = connectionData.LocalStoragePath;
 
             // Make sure local folder for Unity apps is used if defined.
             TheOneCacheService<TUser>.BaseFilePath = connectionData.LocalStoragePath;
 
             // Make sure singleton instance is available.
-            moralisService.Publicize();
+            theoneService.Publicize();
 
             this.Web3Api = web3Api;
 
@@ -70,9 +70,9 @@ namespace TheOneUnity
 
         public string EthAddress { get; }
 
-        public IServiceHub<TUser> ServiceHub => moralisService.Services;
+        public IServiceHub<TUser> ServiceHub => theoneService.Services;
 
-        TheOneService<TUser> moralisService;
+        TheOneService<TUser> theoneService;
 
         public void SetLocalDatastoreController()
         {
@@ -81,37 +81,37 @@ namespace TheOneUnity
 
         public string ApplicationId
         {
-            get => moralisService.ServerConnectionData.ApplicationID;
+            get => theoneService.ServerConnectionData.ApplicationID;
             set
             {
-                moralisService.ServerConnectionData.ApplicationID = value;
+                theoneService.ServerConnectionData.ApplicationID = value;
             }
         }
 
         public string Key
         {
-            get => moralisService.ServerConnectionData.Key;
+            get => theoneService.ServerConnectionData.Key;
             set
             {
-                moralisService.ServerConnectionData.Key = value;
+                theoneService.ServerConnectionData.Key = value;
             }
         }
 
         public string MasterKey
         {
-            get => moralisService.ServerConnectionData.MasterKey;
+            get => theoneService.ServerConnectionData.MasterKey;
             set
             {
-                moralisService.ServerConnectionData.MasterKey = value;
+                theoneService.ServerConnectionData.MasterKey = value;
             }
         }
 
         public string ServerUrl
         {
-            get => moralisService.ServerConnectionData.ServerURI;
+            get => theoneService.ServerConnectionData.ServerURI;
             set
             {
-                moralisService.ServerConnectionData.ServerURI = value;
+                theoneService.ServerConnectionData.ServerURI = value;
             }
         }
 
@@ -175,14 +175,14 @@ namespace TheOneUnity
             throw new NotImplementedException();
         }
 
-        public IFileService File => moralisService.FileService;
+        public IFileService File => theoneService.FileService;
 
-        public IInstallationService InstallationService => moralisService.InstallationService;
-        public IQueryService QueryService => moralisService.QueryService;
-        public ISessionService<TUser> Session => moralisService.SessionService;
-        public IUserService<TUser> UserService => moralisService.UserService;
+        public IInstallationService InstallationService => theoneService.InstallationService;
+        public IQueryService QueryService => theoneService.QueryService;
+        public ISessionService<TUser> Session => theoneService.SessionService;
+        public IUserService<TUser> UserService => theoneService.UserService;
 
-        public TheOneCloud<TUser> Cloud => moralisService.Cloud;
+        public TheOneCloud<TUser> Cloud => theoneService.Cloud;
 
 
         public async UniTask<Guid?> GetInstallationIdAsync() => await InstallationService.GetAsync();
@@ -190,7 +190,7 @@ namespace TheOneUnity
         public async UniTask<TheOneQuery<T>> Query<T>() where T : TheOneObject
         {
             TUser user = await GetCurrentUserAsync();
-            return new TheOneQuery<T>(this.QueryService, InstallationService, moralisService.ServerConnectionData, moralisService.JsonSerializer, user.sessionToken); //, logger);
+            return new TheOneQuery<T>(this.QueryService, InstallationService, theoneService.ServerConnectionData, theoneService.JsonSerializer, user.sessionToken); //, logger);
         }
 
         public T Create<T>(object[] parameters = null) where T : TheOneObject
@@ -243,7 +243,7 @@ namespace TheOneUnity
         /// <returns>Task<TUser></returns>
         public async UniTask<TUser> LogInAsync(IDictionary<string, object> data, CancellationToken cancellationToken)
         {
-            return await this.ServiceHub.LogInWithAsync("moralisEth", data, cancellationToken);
+            return await this.ServiceHub.LogInWithAsync("theoneEth", data, cancellationToken);
         }
 
         /// <summary>
