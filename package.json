@@ -1,18 +1,18 @@
 {
-    "name": "io.moralis.web3-unity-sdk",
-    "version": "1.2.4",
-    "displayName": "TheOne Web3 Unity SDK",
-    "description": "TheOne provides a single workflow for building high performance dapps. Fully compatible with your favorite web3 tools and services. This SDK brings the power of TheOne to your Unity projects.",
-    "homepage": "https://moralis.io",
+    "name": "TheOneForUnity",
+    "version": "1.0.0",
+    "displayName": "TheOne Unity SDK",
+    "description": "TheOne provides a single workflow for building high performance dapps. This SDK brings the power of TheOne to your Unity projects.",
+    "homepage": "https://www.huanlen.com",
     "unity": "2020.3",
     "hideInEditor": false,
     "license": "MIT License",
-    "documentationUrl": "https://docs.moralis.io/unity/",
-    "changelogUrl": "https://github.com/TheOneWeb3/web3-unity-sdk/blob/main/CHANGELOG.md",
-    "licensesUrl": "https://github.com/TheOneWeb3/web3-unity-sdk/blob/main/LICENSE.md",
+    "documentationUrl": "https://www.huanle.com",
+    "changelogUrl": "https://github.com/raojm/TheOneForUnity/blob/main/CHANGELOG.md",
+    "licensesUrl": "https://github.com/raojm/TheOneForUnity/blob/main/LICENSE.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/TheOneWeb3/web3-unity-sdk.git"
+        "url": "https://github.com/raojm/TheOneForUnity.git"
     },
     "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.0.2"
@@ -42,8 +42,8 @@
         "ERC-1155"
     ],
     "author": {
-        "name": "TheOne Web3",
-        "email": "unity@moralis.io",
-        "url": "https://www.moralis.io"
+        "name": "TheOne Web3 SDK",
+        "email": "derekrao@123u.com",
+        "url": "https://www.huanle.com"
     }
 }
