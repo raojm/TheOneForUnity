@@ -196,6 +196,10 @@ namespace TheOneUnity
             resp["cronos"].Add("symbol", "CRO");
             resp["cronos"].Add("decimals", 18);
 
+            resp.Add("theone", new Dictionary<string, object>());
+            resp["theone"].Add("symbol", "THO");
+            resp["theone"].Add("decimals", 18);
+            
             return resp;
         }
     }

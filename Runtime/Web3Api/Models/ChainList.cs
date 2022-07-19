@@ -22,9 +22,10 @@ namespace TheOneUnity.Web3Api.Models
 		avalanche = 0xa86a,
 		avalanche_testnet = 0xa869,
 		fantom = 0xfa,
-		cronos = 0x19
+		cronos = 0x19,
 		// FOR FUTURE USE
 		// cronos_testnet = 0x152
+		theone = 1337
 	};
 
 }
